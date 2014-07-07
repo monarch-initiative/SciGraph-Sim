@@ -18,29 +18,9 @@ public class Neo4jTraversals {
 	static enum RelTypes implements RelationshipType {
 		SUBCLASS,
 	}
-	
-	public static Node addNode(GraphDatabaseService db, String name) {
-		// Wrap a transaction around node creation.
-		Transaction tx = db.beginTx();
-		Node newNode = db.createNode();
-		newNode.setProperty("name", name);
-		tx.success();
-		tx.finish();
-		return newNode;
-	}
-	
-	public static Relationship addRelationship(GraphDatabaseService db, Node first, Node second)
-	{
-		// Wrap a transaction around edge creation.
-		Transaction tx = db.beginTx();
-		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
-		tx.success();
-		tx.finish();
-		return newRel;		
-	}	
 
 	public static Iterable<String> getProperties(GraphDatabaseService db) {
-		LinkedList<String> properties = new LinkedList<String>();
+		LinkedList<String> properties = new LinkedList<>();
 		
 		// Find the first node with properties.
 		for (Node node : GlobalGraphOperations.at(db).getAllNodes())
@@ -72,7 +52,7 @@ public class Neo4jTraversals {
 		Iterable<Relationship> rels = node.getRelationships(dir, RelTypes.SUBCLASS);
 		
 		// Turn the relationships into neighbors.
-		LinkedList<Node> neighbors = new LinkedList<Node>();
+		LinkedList<Node> neighbors = new LinkedList<>();
 		for (Relationship rel : rels)
 		{
 			neighbors.add(rel.getOtherNode(node));
@@ -95,8 +75,8 @@ public class Neo4jTraversals {
 		// Make the process a transaction.
 		Transaction tx = db.beginTx();
 		
-		Set<Node> descendants = new HashSet<Node>();
-		LinkedList<Node> toTry = new LinkedList<Node>();
+		Set<Node> descendants = new HashSet<>();
+		LinkedList<Node> toTry = new LinkedList<>();
 		toTry.add(node);
 		// Check nodes until we run out of possibilities.
 		while (!toTry.isEmpty())
@@ -134,6 +114,83 @@ public class Neo4jTraversals {
 		Set<Node> secondAncestors = (HashSet<Node>)getAncestors(db, second);
 		firstAncestors.retainAll(secondAncestors);
 		return firstAncestors;
+	}
+	
+	private static class LCSNode {
+		public Node node;
+		public Node subsumer;
+		public boolean goingUp;
+		
+		public LCSNode(Node node_, boolean goingUp_)
+		{
+			node = node_;
+			goingUp = goingUp_;
+			if (!goingUp)
+			{
+				subsumer = node_;
+			}
+		}
+	}
+	
+	public static Node getLCS(GraphDatabaseService db, Node first, Node second) {		
+		if (first.equals(second))
+		{
+			return first;
+		}
+
+		HashSet<Node> upVisited = new HashSet<>();
+		HashSet<Node> downVisited = new HashSet<>();
+		LinkedList<LCSNode> toTry = new LinkedList<>();
+		toTry.add(new LCSNode(first, true));
+		toTry.add(new LCSNode(first, false));
+		
+		while (!toTry.isEmpty())
+		{
+			LCSNode next = toTry.removeFirst();
+						
+			// If we're headed up, we can either go up or down.
+			if (next.goingUp)
+			{
+				if (upVisited.contains(next.node))
+				{
+					continue;
+				}
+				
+				for (Node parent : getParents(db, next.node))
+				{
+					if (parent.equals(second))
+					{
+						return parent;
+					}
+					
+					toTry.add(new LCSNode(parent, true));
+					toTry.add(new LCSNode(parent, false));
+				}
+			}
+			
+			// If we're headed down, we can only go down. further.
+			else
+			{
+				if (downVisited.contains(next.node))
+				{
+					continue;
+				}
+				
+				for (Node child : getChildren(db, next.node))
+				{
+					if (child.equals(second))
+					{
+						return next.subsumer;
+					}
+					
+					toTry.add(new LCSNode(child, false));
+				}
+			}
+		}
+		
+		// FIXME: This should throw an error or otherwise complain loudly.
+		// Our ontologies are all rooted, so we should always have an LCS.
+		return null;
 	}
 
 }

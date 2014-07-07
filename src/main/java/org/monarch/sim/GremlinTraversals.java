@@ -25,7 +25,7 @@ public class GremlinTraversals {
 		return parents;
 	}
 	
-	public static Iterable<Vertex> getAncestors(Vertex v) {
+	public static HashSet<Vertex> getAncestors(Vertex v) {
 		// Keep track of the ancestors we've found.
 		HashSet<Vertex> ancestors = new HashSet<>();
 		
@@ -48,6 +48,13 @@ public class GremlinTraversals {
 			;
 		
 		return ancestors;
+	}
+	
+	public static HashSet<Vertex> getCommonAncestors(Vertex first, Vertex second) {
+		HashSet<Vertex> firstAncestors = getAncestors(first);
+		HashSet<Vertex> secondAncestors = getAncestors(second);
+		firstAncestors.retainAll(secondAncestors);
+		return firstAncestors;
 	}
 	
 	public static ArrayList<HashSet<Vertex>> getAncestorsByDistance(Vertex v) {

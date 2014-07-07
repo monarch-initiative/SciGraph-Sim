@@ -1,18 +1,15 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.Neo4jTraversals.addNode;
-import static org.monarch.sim.Neo4jTraversals.addRelationship;
-import static org.monarch.sim.Neo4jTraversals.getAncestors;
-import static org.monarch.sim.Neo4jTraversals.getChildren;
-import static org.monarch.sim.Neo4jTraversals.getCommonAncestors;
-import static org.monarch.sim.Neo4jTraversals.getDescendants;
-import static org.monarch.sim.Neo4jTraversals.getParents;
+import static org.monarch.sim.Neo4jTraversals.*;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.monarch.sim.Neo4jTraversals.RelTypes;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
@@ -43,6 +40,26 @@ public class Neo4jTest {
 		// Clean up the databases.
 		waterDB.shutdown();
 		monarchDB.shutdown();
+	}
+	
+	public static Node addNode(GraphDatabaseService db, String name) {
+		// Wrap a transaction around node creation.
+		Transaction tx = db.beginTx();
+		Node newNode = db.createNode();
+		newNode.setProperty("name", name);
+		tx.success();
+		tx.finish();
+		return newNode;
+	}
+	
+	public static Relationship addRelationship(GraphDatabaseService db, Node first, Node second)
+	{
+		// Wrap a transaction around edge creation.
+		Transaction tx = db.beginTx();
+		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
+		tx.success();
+		tx.finish();
+		return newRel;		
 	}
 	
 	// FIXME: Make this actually check things.
@@ -105,7 +122,30 @@ public class Neo4jTest {
 
 	@Test
 	public void test() {
-		validateWaterDB();
+//		validateWaterDB();
+		for (Node first : GlobalGraphOperations.at(waterDB).getAllNodes())
+		{
+			if (!first.hasProperty("name"))
+			{
+				continue;
+			}
+			
+			for (Node second : GlobalGraphOperations.at(waterDB).getAllNodes())
+			{
+				if (!second.hasProperty("name"))
+				{
+					continue;
+				}
+				
+				if (first.getProperty("name").toString().compareTo(second.getProperty("name").toString()) > 0)
+				{
+					continue;
+				}
+				
+				System.out.println(first.getProperty("name") + " " + second.getProperty("name"));
+				System.out.println("LCS: " + getLCS(waterDB, first, second));
+			}
+		}
 	}
 
 }
