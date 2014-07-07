@@ -1,29 +1,18 @@
 package org.monarch.sim;
 
-import static org.junit.Assert.*;
+import static org.monarch.sim.GremlinTraversals.getAncestors;
+import static org.monarch.sim.GremlinTraversals.getParents;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 
-import org.apache.tools.ant.types.selectors.modifiedselector.Algorithm;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
-import com.tinkerpop.gremlin.java.GremlinPipeline;
-import com.tinkerpop.pipes.PipeFunction;
-import com.tinkerpop.pipes.branch.LoopPipe;
-import com.tinkerpop.pipes.branch.LoopPipe.LoopBundle;
 
 public class GremlinTest {
 	
@@ -54,17 +43,6 @@ public class GremlinTest {
 		tree.shutdown();
 	}
 	
-	// TODO: Move to implementation file.
-	public Iterable<Vertex> getParents(Vertex v) {
-		LinkedList<Vertex> parents = new LinkedList<>();
-		// Follow each outgoing edge to find a parent.
-		for (Edge e : v.getEdges(Direction.OUT))
-		{
-			parents.add(e.getVertex(Direction.IN));
-		}
-		return parents;
-	}
-	
 	// Make sure getParents works.
 	public void checkParents() {
 		// Check that our tree works.
@@ -87,117 +65,6 @@ public class GremlinTest {
 			// In our tree, each node has only one parent.
 			assert count == 1;
 		}
-	}
-	
-	// TODO: Move to implementation file.
-	public Iterable<Vertex> getAncestors(Vertex v) {
-		// Keep track of the ancestors we've found.
-		HashSet<Vertex> ancestors = new HashSet<>();
-		
-		GremlinPipeline<Vertex, Vertex> pipe = new GremlinPipeline<>();
-		pipe.start(v)
-			.as("x")
-			// Look at all the neighbors we haven't seen yet.
-			.out()
-			.except(ancestors)
-			.store(ancestors)
-			// Repeat until we run out of neighbors.
-			.loop("x", new PipeFunction<LoopBundle<Vertex>, Boolean>()
-				{
-					public Boolean compute(LoopBundle<Vertex> bundle)
-					{
-						return true;
-					}
-				})
-			.iterate()
-			;
-		
-		return ancestors;
-	}
-	
-	// TODO: Move to implementation file.
-	public ArrayList<HashSet<Vertex>> getAncestorsByDistance(Vertex v) {
-//		// Keep track of the paths and vertices we've seen.
-//		Collection<List<Vertex>> paths = new LinkedList<>();
-//		HashSet<Vertex> visited = new HashSet<>();
-//		visited.add(v);
-//		
-//		GremlinPipeline<Vertex, ArrayList<Vertex>> pipe = new GremlinPipeline<>();
-//		pipe.start(v)
-//			.as("x")
-//			// Look at all the neighbors we haven't seen yet.
-//			.out()
-//			.except(visited)
-//			.store(visited)
-//			.path()
-//			.store((Collection)paths)
-//			// FIXME: Get the last node in the path.
-//			// Repeat until we run out of neighbors.
-//			.loop("x", new PipeFunction<LoopBundle<Vertex>, Boolean>()
-//				{
-//					public Boolean compute(LoopBundle<Vertex> bundle)
-//					{
-//						return true;
-//					}
-//				})
-//			;
-//
-//		for (ArrayList<Vertex> path : pipe)
-//		{
-//			System.out.println(path);
-//		}
-//		
-//		// Turn our paths into our list of sets of vertices.
-//		ArrayList<HashSet<Vertex>> ancestors = new ArrayList<>();
-//		for (List<Vertex> path : paths)
-//		{
-//			// Pad the list to the size we need.
-//			int length = path.size();
-//			while (length > ancestors.size())
-//			{
-//				ancestors.add(new HashSet<Vertex>());
-//			}
-//			
-//			ancestors.get(length - 1).add((Vertex)path.get(length - 1));
-//		}
-//		
-//		return ancestors;
-		// FIXME: Make this work.
-		return null;
-	}
-	
-	// TODO: Move to implementation file.
-	public ArrayList<Vertex> shortestPath(Vertex start, final Vertex end) {
-		// Keep track of the vertices we've seen.
-		HashSet<Vertex> visited = new HashSet<>();
-		visited.add(start);
-		
-		GremlinPipeline<Vertex, ArrayList<Vertex>> pipe = new GremlinPipeline<>();
-		pipe.start(start)
-			.as("x")
-			// Look at all the neighbors we haven't seen yet.
-			.out()
-			.except(visited)
-			.store(visited)
-			// Repeat until we find what we're looking for or run out of neighbors.
-			.loop("x", new PipeFunction<LoopBundle<Vertex>, Boolean>()
-				{
-					public Boolean compute(LoopBundle<Vertex> bundle)
-					{
-						return bundle.getObject().getId() != end.getId();
-					}
-				})
-			.path()
-			;
-		
-		// Pull out the shortest path.
-		for (ArrayList<Vertex> path : pipe)
-		{
-			return path;
-		}
-		
-		// If this wasn't a toy example, this would horrify me.
-		return null;
 	}
 	
 	// Make sure getAncestors works.
