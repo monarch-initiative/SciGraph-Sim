@@ -4,15 +4,20 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import org.monarch.sim.InitialTest.RelTypes;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTraversals {
+	
+	// Define the relationships we want to use.
+	static enum RelTypes implements RelationshipType {
+		SUBCLASS,
+	}
 	
 	public static Node addNode(GraphDatabaseService db, String name) {
 		// Wrap a transaction around node creation.

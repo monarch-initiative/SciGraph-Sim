@@ -1,24 +1,24 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.Neo4jTraversals.*;
+import static org.monarch.sim.Neo4jTraversals.addNode;
+import static org.monarch.sim.Neo4jTraversals.addRelationship;
+import static org.monarch.sim.Neo4jTraversals.getAncestors;
+import static org.monarch.sim.Neo4jTraversals.getChildren;
+import static org.monarch.sim.Neo4jTraversals.getCommonAncestors;
+import static org.monarch.sim.Neo4jTraversals.getDescendants;
+import static org.monarch.sim.Neo4jTraversals.getParents;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class InitialTest {
-	
-	// Define the relationships we want to use.
-	static enum RelTypes implements RelationshipType {
-		SUBCLASS,
-	}
-	
+public class Neo4jTest {
+
 	// ^-shaped graph.
 	static GraphDatabaseService waterDB;
 	// Graph from monarchGraph folder.
