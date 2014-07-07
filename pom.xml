@@ -32,7 +32,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
- <build>
+  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -43,8 +43,8 @@
           <target>1.7</target>
         </configuration>
       </plugin>
-      </plugins>
-      </build>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
@@ -117,7 +117,5 @@
     </dependency>
   </dependencies>
 
-  <build>
-  </build>
 
 </project>
