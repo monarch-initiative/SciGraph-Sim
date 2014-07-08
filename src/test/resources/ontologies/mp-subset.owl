@@ -1,0 +1,2472 @@
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <owlapi:ontology:ont0>
+
+
+AnnotationProperty: rdfs:label
+
+    
+Datatype: xsd:string
+
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001379>
+
+    Annotations: 
+        rdfs:label "abnormal penile erection"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003698>,
+        <http://purl.obolibrary.org/obo/MP_0009697>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002637>
+
+    Annotations: 
+        rdfs:label "small uterus"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004902>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0011723>
+
+    Annotations: 
+        rdfs:label "ectopic neuron"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002109>
+
+    Annotations: 
+        rdfs:label "abnormal limb morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005371>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001175>
+
+    Annotations: 
+        rdfs:label "abnormal lung morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002132>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001968>
+
+    Annotations: 
+        rdfs:label "abnormal touch/ nociception"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002067>,
+        <http://purl.obolibrary.org/obo/MP_0010771>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001784>
+
+    Annotations: 
+        rdfs:label "abnormal fluid regulation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001764>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002102>
+
+    Annotations: 
+        rdfs:label "abnormal ear morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005377>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001262>
+
+    Annotations: 
+        rdfs:label "decreased body weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001265>,
+        <http://purl.obolibrary.org/obo/MP_0001259>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001265>
+
+    Annotations: 
+        rdfs:label "decreased body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003956>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0006108>
+
+    Annotations: 
+        rdfs:label "abnormal hindbrain development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000913>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005371>
+
+    Annotations: 
+        rdfs:label "limbs/digits/tail phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005377>
+
+    Annotations: 
+        rdfs:label "hearing/vestibular/ear phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009745>
+
+    Annotations: 
+        rdfs:label "abnormal behavioral response to xenobiotic"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008219>
+
+    Annotations: 
+        rdfs:label "abnormal dorsal telencephalic commissure morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002199>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005376>
+
+    Annotations: 
+        rdfs:label "homeostasis/metabolism phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005375>
+
+    Annotations: 
+        rdfs:label "adipose tissue phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001973>
+
+    Annotations: 
+        rdfs:label "increased thermal nociceptive threshold"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002733>,
+        <http://purl.obolibrary.org/obo/MP_0003043>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008903>
+
+    Annotations: 
+        rdfs:label "abnormal mesenteric fat pad morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000010>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005379>
+
+    Annotations: 
+        rdfs:label "endocrine/exocrine gland phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005378>
+
+    Annotations: 
+        rdfs:label "growth/size phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000792>
+
+    Annotations: 
+        rdfs:label "abnormal cortical marginal zone morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000934>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001970>
+
+    Annotations: 
+        rdfs:label "abnormal pain threshold"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001968>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000790>
+
+    Annotations: 
+        rdfs:label "abnormal stratification in cerebral cortex"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000788>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001469>
+
+    Annotations: 
+        rdfs:label "abnormal contextual conditioning behavior"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001468>,
+        <http://purl.obolibrary.org/obo/MP_0002062>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001468>
+
+    Annotations: 
+        rdfs:label "abnormal temporal memory"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002063>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004889>
+
+    Annotations: 
+        rdfs:label "increased energy expenditure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005450>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005382>
+
+    Annotations: 
+        rdfs:label "craniofacial phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001392>
+
+    Annotations: 
+        rdfs:label "abnormal locomotor behavior"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003491>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008489>
+
+    Annotations: 
+        rdfs:label "slow postnatal weight gain"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001262>,
+        <http://purl.obolibrary.org/obo/MP_0001732>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005384>
+
+    Annotations: 
+        rdfs:label "cellular phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002950>
+
+    Annotations: 
+        rdfs:label "abnormal neural crest cell migration"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008932>,
+        <http://purl.obolibrary.org/obo/MP_0003091>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001463>
+
+    Annotations: 
+        rdfs:label "abnormal spatial learning"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002063>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001259>
+
+    Annotations: 
+        rdfs:label "abnormal body weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003956>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005380>
+
+    Annotations: 
+        rdfs:label "embryogenesis phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005389>
+
+    Annotations: 
+        rdfs:label "reproductive system phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005386>
+
+    Annotations: 
+        rdfs:label "behavior/neurological phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005385>
+
+    Annotations: 
+        rdfs:label "cardiovascular system phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005388>
+
+    Annotations: 
+        rdfs:label "respiratory system phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001764>
+
+    Annotations: 
+        rdfs:label "abnormal homeostasis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005376>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005387>
+
+    Annotations: 
+        rdfs:label "immune system phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004262>
+
+    Annotations: 
+        rdfs:label "abnormal physical strength"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002066>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0011117>
+
+    Annotations: 
+        rdfs:label "abnormal susceptibility to weight gain"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001259>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005657>
+
+    Annotations: 
+        rdfs:label "abnormal neural plate morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002085>,
+        <http://purl.obolibrary.org/obo/MP_0003861>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005659>
+
+    Annotations: 
+        rdfs:label "decreased susceptibility to diet-induced obesity"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010182>,
+        <http://purl.obolibrary.org/obo/MP_0004889>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002969>
+
+    Annotations: 
+        rdfs:label "impaired social transmission of food preference"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002802>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0006378>
+
+    Annotations: 
+        rdfs:label "abnormal spermatogonia morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0006362>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008503>
+
+    Annotations: 
+        rdfs:label "abnormal spinal cord grey matter morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000955>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005391>
+
+    Annotations: 
+        rdfs:label "vision/eye phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001475>
+
+    Annotations: 
+        rdfs:label "reduced long term depression"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001898>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002211>
+
+    Annotations: 
+        rdfs:label "abnormal primary sex determination"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002210>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001672>
+
+    Annotations: 
+        rdfs:label "abnormal embryogenesis/ development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005380>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002210>
+
+    Annotations: 
+        rdfs:label "abnormal sex determination"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002160>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002111>
+
+    Annotations: 
+        rdfs:label "abnormal tail morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005371>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002327>
+
+    Annotations: 
+        rdfs:label "abnormal respiratory function"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001943>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009293>
+
+    Annotations: 
+        rdfs:label "decreased inguinal fat pad weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005336>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003660>
+
+    Annotations: 
+        rdfs:label "chylothorax"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010334>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001544>
+
+    Annotations: 
+        rdfs:label "abnormal cardiovascular system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005385>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004077>
+
+    Annotations: 
+        rdfs:label "abnormal striatum morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000787>,
+        <http://purl.obolibrary.org/obo/MP_0006007>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001919>
+
+    Annotations: 
+        rdfs:label "abnormal reproductive system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005389>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010182>
+
+    Annotations: 
+        rdfs:label "decreased susceptibility to weight gain"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0011117>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005621>
+
+    Annotations: 
+        rdfs:label "abnormal cell physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005384>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009299>
+
+    Annotations: 
+        rdfs:label "decreased mesenteric fat pad weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008903>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009198>
+
+    Annotations: 
+        rdfs:label "abnormal male genitalia morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001145>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000929>
+
+    Annotations: 
+        rdfs:label "open neural tube"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003720>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002673>
+
+    Annotations: 
+        rdfs:label "abnormal sperm number"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001929>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001405>
+
+    Annotations: 
+        rdfs:label "impaired coordination"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001516>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001402>
+
+    Annotations: 
+        rdfs:label "hypoactivity"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003313>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000934>
+
+    Annotations: 
+        rdfs:label "abnormal telencephalon development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000787>,
+        <http://purl.obolibrary.org/obo/MP_0003232>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009718>
+
+    Annotations: 
+        rdfs:label "absent Purkinje cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000875>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008932>
+
+    Annotations: 
+        rdfs:label "abnormal embryonic tissue physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001672>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001688>
+
+    Annotations: 
+        rdfs:label "abnormal somite development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002085>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000003>
+
+    Annotations: 
+        rdfs:label "abnormal adipose tissue morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005375>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000001>
+
+    Annotations: 
+        rdfs:label "mammalian phenotype"^^xsd:string
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002286>
+
+    Annotations: 
+        rdfs:label "cryptorchism"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001146>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001924>
+
+    Annotations: 
+        rdfs:label "infertility"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002161>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001927>
+
+    Annotations: 
+        rdfs:label "abnormal estrous cycle"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009344>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004901>
+
+    Annotations: 
+        rdfs:label "decreased male germ cell number"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002209>,
+        <http://purl.obolibrary.org/obo/MP_0006362>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001925>
+
+    Annotations: 
+        rdfs:label "male infertility"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003698>,
+        <http://purl.obolibrary.org/obo/MP_0001924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001926>
+
+    Annotations: 
+        rdfs:label "female infertility"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001924>,
+        <http://purl.obolibrary.org/obo/MP_0003699>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002802>
+
+    Annotations: 
+        rdfs:label "abnormal discrimination learning"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002063>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004924>
+
+    Annotations: 
+        rdfs:label "abnormal behavior"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005386>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001929>
+
+    Annotations: 
+        rdfs:label "abnormal gametogenesis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002160>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004902>
+
+    Annotations: 
+        rdfs:label "abnormal uterus size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001120>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000937>
+
+    Annotations: 
+        rdfs:label "abnormal motor neuron morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>,
+        <http://purl.obolibrary.org/obo/MP_0008503>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002132>
+
+    Annotations: 
+        rdfs:label "abnormal respiratory system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005388>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001698>
+
+    Annotations: 
+        rdfs:label "decreased embryo size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001697>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002133>
+
+    Annotations: 
+        rdfs:label "abnormal respiratory system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005388>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004270>
+
+    Annotations: 
+        rdfs:label "analgesia"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001968>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001697>
+
+    Annotations: 
+        rdfs:label "abnormal embryo size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010866>,
+        <http://purl.obolibrary.org/obo/MP_0002088>,
+        <http://purl.obolibrary.org/obo/MP_0001672>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001127>
+
+    Annotations: 
+        rdfs:label "small ovary"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001116>,
+        <http://purl.obolibrary.org/obo/MP_0004853>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001126>
+
+    Annotations: 
+        rdfs:label "abnormal ovary morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009209>,
+        <http://purl.obolibrary.org/obo/MP_0000653>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001124>
+
+    Annotations: 
+        rdfs:label "abnormal gametes"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002208>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009701>
+
+    Annotations: 
+        rdfs:label "abnormal birth body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005378>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0006007>
+
+    Annotations: 
+        rdfs:label "abnormal basal ganglion morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000783>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009703>
+
+    Annotations: 
+        rdfs:label "decreased birth body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009701>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005336>
+
+    Annotations: 
+        rdfs:label "abnormal inguinal fat pad morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000010>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001120>
+
+    Annotations: 
+        rdfs:label "abnormal uterus morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009209>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005334>
+
+    Annotations: 
+        rdfs:label "abnormal fat pad morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000003>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000801>
+
+    Annotations: 
+        rdfs:label "abnormal temporal lobe morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008540>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004166>
+
+    Annotations: 
+        rdfs:label "abnormal limbic system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000783>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000807>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004166>,
+        <http://purl.obolibrary.org/obo/MP_0000787>,
+        <http://purl.obolibrary.org/obo/MP_0000801>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003415>
+
+    Annotations: 
+        rdfs:label "priapism"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001379>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004098>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar granule cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000886>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002161>
+
+    Annotations: 
+        rdfs:label "abnormal fertility/fecundity"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001919>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000428>
+
+    Annotations: 
+        rdfs:label "abnormal craniofacial morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005382>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002160>
+
+    Annotations: 
+        rdfs:label "abnormal reproductive system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005389>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000685>
+
+    Annotations: 
+        rdfs:label "abnormal immune system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005387>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002557>
+
+    Annotations: 
+        rdfs:label "abnormal social/conspecific interaction"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002906>
+
+    Annotations: 
+        rdfs:label "increased susceptibility to pharmacologically induced seizures"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000950>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002163>
+
+    Annotations: 
+        rdfs:label "abnormal gland morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005379>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004097>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar cortex morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000849>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000812>
+
+    Annotations: 
+        rdfs:label "abnormal dentate gyrus morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000807>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000813>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus layer morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000807>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001943>
+
+    Annotations: 
+        rdfs:label "abnormal respiration"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002133>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008440>
+
+    Annotations: 
+        rdfs:label "abnormal subplate morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000934>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001156>
+
+    Annotations: 
+        rdfs:label "abnormal spermatogenesis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001929>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008441>
+
+    Annotations: 
+        rdfs:label "thin cortical plate"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008439>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000819>
+
+    Annotations: 
+        rdfs:label "abnormal olfactory bulb morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009944>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003698>
+
+    Annotations: 
+        rdfs:label "abnormal male reproductive system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001919>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005159>
+
+    Annotations: 
+        rdfs:label "azoospermia"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004901>,
+        <http://purl.obolibrary.org/obo/MP_0001117>,
+        <http://purl.obolibrary.org/obo/MP_0002673>,
+        <http://purl.obolibrary.org/obo/MP_0001156>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008439>
+
+    Annotations: 
+        rdfs:label "abnormal cortical plate morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000934>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000913>
+
+    Annotations: 
+        rdfs:label "abnormal brain development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>,
+        <http://purl.obolibrary.org/obo/MP_0003861>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001286>
+
+    Annotations: 
+        rdfs:label "abnormal eye development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002092>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002566>
+
+    Annotations: 
+        rdfs:label "abnormal sexual interaction"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002557>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000572>
+
+    Annotations: 
+        rdfs:label "abnormal autopod morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002109>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003699>
+
+    Annotations: 
+        rdfs:label "abnormal female reproductive system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001919>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002915>
+
+    Annotations: 
+        rdfs:label "abnormal synaptic depression"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002206>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008026>
+
+    Annotations: 
+        rdfs:label "abnormal brain white matter morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001147>
+
+    Annotations: 
+        rdfs:label "small testis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004849>,
+        <http://purl.obolibrary.org/obo/MP_0001116>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000018>
+
+    Annotations: 
+        rdfs:label "small ears"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002177>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002151>
+
+    Annotations: 
+        rdfs:label "abnormal neural tube morphology/development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002085>,
+        <http://purl.obolibrary.org/obo/MP_0003861>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002152>
+
+    Annotations: 
+        rdfs:label "abnormal brain morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003632>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008540>
+
+    Annotations: 
+        rdfs:label "abnormal cerebrum morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000787>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000822>
+
+    Annotations: 
+        rdfs:label "abnormal brain ventricle morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002200>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000823>
+
+    Annotations: 
+        rdfs:label "abnormal lateral ventricle morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000787>,
+        <http://purl.obolibrary.org/obo/MP_0000822>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001954>
+
+    Annotations: 
+        rdfs:label "respiratory distress"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001951>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000010>
+
+    Annotations: 
+        rdfs:label "abnormal abdominal fat pad morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005334>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001146>
+
+    Annotations: 
+        rdfs:label "abnormal testis morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009205>,
+        <http://purl.obolibrary.org/obo/MP_0000653>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001953>
+
+    Annotations: 
+        rdfs:label "respiratory failure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001943>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001145>
+
+    Annotations: 
+        rdfs:label "abnormal male reproductive system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002160>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001951>
+
+    Annotations: 
+        rdfs:label "abnormal breathing pattern"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002327>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009944>
+
+    Annotations: 
+        rdfs:label "abnormal olfactory lobe morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000787>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003232>
+
+    Annotations: 
+        rdfs:label "abnormal forebrain development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000913>,
+        <http://purl.obolibrary.org/obo/MP_0000783>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009697>
+
+    Annotations: 
+        rdfs:label "abnormal copulation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001919>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002177>
+
+    Annotations: 
+        rdfs:label "abnormal outer ear morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002102>,
+        <http://purl.obolibrary.org/obo/MP_0000432>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009940>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus pyramidal cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009939>,
+        <http://purl.obolibrary.org/obo/MP_0008284>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000778>
+
+    Annotations: 
+        rdfs:label "abnormal nervous system tract morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003632>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003091>
+
+    Annotations: 
+        rdfs:label "abnormal cell migration"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005621>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000825>
+
+    Annotations: 
+        rdfs:label "dilated lateral ventricles"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000823>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000771>
+
+    Annotations: 
+        rdfs:label "abnormal brain size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004038>
+
+    Annotations: 
+        rdfs:label "lymphangiectasis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010200>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000841>
+
+    Annotations: 
+        rdfs:label "abnormal hindbrain morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000639>
+
+    Annotations: 
+        rdfs:label "abnormal adrenal gland morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002163>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009956>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar layer morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004097>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005076>
+
+    Annotations: 
+        rdfs:label "abnormal cell differentiation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005621>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008974>
+
+    Annotations: 
+        rdfs:label "proportional dwarf"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001265>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003633>
+
+    Annotations: 
+        rdfs:label "abnormal nervous system physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003631>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000788>
+
+    Annotations: 
+        rdfs:label "abnormal cerebral cortex morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008540>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003635>
+
+    Annotations: 
+        rdfs:label "abnormal synaptic transmission"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003633>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000787>
+
+    Annotations: 
+        rdfs:label "abnormal telencephalon morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000783>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010678>
+
+    Annotations: 
+        rdfs:label "abnormal skin adnexa morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010771>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000783>
+
+    Annotations: 
+        rdfs:label "abnormal forebrain morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000780>
+
+    Annotations: 
+        rdfs:label "abnormal corpus callosum morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0008219>,
+        <http://purl.obolibrary.org/obo/MP_0008540>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000781>
+
+    Annotations: 
+        rdfs:label "decreased corpus callosum size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000780>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003632>
+
+    Annotations: 
+        rdfs:label "abnormal nervous system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003631>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003631>
+
+    Annotations: 
+        rdfs:label "nervous system phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000854>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellum development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0006108>,
+        <http://purl.obolibrary.org/obo/MP_0000849>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005452>
+
+    Annotations: 
+        rdfs:label "abnormal adipose tissue amount"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000003>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000857>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar foliation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000854>,
+        <http://purl.obolibrary.org/obo/MP_0009964>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_9999999>
+
+    Annotations: 
+        rdfs:label "fake"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002092>
+
+    Annotations: 
+        rdfs:label "abnormal eye morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005391>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005457>
+
+    Annotations: 
+        rdfs:label "abnormal percent body fat"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005452>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000853>
+
+    Annotations: 
+        rdfs:label "absent cerebellar foliation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000857>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000852>
+
+    Annotations: 
+        rdfs:label "small cerebellum"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000849>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001116>
+
+    Annotations: 
+        rdfs:label "small gonad"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002211>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000950>
+
+    Annotations: 
+        rdfs:label "abnormal seizure response to pharmacological agent"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009745>,
+        <http://purl.obolibrary.org/obo/MP_0009357>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001117>
+
+    Annotations: 
+        rdfs:label "absent gametes"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001124>,
+        <http://purl.obolibrary.org/obo/MP_0004806>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005316>
+
+    Annotations: 
+        rdfs:label "abnormal response to tactile stimuli"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001968>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005459>
+
+    Annotations: 
+        rdfs:label "decreased percent body fat"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005457>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000955>
+
+    Annotations: 
+        rdfs:label "abnormal spinal cord morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003632>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002199>
+
+    Annotations: 
+        rdfs:label "abnormal brain commissure morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000778>,
+        <http://purl.obolibrary.org/obo/MP_0008026>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001119>
+
+    Annotations: 
+        rdfs:label "abnormal female reproductive system morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002160>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001516>
+
+    Annotations: 
+        rdfs:label "abnormal motor coordination/ balance"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002066>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001510>
+
+    Annotations: 
+        rdfs:label "abnormal coat appearance"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000367>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000847>
+
+    Annotations: 
+        rdfs:label "abnormal metencephalon morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000841>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000435>
+
+    Annotations: 
+        rdfs:label "shortened head"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0011495>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000653>
+
+    Annotations: 
+        rdfs:label "abnormal sex gland morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002163>,
+        <http://purl.obolibrary.org/obo/MP_0002160>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005450>
+
+    Annotations: 
+        rdfs:label "abnormal energy expenditure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005448>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000849>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellum morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000847>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000432>
+
+    Annotations: 
+        rdfs:label "abnormal head morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000428>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004806>
+
+    Annotations: 
+        rdfs:label "absent germ cells"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002209>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009939>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus neuron morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>,
+        <http://purl.obolibrary.org/obo/MP_0000807>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000249>
+
+    Annotations: 
+        rdfs:label "abnormal blood vessel physiology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001544>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009938>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus granule cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009939>,
+        <http://purl.obolibrary.org/obo/MP_0008285>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009937>
+
+    Annotations: 
+        rdfs:label "abnormal neuron differentiation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>,
+        <http://purl.obolibrary.org/obo/MP_0005076>,
+        <http://purl.obolibrary.org/obo/MP_0003861>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003956>
+
+    Annotations: 
+        rdfs:label "abnormal body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002089>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004196>
+
+    Annotations: 
+        rdfs:label "abnormal prenatal growth/weight/body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005378>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0005448>
+
+    Annotations: 
+        rdfs:label "abnormal energy balance"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001764>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002772>
+
+    Annotations: 
+        rdfs:label "brachypodia"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000572>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001732>
+
+    Annotations: 
+        rdfs:label "postnatal growth retardation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001731>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002208>
+
+    Annotations: 
+        rdfs:label "abnormal germ cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001929>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001731>
+
+    Annotations: 
+        rdfs:label "abnormal postnatal growth"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002089>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002209>
+
+    Annotations: 
+        rdfs:label "decreased germ cell number"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002208>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002206>
+
+    Annotations: 
+        rdfs:label "abnormal CNS synaptic transmission"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003635>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000872>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellum external granule cell layer morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000854>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002200>
+
+    Annotations: 
+        rdfs:label "abnormal brain ventricle/choroid plexus morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002152>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001879>
+
+    Annotations: 
+        rdfs:label "abnormal lymphatic vessel morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000685>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000875>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar Purkinje cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009956>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0006362>
+
+    Annotations: 
+        rdfs:label "abnormal male germ cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002208>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002073>
+
+    Annotations: 
+        rdfs:label "abnormal hair growth"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001510>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000877>
+
+    Annotations: 
+        rdfs:label "abnormal Purkinje cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>,
+        <http://purl.obolibrary.org/obo/MP_0000875>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001898>
+
+    Annotations: 
+        rdfs:label "abnormal long term depression"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002915>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003861>
+
+    Annotations: 
+        rdfs:label "abnormal nervous system development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003632>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002768>
+
+    Annotations: 
+        rdfs:label "small adrenal glands"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000639>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010832>
+
+    Annotations: 
+        rdfs:label "lethality during fetal growth through weaning"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010770>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002762>
+
+    Annotations: 
+        rdfs:label "ectopic cerebellar granule cells"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0011723>,
+        <http://purl.obolibrary.org/obo/MP_0004098>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003720>
+
+    Annotations: 
+        rdfs:label "abnormal neural tube closure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002151>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008285>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus granule cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000813>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0008284>
+
+    Annotations: 
+        rdfs:label "abnormal hippocampus pyramidal cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000813>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003043>
+
+    Annotations: 
+        rdfs:label "hypoalgesia"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001970>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000885>
+
+    Annotations: 
+        rdfs:label "ectopic Purkinje cell"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0011723>,
+        <http://purl.obolibrary.org/obo/MP_0000877>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000886>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar granule layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009956>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000884>
+
+    Annotations: 
+        rdfs:label "delaminated Purkinje cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000875>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002080>
+
+    Annotations: 
+        rdfs:label "prenatal lethality"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010770>,
+        <http://purl.obolibrary.org/obo/MP_0010769>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000889>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellar molecular layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009956>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002081>
+
+    Annotations: 
+        rdfs:label "perinatal lethality"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010832>,
+        <http://purl.obolibrary.org/obo/MP_0010769>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002082>
+
+    Annotations: 
+        rdfs:label "postnatal lethality"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010832>,
+        <http://purl.obolibrary.org/obo/MP_0010769>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002083>
+
+    Annotations: 
+        rdfs:label "premature death"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010769>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010769>
+
+    Annotations: 
+        rdfs:label "abnormal survival"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010768>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002758>
+
+    Annotations: 
+        rdfs:label "long tail"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002111>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002085>
+
+    Annotations: 
+        rdfs:label "abnormal embryonic tissue morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001672>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002088>
+
+    Annotations: 
+        rdfs:label "abnormal embryonic growth/weight/body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004196>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002089>
+
+    Annotations: 
+        rdfs:label "abnormal postnatal growth/weight/body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0005378>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0001491>
+
+    Annotations: 
+        rdfs:label "unresponsive to tactile stimuli"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004270>,
+        <http://purl.obolibrary.org/obo/MP_0005316>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010770>
+
+    Annotations: 
+        rdfs:label "preweaning lethality"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010769>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004853>
+
+    Annotations: 
+        rdfs:label "abnormal ovary size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001126>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000746>
+
+    Annotations: 
+        rdfs:label "weakness"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004262>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010771>
+
+    Annotations: 
+        rdfs:label "integument phenotype"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0000367>
+
+    Annotations: 
+        rdfs:label "abnormal coat/ hair morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0010678>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003491>
+
+    Annotations: 
+        rdfs:label "abnormal voluntary movement"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002066>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009208>
+
+    Annotations: 
+        rdfs:label "abnormal female genitalia morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001119>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009964>
+
+    Annotations: 
+        rdfs:label "abnormal cerebellum lobule morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004097>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009209>
+
+    Annotations: 
+        rdfs:label "abnormal internal female genitalia morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009208>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009205>
+
+    Annotations: 
+        rdfs:label "abnormal internal male genitalia morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009198>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009969>
+
+    Annotations: 
+        rdfs:label "abnormal cerebral cortex pyramidal cell morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000788>,
+        <http://purl.obolibrary.org/obo/MP_0002882>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002739>
+
+    Annotations: 
+        rdfs:label "abnormal olfactory bulb development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000819>,
+        <http://purl.obolibrary.org/obo/MP_0000913>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0003313>
+
+    Annotations: 
+        rdfs:label "abnormal locomotor activation"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001392>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0011495>
+
+    Annotations: 
+        rdfs:label "abnormal head shape"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000432>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002883>
+
+    Annotations: 
+        rdfs:label "chromatolysis"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002882>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010334>
+
+    Annotations: 
+        rdfs:label "pleural effusion"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002133>,
+        <http://purl.obolibrary.org/obo/MP_0001784>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002882>
+
+    Annotations: 
+        rdfs:label "abnormal neuron morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003632>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002881>
+
+    Annotations: 
+        rdfs:label "long hair"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002073>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009344>
+
+    Annotations: 
+        rdfs:label "abnormal ovulation cycle"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003699>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0004849>
+
+    Annotations: 
+        rdfs:label "abnormal testis size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001146>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010768>
+
+    Annotations: 
+        rdfs:label "mortality/aging"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009672>
+
+    Annotations: 
+        rdfs:label "abnormal birth weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009701>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009674>
+
+    Annotations: 
+        rdfs:label "decreased birth weight"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0009672>,
+        <http://purl.obolibrary.org/obo/MP_0009703>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0009357>
+
+    Annotations: 
+        rdfs:label "abnormal seizure response to inducing agent"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002064>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002062>
+
+    Annotations: 
+        rdfs:label "abnormal associative learning"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0002063>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010866>
+
+    Annotations: 
+        rdfs:label "abnormal prenatal body size"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004196>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002067>
+
+    Annotations: 
+        rdfs:label "abnormal sensory capabilities/reflexes/nociception"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002733>
+
+    Annotations: 
+        rdfs:label "abnormal thermal nociception"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001968>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002064>
+
+    Annotations: 
+        rdfs:label "seizures"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0003633>,
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002063>
+
+    Annotations: 
+        rdfs:label "abnormal learning/memory/conditioning"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0002066>
+
+    Annotations: 
+        rdfs:label "abnormal motor capabilities/coordination/movement"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0004924>
+    
+    
+Class: <http://purl.obolibrary.org/obo/MP_0010200>
+
+    Annotations: 
+        rdfs:label "enlarged lymphatic vessel"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/MP_0001879>
+    
+    
