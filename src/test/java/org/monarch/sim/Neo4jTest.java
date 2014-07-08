@@ -1,11 +1,17 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.Neo4jTraversals.*;
+import static org.monarch.sim.Neo4jTraversals.getAncestors;
+import static org.monarch.sim.Neo4jTraversals.getChildren;
+import static org.monarch.sim.Neo4jTraversals.getCommonAncestors;
+import static org.monarch.sim.Neo4jTraversals.getDescendants;
+import static org.monarch.sim.Neo4jTraversals.getLCS;
+import static org.monarch.sim.Neo4jTraversals.getParents;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.monarch.sim.Neo4jTraversals.RelTypes;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -71,25 +77,26 @@ public class Neo4jTest {
 			{
 				System.out.println("NODE: " + node.getProperty("name"));
 				System.out.println("Parents:");
-				for (Node parent : getParents(waterDB, node))
+				for (Node parent : getParents(node))
 				{
 					System.out.println(parent.getProperty("name"));
 				}
 				System.out.println("Children:");
-				for (Node child : getChildren(waterDB, node))
+				for (Node child : getChildren(node))
 				{
 					System.out.println(child.getProperty("name"));
 				}
 				System.out.println("Ancestors:");
-				for (Node ancestor : getAncestors(waterDB, node))
+				for (Node ancestor : getAncestors(node))
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
 				System.out.println("Descendants:");
-				for (Node descendant : getDescendants(waterDB, node))
+				for (Node descendant : getDescendants(node))
 				{
 					System.out.println(descendant.getProperty("name"));
 				}
+				System.out.println();
 			}
 		}
 		System.out.println();
@@ -112,40 +119,21 @@ public class Neo4jTest {
 					continue;
 				}
 				System.out.println("NODES: " + first_name + " " + second_name);
-				for (Node ancestor : getCommonAncestors(waterDB, first, second))
+				for (Node ancestor : getCommonAncestors(first, second))
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
+				System.out.println("LCS: " + getLCS(first, second).getProperty("name"));
 			}
 		}
+		
 	}
 
 	@Test
 	public void test() {
 //		validateWaterDB();
-		for (Node first : GlobalGraphOperations.at(waterDB).getAllNodes())
-		{
-			if (!first.hasProperty("name"))
-			{
-				continue;
-			}
-			
-			for (Node second : GlobalGraphOperations.at(waterDB).getAllNodes())
-			{
-				if (!second.hasProperty("name"))
-				{
-					continue;
-				}
-				
-				if (first.getProperty("name").toString().compareTo(second.getProperty("name").toString()) > 0)
-				{
-					continue;
-				}
-				
-				System.out.println(first.getProperty("name") + " " + second.getProperty("name"));
-				System.out.println("LCS: " + getLCS(waterDB, first, second));
-			}
-		}
+		System.out.println(getParents(monarchDB.getNodeById(1)));
+		System.out.println(getParents(monarchDB.getNodeById(5066)));
 	}
 
 }
