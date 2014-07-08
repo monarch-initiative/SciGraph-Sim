@@ -91,17 +91,17 @@
       <artifactId>blueprints-graph-jung</artifactId>
       <version>${blueprints.version}</version>
     </dependency>
-    
+
     <dependency>
- 	 <groupId>com.tinkerpop.gremlin</groupId>
- 	 <artifactId>gremlin-java</artifactId>
- 	 <version>2.5.0</version>
-	</dependency>
-	<dependency>
-	  <groupId>com.tinkerpop.gremlin</groupId>
-	  <artifactId>gremlin-groovy</artifactId>
-	  <version>2.5.0</version>
-	</dependency>
+      <groupId>com.tinkerpop.gremlin</groupId>
+      <artifactId>gremlin-java</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.tinkerpop.gremlin</groupId>
+      <artifactId>gremlin-groovy</artifactId>
+      <version>2.5.0</version>
+    </dependency>
 
     <dependency>
       <groupId>net.sourceforge.owlapi</groupId>
@@ -110,12 +110,11 @@
     </dependency>
 
     <dependency>
-    	<groupId>junit</groupId>
-    	<artifactId>junit</artifactId>
-    	<version>4.11</version>
-    	<scope>test</scope>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-
 
 </project>
