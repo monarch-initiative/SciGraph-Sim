@@ -124,6 +124,10 @@ public class Neo4jTraversals {
 	}
 	
 	// TODO: This can actually be horribly inefficient.
+	// FIXME: This doesn't necessarily get the least common subsumer,
+	// only the subsumer with the shortest combined path.
+	// For instance, in cycleDB (Neo4jTest), the least common subsumer
+	// of B and E is B, but there is a shorter path with subsumer A.
 	public static Node getLCS(Node first, Node second) {		
 		if (first.equals(second))
 		{

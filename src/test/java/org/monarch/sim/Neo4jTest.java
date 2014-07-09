@@ -1,18 +1,18 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.Neo4jTraversals.getAncestors;
-import static org.monarch.sim.Neo4jTraversals.getChildren;
-import static org.monarch.sim.Neo4jTraversals.getCommonAncestors;
-import static org.monarch.sim.Neo4jTraversals.getDescendants;
-import static org.monarch.sim.Neo4jTraversals.getLCS;
-import static org.monarch.sim.Neo4jTraversals.getParents;
+import static org.monarch.sim.Neo4jTraversals.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Random;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.monarch.sim.Neo4jTraversals.RelTypes;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -29,6 +29,8 @@ public class Neo4jTest {
 	static GraphDatabaseService completeDB;
 	// Balanced binary tree.
 	static GraphDatabaseService treeDB;
+	// A directed cycle with one edge reversed.
+	static GraphDatabaseService cycleDB;
 	// Graph from monarchGraph folder.
 	static GraphDatabaseService monarchDB;	
 
@@ -36,7 +38,8 @@ public class Neo4jTest {
 	public static void setUpBeforeClass() throws Exception {
 		buildWaterDB();		
 		buildCompleteDB(16);
-		buildTreeDB(15);		
+		buildTreeDB(15);	
+		buildCycleDB();
 		buildMonarchDB();
 	}
 
@@ -78,9 +81,67 @@ public class Neo4jTest {
 		}
 	}
 
+	private static void buildCycleDB() {
+		// Build a small pathological graph.
+		cycleDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		Node a = addNode(cycleDB, "A");
+		Node b = addNode(cycleDB, "B");
+		Node c = addNode(cycleDB, "C");
+		Node d = addNode(cycleDB, "D");
+		Node e = addNode(cycleDB, "E");
+		addEdge(cycleDB, b, a);
+		addEdge(cycleDB, c, b);
+		addEdge(cycleDB, d, c);
+		addEdge(cycleDB, e, d);
+		addEdge(cycleDB, e, a);
+	}
+	
 	private static void buildMonarchDB() {
 		// Build a database from the monarchGraph folder.
-		monarchDB = new GraphDatabaseFactory().newEmbeddedDatabase("monarchGraph");
+		monarchDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+
+		// All the edges in the given graph are undirected, so we need to rebuild.
+		Transaction tx = monarchDB.beginTx();
+		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase("monarchGraph");
+		HashMap<Node, Node> map = new HashMap<>();
+		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
+		{
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			Node newNode = addNode(monarchDB, "" + n.getId());
+			for (String property : n.getPropertyKeys())
+			{
+				newNode.setProperty(property, n.getProperty(property));
+			}
+			map.put(n, newNode);
+		}
+		tx.success();
+		tx.finish();
+		
+		// Expand outward starting with node 1.
+		HashSet<Node> visited = new HashSet<>();
+		LinkedList<Node> toExpand = new LinkedList<>();
+		toExpand.add(tempDB.getNodeById(1));
+		while (!toExpand.isEmpty())
+		{
+			Node next = toExpand.removeFirst();
+			if (!visited.add(next))
+			{
+				continue;
+			}
+			
+			for (Relationship edge : next.getRelationships(Direction.INCOMING))
+			{
+				Node child = edge.getStartNode();
+				if (!visited.contains(child))
+				{
+					addEdge(monarchDB, map.get(child), map.get(next));
+					toExpand.add(child);
+				}
+			}
+		}
 	}
 
 	@AfterClass
@@ -89,7 +150,17 @@ public class Neo4jTest {
 		waterDB.shutdown();
 		completeDB.shutdown();
 		treeDB.shutdown();
+		cycleDB.shutdown();
 		monarchDB.shutdown();
+	}
+	
+	public static Node addNode(GraphDatabaseService db) {
+		// Wrap a transaction around node creation.
+		Transaction tx = db.beginTx();
+		Node newNode = db.createNode();
+		tx.success();
+		tx.finish();
+		return newNode;
 	}
 	
 	public static Node addNode(GraphDatabaseService db, String name) {
@@ -176,15 +247,57 @@ public class Neo4jTest {
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
-				System.out.println("LCS: " + getLCS(first, second).getProperty("name"));
+				Node lcs = getLCS(first, second);
+				if (lcs == null)
+				{
+					System.out.println("LCS: Null");
+					System.out.println();
+					continue;
+				}
+				System.out.println("LCS: " + lcs.getProperty("name"));
 				System.out.println();
 			}
 		}
 	}
 	
+	private void validateMonarchDB() {
+		int count = 0;
+		for (@SuppressWarnings("unused") Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
+		{
+			count++;
+		}
+		for (int i = 0; i < 100; i++)
+		{
+			Random rand = new Random();
+			int j = rand.nextInt(count) + 1;
+			int k = rand.nextInt(count) + 1;
+			Node m = monarchDB.getNodeById(j);
+			Node n = monarchDB.getNodeById(k);
+			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
+			System.out.println("Common Ancestors:");
+			for (Node ancestor : getCommonAncestors(m, n))
+			{
+				System.out.println(ancestor.getProperty("name"));
+			}
+			Node lcs = getLCS(m, n);
+			if (lcs == null)
+			{
+				System.out.println("LCS: Null");
+				continue;
+			}
+			System.out.println("LCS: " + lcs.getProperty("name"));
+			System.out.println();			
+		}
+	}
+	
 	@Test
 	public void test() {
-		validateDBPairwise(treeDB);
+		validateMonarchDB();
+//		for (String p : getProperties(monarchDB))
+//		{
+//			System.out.println(p);
+//		}
+//		System.out.println(monarchDB.getNodeById(481).getProperty("label"));
 	}
-
+	
 }
