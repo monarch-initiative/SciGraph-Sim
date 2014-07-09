@@ -23,6 +23,14 @@
   <name>SciGraph - core</name>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+  
+  <repositories>
+	<repository>
+	<id>CRBS</id>
+	<name>CRBS Maven Repo</name>
+	<url>http://maven.crbs.ucsd.edu/nexus/content/repositories/NIF-snapshot</url>
+	</repository>
+  </repositories>
 
   <properties>
     <neo4j.version>1.9.8</neo4j.version>
@@ -108,6 +116,14 @@
       <artifactId>owlapi-distribution</artifactId>
       <version>3.5.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>edu.sdsc</groupId>
+      <artifactId>scigraph-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+	  <type>jar</type>
+	  <scope>compile</scope>
+	</dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -115,6 +131,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+	<version>1.8.4</version>
+</dependency>
   </dependencies>
 
 </project>

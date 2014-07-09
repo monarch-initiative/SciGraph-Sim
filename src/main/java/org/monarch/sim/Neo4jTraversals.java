@@ -9,7 +9,6 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTraversals {
@@ -44,12 +43,9 @@ public class Neo4jTraversals {
 		return properties;
 	}
 	
-	public static Iterable<Node> getDirectedNeighbors(GraphDatabaseService db, Node node, Direction dir) {
-		// Make the process a transaction.
-		Transaction tx = db.beginTx();
-		
+	public static Iterable<Node> getDirectedNeighbors(Node node, Direction dir) {
 		// Get the relationships.
-		Iterable<Relationship> rels = node.getRelationships(dir, RelTypes.SUBCLASS);
+		Iterable<Relationship> rels = node.getRelationships(dir);
 		
 		// Turn the relationships into neighbors.
 		LinkedList<Node> neighbors = new LinkedList<>();
@@ -57,24 +53,18 @@ public class Neo4jTraversals {
 		{
 			neighbors.add(rel.getOtherNode(node));
 		}
-		
-		tx.success();
-		tx.finish();
 		return neighbors;
 	}
 	
-	public static Iterable<Node> getChildren(GraphDatabaseService db, Node node) {
-		return getDirectedNeighbors(db, node, Direction.INCOMING);
+	public static Iterable<Node> getChildren(Node node) {
+		return getDirectedNeighbors(node, Direction.INCOMING);
 	}
 	
-	public static Iterable<Node> getParents(GraphDatabaseService db, Node node) {
-		return getDirectedNeighbors(db, node, Direction.OUTGOING);
+	public static Iterable<Node> getParents(Node node) {
+		return getDirectedNeighbors(node, Direction.OUTGOING);
 	}
 
-	public static Iterable<Node> getDirectedDescendants(GraphDatabaseService db, Node node, Direction dir) {
-		// Make the process a transaction.
-		Transaction tx = db.beginTx();
-		
+	public static Iterable<Node> getDirectedDescendants(Node node, Direction dir) {
 		Set<Node> descendants = new HashSet<>();
 		LinkedList<Node> toTry = new LinkedList<>();
 		toTry.add(node);
@@ -89,29 +79,27 @@ public class Neo4jTraversals {
 			}
 			descendants.add(curNode);
 			// We need to expand from each of the neighbors.
-			for (Node neighbor : getDirectedNeighbors(db, node, dir))
+			for (Node neighbor : getDirectedNeighbors(curNode, dir))
 			{
 				toTry.add(neighbor);
 			}
 		}
-		
-		tx.success();
-		tx.finish();
+
 		return descendants;
 	}
 
-	public static Iterable<Node> getAncestors(GraphDatabaseService db, Node node) {
-		return getDirectedDescendants(db, node, Direction.OUTGOING);
+	public static Iterable<Node> getAncestors(Node node) {
+		return getDirectedDescendants(node, Direction.OUTGOING);
 	}
 
-	public static Iterable<Node> getDescendants(GraphDatabaseService db, Node node) {
-		return getDirectedDescendants(db, node, Direction.INCOMING);
+	public static Iterable<Node> getDescendants(Node node) {
+		return getDirectedDescendants(node, Direction.INCOMING);
 	}
 
 	// TODO: Write this using Neo4j more directly.
-	public static Iterable<Node> getCommonAncestors(GraphDatabaseService db, Node first, Node second) {
-		Set<Node> firstAncestors = (HashSet<Node>)getAncestors(db, first);
-		Set<Node> secondAncestors = (HashSet<Node>)getAncestors(db, second);
+	public static Iterable<Node> getCommonAncestors(Node first, Node second) {
+		Set<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
+		Set<Node> secondAncestors = (HashSet<Node>)getAncestors(second);
 		firstAncestors.retainAll(secondAncestors);
 		return firstAncestors;
 	}
@@ -132,7 +120,8 @@ public class Neo4jTraversals {
 		}
 	}
 	
-	public static Node getLCS(GraphDatabaseService db, Node first, Node second) {		
+	// TODO: This can actually be horribly inefficient.
+	public static Node getLCS(Node first, Node second) {		
 		if (first.equals(second))
 		{
 			return first;
@@ -156,7 +145,7 @@ public class Neo4jTraversals {
 					continue;
 				}
 				
-				for (Node parent : getParents(db, next.node))
+				for (Node parent : getParents(next.node))
 				{
 					if (parent.equals(second))
 					{
@@ -168,7 +157,7 @@ public class Neo4jTraversals {
 				}
 			}
 			
-			// If we're headed down, we can only go down. further.
+			// If we're headed down, we can only go down further.
 			else
 			{
 				if (downVisited.contains(next.node))
@@ -176,7 +165,7 @@ public class Neo4jTraversals {
 					continue;
 				}
 				
-				for (Node child : getChildren(db, next.node))
+				for (Node child : getChildren(next.node))
 				{
 					if (child.equals(second))
 					{
