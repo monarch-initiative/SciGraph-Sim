@@ -109,14 +109,17 @@ public class Neo4jTraversals {
 		public Node subsumer;
 		public boolean goingUp;
 		
-		public LCSNode(Node node_, boolean goingUp_)
+		public LCSNode(Node node_)
 		{
 			node = node_;
-			goingUp = goingUp_;
-			if (!goingUp)
-			{
-				subsumer = node_;
-			}
+			goingUp = true;
+		}
+		
+		public LCSNode(Node node_, Node subsumer_)
+		{
+			node = node_;
+			subsumer = subsumer_;
+			goingUp = false;
 		}
 	}
 	
@@ -130,17 +133,17 @@ public class Neo4jTraversals {
 		HashSet<Node> upVisited = new HashSet<>();
 		HashSet<Node> downVisited = new HashSet<>();
 		LinkedList<LCSNode> toTry = new LinkedList<>();
-		toTry.add(new LCSNode(first, true));
-		toTry.add(new LCSNode(first, false));
+		toTry.add(new LCSNode(first));
+		toTry.add(new LCSNode(first, first));
 		
 		while (!toTry.isEmpty())
 		{
 			LCSNode next = toTry.removeFirst();
-						
+			
 			// If we're headed up, we can either go up or down.
 			if (next.goingUp)
 			{
-				if (upVisited.contains(next.node))
+				if (!upVisited.add(next.node))
 				{
 					continue;
 				}
@@ -152,15 +155,15 @@ public class Neo4jTraversals {
 						return parent;
 					}
 					
-					toTry.add(new LCSNode(parent, true));
-					toTry.add(new LCSNode(parent, false));
+					toTry.add(new LCSNode(parent));
+					toTry.add(new LCSNode(parent, parent));
 				}
 			}
 			
 			// If we're headed down, we can only go down further.
 			else
 			{
-				if (downVisited.contains(next.node))
+				if (!downVisited.add(next.node))
 				{
 					continue;
 				}
@@ -172,7 +175,7 @@ public class Neo4jTraversals {
 						return next.subsumer;
 					}
 					
-					toTry.add(new LCSNode(child, false));
+					toTry.add(new LCSNode(child, next.subsumer));
 				}
 			}
 		}

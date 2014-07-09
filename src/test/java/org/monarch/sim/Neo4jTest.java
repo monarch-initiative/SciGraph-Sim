@@ -7,6 +7,8 @@ import static org.monarch.sim.Neo4jTraversals.getDescendants;
 import static org.monarch.sim.Neo4jTraversals.getLCS;
 import static org.monarch.sim.Neo4jTraversals.getParents;
 
+import java.util.ArrayList;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,19 +25,60 @@ public class Neo4jTest {
 
 	// ^-shaped graph.
 	static GraphDatabaseService waterDB;
+	// Complete graph.
+	static GraphDatabaseService completeDB;
+	// Balanced binary tree.
+	static GraphDatabaseService treeDB;
 	// Graph from monarchGraph folder.
 	static GraphDatabaseService monarchDB;	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		buildWaterDB();		
+		buildCompleteDB(16);
+		buildTreeDB(15);		
+		buildMonarchDB();
+	}
+
+	private static void buildWaterDB() {
 		// Build a database with three nodes in a ^ configuration.
 		waterDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
 		Node waterA = addNode(waterDB, "A");
 		Node waterB = addNode(waterDB, "B");
 		Node waterC = addNode(waterDB, "C");
-		addRelationship(waterDB, waterA, waterB);
-		addRelationship(waterDB, waterC, waterB);
-		
+		addEdge(waterDB, waterA, waterB);
+		addEdge(waterDB, waterC, waterB);
+	}
+	
+	private static void buildCompleteDB(int numNodes) {
+		// Build a complete graph with edges directed toward the lower indices.
+		completeDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		ArrayList<Long> ids = new ArrayList<>();
+		for (int i = 1; i <= numNodes; i++)
+		{
+			Node newNode = addNode(completeDB, "" + i);
+			for (Long id : ids)
+			{
+				addEdge(completeDB, newNode, completeDB.getNodeById(id));
+			}
+			ids.add(newNode.getId());
+		}
+	}
+
+	private static void buildTreeDB(int numNodes) {
+		// Build a balanced binary tree with edges directed toward the lower indices.
+		treeDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		for (int i = 1; i <= numNodes; i++)
+		{
+			Node newNode = addNode(treeDB, "" + i);
+			if (i != 1)
+			{
+				addEdge(treeDB, newNode, treeDB.getNodeById(i / 2));
+			}
+		}
+	}
+
+	private static void buildMonarchDB() {
 		// Build a database from the monarchGraph folder.
 		monarchDB = new GraphDatabaseFactory().newEmbeddedDatabase("monarchGraph");
 	}
@@ -44,6 +87,8 @@ public class Neo4jTest {
 	public static void tearDownAfterClass() throws Exception {
 		// Clean up the databases.
 		waterDB.shutdown();
+		completeDB.shutdown();
+		treeDB.shutdown();
 		monarchDB.shutdown();
 	}
 	
@@ -57,7 +102,7 @@ public class Neo4jTest {
 		return newNode;
 	}
 	
-	public static Relationship addRelationship(GraphDatabaseService db, Node first, Node second)
+	public static Relationship addEdge(GraphDatabaseService db, Node first, Node second)
 	{
 		// Wrap a transaction around edge creation.
 		Transaction tx = db.beginTx();
@@ -67,9 +112,14 @@ public class Neo4jTest {
 		return newRel;		
 	}
 	
-	// FIXME: Make this actually check things.
-	public void validateWaterDB() {	
-		Iterable<Node> nodes = GlobalGraphOperations.at(waterDB).getAllNodes();
+	public void validateDB(GraphDatabaseService db) {
+		validateDBNodes(db);
+		System.out.println();
+		validateDBPairwise(db);
+	}
+
+	private void validateDBNodes(GraphDatabaseService db) {
+		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
 		for (Node node : nodes)
 		{
 			if (node.hasProperty("name"))
@@ -98,7 +148,10 @@ public class Neo4jTest {
 				System.out.println();
 			}
 		}
-		System.out.println();
+	}
+
+	private void validateDBPairwise(GraphDatabaseService db) {
+		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
 		for (Node first : nodes)
 		{
 			if (!first.hasProperty("name"))
@@ -118,21 +171,20 @@ public class Neo4jTest {
 					continue;
 				}
 				System.out.println("NODES: " + first_name + " " + second_name);
+				System.out.println("Common Ancestors:");
 				for (Node ancestor : getCommonAncestors(first, second))
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
 				System.out.println("LCS: " + getLCS(first, second).getProperty("name"));
+				System.out.println();
 			}
 		}
-		
 	}
-
+	
 	@Test
 	public void test() {
-//		validateWaterDB();
-		System.out.println(getParents(monarchDB.getNodeById(1)));
-		System.out.println(getParents(monarchDB.getNodeById(5066)));
+		validateDBPairwise(treeDB);
 	}
 
 }
