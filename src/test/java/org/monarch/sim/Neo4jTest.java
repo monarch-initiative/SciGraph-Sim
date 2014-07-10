@@ -287,8 +287,8 @@ public class Neo4jTest {
 		{
 			// Pick any two nodes.
 			Random rand = new Random();
-			int j = rand.nextInt(count) + 1;
-			int k = rand.nextInt(count) + 1;
+			int j = rand.nextInt(count);
+			int k = rand.nextInt(count);
 			Node m = monarchDB.getNodeById(j);
 			Node n = monarchDB.getNodeById(k);
 			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
@@ -362,6 +362,7 @@ public class Neo4jTest {
 	public void test() {
 		validateMonarchDB();
 //		validateDBPairwise(cycleDB);
+//		validateDBPairwise(treeDB);
 	}
 	
 }
