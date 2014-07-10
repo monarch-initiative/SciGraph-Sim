@@ -3,10 +3,14 @@ package org.monarch.sim;
 import static org.monarch.sim.Neo4jTraversals.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -260,44 +264,104 @@ public class Neo4jTest {
 		}
 	}
 	
-	private void validateMonarchDB() {
+	public void validateMonarchDB() {
+		// Keep track of some statistics.
+		int trials = 1000;
+		int totalCommonAncestors = 0;
+		HashMap<String, Integer> subsumerCounts = new HashMap<>();
+		int relevantSubsumerCount = 5;
+		
+		// We should get a sense of which subsumer method is faster.
+		long ancestorTime = 0;
+		long lcsTime = 0;
+		long start, end;
+		
+		// We need to know how many nodes there are to choose one uniformly.
 		int count = 0;
 		for (@SuppressWarnings("unused") Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
 		{
 			count++;
 		}
-		for (int i = 0; i < 100; i++)
+		
+		for (int i = 0; i < trials; i++)
 		{
+			// Pick any two nodes.
 			Random rand = new Random();
 			int j = rand.nextInt(count) + 1;
 			int k = rand.nextInt(count) + 1;
 			Node m = monarchDB.getNodeById(j);
 			Node n = monarchDB.getNodeById(k);
 			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
+			
+			// Find all common ancestors.
 			System.out.println("Common Ancestors:");
-			for (Node ancestor : getCommonAncestors(m, n))
+			start = System.nanoTime();
+			Iterable<Node> ancestors = getCommonAncestors(m, n);
+			end = System.nanoTime();
+			ancestorTime += (end - start);
+			for (Node ancestor : ancestors)
 			{
 				System.out.println(ancestor.getProperty("name"));
-			}
+				totalCommonAncestors++;
+			}			
+			
+			// Find the LCS.
+			start = System.nanoTime();
 			Node lcs = getLCS(m, n);
+			end = System.nanoTime();
+			lcsTime += (end - start);
 			if (lcs == null)
 			{
 				System.out.println("LCS: Null");
 				continue;
 			}
-			System.out.println("LCS: " + lcs.getProperty("name"));
+			String lcsName = (String)lcs.getProperty("name");
+			if (!subsumerCounts.containsKey(lcsName))
+			{
+				subsumerCounts.put(lcsName, 0);
+			}
+			subsumerCounts.put(lcsName, subsumerCounts.get(lcsName) + 1);
+			System.out.println("LCS: " + lcsName);
 			System.out.println();			
+		}
+		
+		// Process statistics.
+		double averageCommonAncestors = totalCommonAncestors * 1.0 / trials;
+		// This would be trivial in a sensible language.
+		List<Entry<String, Integer>> entries = new LinkedList<>(subsumerCounts.entrySet());
+		Collections.sort(entries, new Comparator<Entry<String, Integer>>()
+			{
+				public int compare(Entry<String, Integer> first, Entry<String, Integer> second) {
+					return first.getValue().compareTo(second.getValue());
+				}
+			});
+		Collections.reverse(entries);
+		
+		// Report to the user.
+		System.out.println("Trials: " + trials);
+		System.out.println("Milliseconds to compute ancestors: " + ancestorTime / 1000000);
+		System.out.println("Milliseconds to compute LCS: " + lcsTime / 1000000);
+		System.out.println("Average common ancestors: " + averageCommonAncestors);
+		System.out.println("Common LCS nodes:");
+		for (Entry<String, Integer> entry : entries)
+		{
+			if (entry.getValue() == 1)
+			{
+				break;
+			}
+			System.out.println("Node " + entry.getKey() + ": " + entry.getValue() + " times");
+			relevantSubsumerCount--;
+			if (relevantSubsumerCount == 0)
+			{
+				break;
+			}
 		}
 	}
 	
 	@Test
 	public void test() {
 		validateMonarchDB();
-//		for (String p : getProperties(monarchDB))
-//		{
-//			System.out.println(p);
-//		}
-//		System.out.println(monarchDB.getNodeById(481).getProperty("label"));
+//		validateDBPairwise(cycleDB);
 	}
 	
 }
