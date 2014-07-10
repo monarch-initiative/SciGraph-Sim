@@ -1,11 +1,12 @@
 package org.monarch.sim;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 
+import com.google.common.base.Optional;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
@@ -37,7 +38,8 @@ public class GremlinTraversals {
 			.except(ancestors)
 			.store(ancestors)
 			// Repeat until we run out of neighbors.
-			.loop("x", new PipeFunction<LoopBundle<Vertex>, Boolean>()
+			.loop("x",
+				new PipeFunction<LoopBundle<Vertex>, Boolean>()
 				{
 					public Boolean compute(LoopBundle<Vertex> bundle)
 					{
@@ -50,7 +52,49 @@ public class GremlinTraversals {
 		return ancestors;
 	}
 	
-	public static HashSet<Vertex> getCommonAncestors(Vertex first, Vertex second) {
+	// FIXME: This doesn't work.
+	public static Iterable<Vertex> getCommonAncestors2(Vertex first, Vertex second) {
+		// Pass the vertices in together.
+		ArrayList<Vertex> vertices = new ArrayList<>();
+		vertices.add(first);
+		vertices.add(second);
+		
+		final Map<Vertex, Number> counts = new HashMap<>();
+		
+		// We want to loop forever, and we always want to emit our answer.
+		PipeFunction<LoopBundle<Vertex>, Boolean> loopFunction =
+			new PipeFunction<LoopBundle<Vertex>, Boolean>()
+			{
+				public Boolean compute(LoopBundle<Vertex> bundle)
+				{
+					return true;
+				}
+			};
+			
+		// Common ancestors show up more than once.
+		PipeFunction<Vertex, Boolean> filterFunction =
+			new PipeFunction<Vertex, Boolean>()
+			{
+				public Boolean compute(Vertex v)
+				{
+					return counts.get(v).intValue() > 1;
+				}
+			};
+		
+		GremlinPipeline<ArrayList<Vertex>, Vertex> pipe = new GremlinPipeline<>();
+		pipe.start(vertices)
+			.as("x")
+			.in()
+			.loop("x", loopFunction, loopFunction)
+			.groupCount(counts)
+			.cast(Vertex.class)
+			.filter(filterFunction)
+			;
+		
+		return pipe;
+	}
+	
+	public static Iterable<Vertex> getCommonAncestors(Vertex first, Vertex second) {
 		HashSet<Vertex> firstAncestors = getAncestors(first);
 		HashSet<Vertex> secondAncestors = getAncestors(second);
 		firstAncestors.retainAll(secondAncestors);
@@ -107,7 +151,7 @@ public class GremlinTraversals {
 		return null;
 	}
 	
-	public static ArrayList<Vertex> shortestPath(Vertex start, final Vertex end) {
+	public static Optional<ArrayList<Vertex>> shortestPath(Vertex start, final Vertex end) {
 		// Keep track of the vertices we've seen.
 		HashSet<Vertex> visited = new HashSet<>();
 		visited.add(start);
@@ -133,11 +177,11 @@ public class GremlinTraversals {
 		// Pull out the shortest path.
 		for (ArrayList<Vertex> path : pipe)
 		{
-			return path;
+			return Optional.of(path);
 		}
 		
-		// If this wasn't a toy example, this would horrify me.
-		return null;
+		// If we no such path exists, return a sentinel value.
+		return Optional.absent();
 	}
 	
 }
