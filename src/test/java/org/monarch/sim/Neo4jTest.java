@@ -268,7 +268,7 @@ public class Neo4jTest {
 		// Keep track of some statistics.
 		int trials = 1000;
 		int totalCommonAncestors = 0;
-		HashMap<String, Integer> subsumerCounts = new HashMap<>();
+		HashMap<Node, Integer> subsumerCounts = new HashMap<>();
 		int relevantSubsumerCount = 5;
 		
 		// We should get a sense of which subsumer method is faster.
@@ -315,23 +315,22 @@ public class Neo4jTest {
 				System.out.println("LCS: Null");
 				continue;
 			}
-			String lcsName = (String)lcs.getProperty("name");
-			if (!subsumerCounts.containsKey(lcsName))
+			if (!subsumerCounts.containsKey(lcs))
 			{
-				subsumerCounts.put(lcsName, 0);
+				subsumerCounts.put(lcs, 0);
 			}
-			subsumerCounts.put(lcsName, subsumerCounts.get(lcsName) + 1);
-			System.out.println("LCS: " + lcsName);
+			subsumerCounts.put(lcs, subsumerCounts.get(lcs) + 1);
+			System.out.println("LCS: " + lcs.getProperty("name"));
 			System.out.println();			
 		}
 		
 		// Process statistics.
 		double averageCommonAncestors = totalCommonAncestors * 1.0 / trials;
 		// This would be trivial in a sensible language.
-		List<Entry<String, Integer>> entries = new LinkedList<>(subsumerCounts.entrySet());
-		Collections.sort(entries, new Comparator<Entry<String, Integer>>()
+		List<Entry<Node, Integer>> entries = new LinkedList<>(subsumerCounts.entrySet());
+		Collections.sort(entries, new Comparator<Entry<Node, Integer>>()
 			{
-				public int compare(Entry<String, Integer> first, Entry<String, Integer> second) {
+				public int compare(Entry<Node, Integer> first, Entry<Node, Integer> second) {
 					return first.getValue().compareTo(second.getValue());
 				}
 			});
@@ -343,13 +342,14 @@ public class Neo4jTest {
 		System.out.println("Milliseconds to compute LCS: " + lcsTime / 1000000);
 		System.out.println("Average common ancestors: " + averageCommonAncestors);
 		System.out.println("Common LCS nodes:");
-		for (Entry<String, Integer> entry : entries)
+		for (Entry<Node, Integer> entry : entries)
 		{
 			if (entry.getValue() == 1)
 			{
 				break;
 			}
-			System.out.println("Node " + entry.getKey() + ": " + entry.getValue() + " times");
+			System.out.println("Node " + entry.getKey().getProperty("name") + ": " + entry.getValue() + " times");
+			System.out.println(entry.getKey().getProperty("label"));
 			relevantSubsumerCount--;
 			if (relevantSubsumerCount == 0)
 			{
@@ -361,8 +361,6 @@ public class Neo4jTest {
 	@Test
 	public void test() {
 		validateMonarchDB();
-//		validateDBPairwise(cycleDB);
-//		validateDBPairwise(treeDB);
 	}
 	
 }
