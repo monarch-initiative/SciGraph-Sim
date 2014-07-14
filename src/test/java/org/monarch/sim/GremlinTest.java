@@ -211,7 +211,7 @@ public class GremlinTest {
 			// Find all common ancestors.
 //			System.out.println("Common Ancestors:");
 			start = System.nanoTime();
-			Iterable<Vertex> ancestors = getCommonAncestors2(m, n);
+			Iterable<Vertex> ancestors = getCommonAncestors(m, n);
 			end = System.nanoTime();
 			ancestorTime += (end - start);
 			for (Vertex ancestor : ancestors)

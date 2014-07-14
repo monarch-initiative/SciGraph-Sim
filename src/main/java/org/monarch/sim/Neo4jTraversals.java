@@ -12,8 +12,10 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipExpander;
 import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.tooling.GlobalGraphOperations;
 import org.neo4j.graphalgo.impl.ancestor.AncestorsUtil;
+import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.kernel.OrderedByTypeExpander;
 import org.neo4j.kernel.StandardExpander;
 import org.neo4j.kernel.Traversal;
@@ -111,31 +113,32 @@ public class Neo4jTraversals {
 		return firstAncestors;
 	}
 	
-//	private static class LCSNode {
-//		public Node node;
-//		public Node subsumer;
-//		public boolean goingUp;
-//		
-//		public LCSNode(Node node_)
-//		{
-//			node = node_;
-//			goingUp = true;
-//		}
-//		
-//		public LCSNode(Node node_, Node subsumer_)
-//		{
-//			node = node_;
-//			subsumer = subsumer_;
-//			goingUp = false;
-//		}
-//	}
-	
+	// FIXME: This doesn't use IC scores yet.
 	public static Node getLCS(Node first, Node second) {
 		List<Node> nodes = new ArrayList<Node>();
 		nodes.add(first);
 		nodes.add(second);
 		RelationshipExpander expander = Traversal.expanderForAllTypes(Direction.OUTGOING);
 		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
+	}
+	
+	public static void setAllIC(GraphDatabaseService db) {
+		Transaction tx = db.beginTx();
+		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
+		int totalNodes = IteratorUtil.count(nodes) - 1;
+		for (Node n : nodes)
+		{
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			// FIXME: When we have real data, we should calculate this better.
+			int nodesBelow = IteratorUtil.count(getDescendants(n));
+			double ic = - Math.log((double)nodesBelow / totalNodes) / Math.log(2);
+			n.setProperty("IC", ic);
+		}
+		tx.success();
+		tx.finish();
 	}
 	
 }

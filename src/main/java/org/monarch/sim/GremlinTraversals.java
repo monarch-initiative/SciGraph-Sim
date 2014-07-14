@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Optional;
@@ -49,49 +50,8 @@ public class GremlinTraversals {
 			.iterate()
 			;
 		
+		ancestors.add(v);		
 		return ancestors;
-	}
-	
-	// FIXME: This doesn't work.
-	public static Iterable<Vertex> getCommonAncestors2(Vertex first, Vertex second) {
-		// Pass the vertices in together.
-		ArrayList<Vertex> vertices = new ArrayList<>();
-		vertices.add(first);
-		vertices.add(second);
-		
-		final Map<Vertex, Number> counts = new HashMap<>();
-		
-		// We want to loop forever, and we always want to emit our answer.
-		PipeFunction<LoopBundle<Vertex>, Boolean> loopFunction =
-			new PipeFunction<LoopBundle<Vertex>, Boolean>()
-			{
-				public Boolean compute(LoopBundle<Vertex> bundle)
-				{
-					return true;
-				}
-			};
-			
-		// Common ancestors show up more than once.
-		PipeFunction<Vertex, Boolean> filterFunction =
-			new PipeFunction<Vertex, Boolean>()
-			{
-				public Boolean compute(Vertex v)
-				{
-					return counts.get(v).intValue() > 1;
-				}
-			};
-		
-		GremlinPipeline<ArrayList<Vertex>, Vertex> pipe = new GremlinPipeline<>();
-		pipe.start(vertices)
-			.as("x")
-			.in()
-			.loop("x", loopFunction, loopFunction)
-			.groupCount(counts)
-			.cast(Vertex.class)
-			.filter(filterFunction)
-			;
-		
-		return pipe;
 	}
 	
 	public static Iterable<Vertex> getCommonAncestors(Vertex first, Vertex second) {
@@ -101,55 +61,65 @@ public class GremlinTraversals {
 		return firstAncestors;
 	}
 	
-	public static ArrayList<HashSet<Vertex>> getAncestorsByDistance(Vertex v) {
-//		// Keep track of the paths and vertices we've seen.
-//		Collection<List<Vertex>> paths = new LinkedList<>();
-//		HashSet<Vertex> visited = new HashSet<>();
-//		visited.add(v);
+	// FIXME: This doesn't work.
+//	public static Iterable<Vertex> getCommonAncestors2(Vertex first, Vertex second) {
+//		// Pass the vertices in together.
+//		final ArrayList<Vertex> vertices = new ArrayList<>();
+//		vertices.add(first);
+//		vertices.add(second);
 //		
-//		GremlinPipeline<Vertex, ArrayList<Vertex>> pipe = new GremlinPipeline<>();
-//		pipe.start(v)
-//			.as("x")
-//			// Look at all the neighbors we haven't seen yet.
-//			.out()
-//			.except(visited)
-//			.store(visited)
-//			.path()
-//			.store((Collection)paths)
-//			// FIXME: Get the last node in the path.
-//			// Repeat until we run out of neighbors.
-//			.loop("x", new PipeFunction<LoopBundle<Vertex>, Boolean>()
-//				{
-//					public Boolean compute(LoopBundle<Vertex> bundle)
-//					{
-//						return true;
-//					}
-//				})
-//			;
-//
-//		for (ArrayList<Vertex> path : pipe)
-//		{
-//			System.out.println(path);
-//		}
+//		final Map<Vertex, Number> counts = new HashMap<>();
 //		
-//		// Turn our paths into our list of sets of vertices.
-//		ArrayList<HashSet<Vertex>> ancestors = new ArrayList<>();
-//		for (List<Vertex> path : paths)
-//		{
-//			// Pad the list to the size we need.
-//			int length = path.size();
-//			while (length > ancestors.size())
+//		// We want to loop forever, and we always want to emit our answer.
+//		PipeFunction<LoopBundle<Vertex>, Boolean> trueFunction =
+//			new PipeFunction<LoopBundle<Vertex>, Boolean>()
 //			{
-//				ancestors.add(new HashSet<Vertex>());
-//			}
+//				public Boolean compute(LoopBundle<Vertex> bundle)
+//				{
+//					return true;
+//				}
+//			};
 //			
-//			ancestors.get(length - 1).add((Vertex)path.get(length - 1));
+//		// Common ancestors show up more than once.
+//		PipeFunction<Vertex, Boolean> filterFunction =
+//			new PipeFunction<Vertex, Boolean>()
+//			{
+//				public Boolean compute(Vertex v)
+//				{
+//					boolean repeated = counts.get(v).intValue() > 1;
+//					boolean startNode = vertices.contains(v);
+//					return repeated || startNode;
+//				}
+//			};
+//		
+//		GremlinPipeline<ArrayList<Vertex>, Vertex> pipe = new GremlinPipeline<>();
+//		pipe.start(vertices)
+//			// Expand out from each of the starting vertices.
+//			.as("x")
+//			.out()
+//			.loop("x", trueFunction, trueFunction)
+//			// Every node that shows up more than once is a common ancestor.
+//			.groupCount(counts)
+//			.cast(Vertex.class)
+//			.filter(filterFunction)
+//			;
+//		
+//		if (!first.equals(second))
+//		{
+//			return pipe;
 //		}
 //		
+//		// TODO: If there's a way to put a node directly into a pipe, we should do that instead.
+//		// The above doesn't handle the case where the nodes are the same.
+//		// This horrible hack does.
+//		List<Vertex> ancestors = new LinkedList<>();
+//		for (Vertex v : pipe)
+//		{
+//			ancestors.add(v);
+//		}
+//		ancestors.add(first);
 //		return ancestors;
-		// FIXME: Make this work.
-		return null;
-	}
+//	}
 	
 	public static Optional<ArrayList<Vertex>> shortestPath(Vertex start, final Vertex end) {
 		// Keep track of the vertices we've seen.

@@ -22,6 +22,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
@@ -55,6 +56,7 @@ public class Neo4jTest {
 		Node waterC = addNode(waterDB, "C");
 		addEdge(waterDB, waterA, waterB);
 		addEdge(waterDB, waterC, waterB);
+		setAllIC(waterDB);
 	}
 	
 	private static void buildCompleteDB(int numNodes) {
@@ -70,6 +72,7 @@ public class Neo4jTest {
 			}
 			ids.add(newNode.getId());
 		}
+		setAllIC(completeDB);
 	}
 
 	private static void buildTreeDB(int numNodes) {
@@ -83,6 +86,7 @@ public class Neo4jTest {
 				addEdge(treeDB, newNode, treeDB.getNodeById(i / 2));
 			}
 		}
+		setAllIC(treeDB);
 	}
 
 	private static void buildCycleDB() {
@@ -98,6 +102,7 @@ public class Neo4jTest {
 		addEdge(cycleDB, d, c);
 		addEdge(cycleDB, e, d);
 		addEdge(cycleDB, e, a);
+		setAllIC(cycleDB);
 	}
 	
 	private static void buildMonarchDB() {
@@ -146,6 +151,7 @@ public class Neo4jTest {
 				}
 			}
 		}
+		setAllIC(monarchDB);
 	}
 
 	@AfterClass
@@ -200,6 +206,7 @@ public class Neo4jTest {
 			if (node.hasProperty("name"))
 			{
 				System.out.println("NODE: " + node.getProperty("name"));
+				System.out.println("IC: " + node.getProperty("IC"));
 				System.out.println("Parents:");
 				for (Node parent : getParents(node))
 				{
@@ -270,6 +277,8 @@ public class Neo4jTest {
 		int totalCommonAncestors = 0;
 		HashMap<Node, Integer> subsumerCounts = new HashMap<>();
 		int relevantSubsumerCount = 5;
+		double totalIC = 0;
+		double lcsIC = 0;
 		
 		// We should get a sense of which subsumer method is faster.
 		long ancestorTime = 0;
@@ -277,20 +286,18 @@ public class Neo4jTest {
 		long start, end;
 		
 		// We need to know how many nodes there are to choose one uniformly.
-		int count = 0;
-		for (@SuppressWarnings("unused") Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
-		{
-			count++;
-		}
+		int count = IteratorUtil.count(GlobalGraphOperations.at(monarchDB).getAllNodes());
 		
 		for (int i = 0; i < trials; i++)
 		{
 			// Pick any two nodes.
 			Random rand = new Random();
-			int j = rand.nextInt(count);
-			int k = rand.nextInt(count);
+			int j = rand.nextInt(count - 1) + 1;
+			int k = rand.nextInt(count - 1) + 1;
 			Node m = monarchDB.getNodeById(j);
 			Node n = monarchDB.getNodeById(k);
+			totalIC += (double)m.getProperty("IC");
+			totalIC += (double)n.getProperty("IC");
 			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
 			
 			// Find all common ancestors.
@@ -303,29 +310,27 @@ public class Neo4jTest {
 			{
 				System.out.println(ancestor.getProperty("name"));
 				totalCommonAncestors++;
-			}			
+			}
 			
 			// Find the LCS.
 			start = System.nanoTime();
 			Node lcs = getLCS(m, n);
 			end = System.nanoTime();
 			lcsTime += (end - start);
-			if (lcs == null)
-			{
-				System.out.println("LCS: Null");
-				continue;
-			}
 			if (!subsumerCounts.containsKey(lcs))
 			{
 				subsumerCounts.put(lcs, 0);
 			}
 			subsumerCounts.put(lcs, subsumerCounts.get(lcs) + 1);
+			lcsIC += (double)lcs.getProperty("IC");
 			System.out.println("LCS: " + lcs.getProperty("name"));
 			System.out.println();			
 		}
 		
 		// Process statistics.
 		double averageCommonAncestors = totalCommonAncestors * 1.0 / trials;
+		double averageIC = totalIC / (2 * trials);
+		double averageLCSIC = lcsIC / trials;
 		// This would be trivial in a sensible language.
 		List<Entry<Node, Integer>> entries = new LinkedList<>(subsumerCounts.entrySet());
 		Collections.sort(entries, new Comparator<Entry<Node, Integer>>()
@@ -341,25 +346,33 @@ public class Neo4jTest {
 		System.out.println("Milliseconds to compute ancestors: " + ancestorTime / 1000000);
 		System.out.println("Milliseconds to compute LCS: " + lcsTime / 1000000);
 		System.out.println("Average common ancestors: " + averageCommonAncestors);
+		System.out.println("Average IC:" + averageIC);
+		System.out.println("Average LCS IC: " + averageLCSIC);
+		System.out.println();
 		System.out.println("Common LCS nodes:");
 		for (Entry<Node, Integer> entry : entries)
 		{
-			if (entry.getValue() == 1)
+			Node key = entry.getKey();
+			Integer value = entry.getValue();
+			if (value == 1)
 			{
 				break;
 			}
-			System.out.println("Node " + entry.getKey().getProperty("name") + ": " + entry.getValue() + " times");
-			System.out.println(entry.getKey().getProperty("label"));
+			System.out.println("Node " + key.getProperty("name") + ": " + value + " times");
+			System.out.println(key.getProperty("label"));
+			System.out.println("IC: " + key.getProperty("IC"));
 			relevantSubsumerCount--;
 			if (relevantSubsumerCount == 0)
 			{
 				break;
 			}
+			System.out.println();
 		}
 	}
 	
 	@Test
 	public void test() {
+//		validateDBNodes(treeDB);
 		validateMonarchDB();
 	}
 	
