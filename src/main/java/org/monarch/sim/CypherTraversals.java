@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.Node;
 
 public class CypherTraversals {
