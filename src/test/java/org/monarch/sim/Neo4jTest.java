@@ -373,7 +373,8 @@ public class Neo4jTest {
 	@Test
 	public void test() {
 //		validateDBNodes(treeDB);
-		validateMonarchDB();
+//		validateMonarchDB();
+		validateDBPairwise(completeDB);
 	}
 	
 }

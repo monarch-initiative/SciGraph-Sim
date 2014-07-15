@@ -208,22 +208,26 @@ public class CypherTest {
 
 	@Test
 	public void test() {
-		Iterable<Node> nodes = GlobalGraphOperations.at(completeDB).getAllNodes();
-		for (Node n : nodes)
-		{
-			System.out.println(CypherTraversals.getAncestors(n, completeEngine));
-		}
-		for (Node first : nodes)
-		{
-			long firstId = first.getId();
-			for (Node second : nodes)
-			{
-				long secondId = second.getId();
-				System.out.println(firstId + " " + secondId + ":");
-				System.out.println(CypherTraversals.getCommonAncestors(first, second, completeEngine));
-			}
-		}
-//		benchmarkAugTree();
+//		Iterable<Node> nodes = GlobalGraphOperations.at(completeDB).getAllNodes();
+//		for (Node n : nodes)
+//		{
+//			System.out.println(CypherTraversals.getAncestors(n, completeEngine));
+//		}
+//		for (Node first : nodes)
+//		{
+//			long firstId = first.getId();
+//			for (Node second : nodes)
+//			{
+//				long secondId = second.getId();
+//				System.out.println(firstId + " " + secondId + ":");
+//				System.out.println(CypherTraversals.getCommonAncestors(first, second, completeEngine));
+//			}
+//		}
+		benchmarkAugTree();
+//		for (Relationship edge : GlobalGraphOperations.at(completeDB).getAllRelationships())
+//		{
+//			System.out.println(edge.getStartNode() + "->" + edge.getEndNode());
+//		}
 	}
 
 }
