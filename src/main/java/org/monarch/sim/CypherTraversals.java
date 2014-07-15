@@ -9,6 +9,7 @@ import org.neo4j.graphdb.Node;
 
 public class CypherTraversals {
 
+	// FIXME: This is horribly slow.
 	public static HashSet<Node> getAncestors(Node n, ExecutionEngine engine)
 	{
 		// Build the appropriate query.
@@ -29,6 +30,7 @@ public class CypherTraversals {
 		return ancestors;
 	}
 	
+	// FIXME: This is horribly slow.
 	public static HashSet<Node> getCommonAncestors(Node first, Node second, ExecutionEngine engine)
 	{
 		// Build the appropriate query.
