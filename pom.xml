@@ -93,6 +93,12 @@
       <groupId>com.tinkerpop</groupId>
       <artifactId>frames</artifactId>
       <version>${blueprints.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>guava</artifactId>
+          <groupId>com.google.guava</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.tinkerpop.blueprints</groupId>
