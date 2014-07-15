@@ -9,6 +9,7 @@ import java.util.Set;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.PathExpander;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipExpander;
 import org.neo4j.graphdb.RelationshipType;
@@ -19,6 +20,7 @@ import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.kernel.OrderedByTypeExpander;
 import org.neo4j.kernel.StandardExpander;
 import org.neo4j.kernel.Traversal;
+import org.neo4j.graphdb.*;
 
 public class Neo4jTraversals {
 	
@@ -120,6 +122,12 @@ public class Neo4jTraversals {
 		nodes.add(second);
 		RelationshipExpander expander = Traversal.expanderForAllTypes(Direction.OUTGOING);
 		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
+	}
+	
+	// FIXME: Write getAncestors using PathExpanders.
+	public static Iterable<Node> getAncestors2(Node n) {
+		// FIXME: Write this.
+		return null;
 	}
 	
 	public static void setAllIC(GraphDatabaseService db) {

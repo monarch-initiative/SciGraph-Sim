@@ -38,6 +38,8 @@ public class Neo4jTest {
 	static GraphDatabaseService cycleDB;
 	// Graph from monarchGraph folder.
 	static GraphDatabaseService monarchDB;	
+	// Graph of wines.
+	static GraphDatabaseService wineDB;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -45,7 +47,8 @@ public class Neo4jTest {
 		buildCompleteDB(16);
 		buildTreeDB(15);	
 		buildCycleDB();
-		buildMonarchDB();
+//		buildMonarchDB();
+//		buildWineDB();
 	}
 
 	private static void buildWaterDB() {
@@ -154,6 +157,11 @@ public class Neo4jTest {
 		setAllIC(monarchDB);
 	}
 
+	private static void buildWineDB() {
+		OwlTestUtil.loadOntology("http://www.w3.org/TR/owl-guide/wine.rdf", "target/wine");
+		wineDB = new GraphDatabaseFactory().newEmbeddedDatabase("target/wine");
+	}
+	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// Clean up the databases.
@@ -161,7 +169,8 @@ public class Neo4jTest {
 		completeDB.shutdown();
 		treeDB.shutdown();
 		cycleDB.shutdown();
-		monarchDB.shutdown();
+//		monarchDB.shutdown();
+//		wineDB.shutdown();
 	}
 	
 	public static Node addNode(GraphDatabaseService db) {
@@ -169,7 +178,6 @@ public class Neo4jTest {
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -179,7 +187,6 @@ public class Neo4jTest {
 		Node newNode = db.createNode();
 		newNode.setProperty("name", name);
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -189,7 +196,6 @@ public class Neo4jTest {
 		Transaction tx = db.beginTx();
 		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
 		tx.success();
-		tx.finish();
 		return newRel;		
 	}
 	
@@ -374,7 +380,14 @@ public class Neo4jTest {
 	public void test() {
 //		validateDBNodes(treeDB);
 //		validateMonarchDB();
-		validateDBPairwise(completeDB);
+//		validateDBPairwise(completeDB);
+//		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
+//		{
+//			if (n.hasProperty("uri"))
+//			{
+//				System.out.println(n.getProperty("uri"));
+//			}
+//		}
 	}
 	
 }
