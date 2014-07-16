@@ -1,6 +1,6 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.Neo4jTraversals.*;
+import org.monarch.sim.Neo4jTraversals.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +15,11 @@ import java.util.Map.Entry;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.monarch.sim.Neo4jTraversals.RelTypes;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.helpers.collection.IteratorUtil;
@@ -27,6 +27,11 @@ import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTest {
+	
+	// Define the relationships we want to use.
+	static enum RelTypes implements RelationshipType {
+		SUBCLASS,
+	}
 
 	// ^-shaped graph.
 	static GraphDatabaseService waterDB;
@@ -173,7 +178,7 @@ public class Neo4jTest {
 //		wineDB.shutdown();
 	}
 	
-	public static Node addNode(GraphDatabaseService db) {
+	private static Node addNode(GraphDatabaseService db) {
 		// Wrap a transaction around node creation.
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
@@ -181,7 +186,7 @@ public class Neo4jTest {
 		return newNode;
 	}
 	
-	public static Node addNode(GraphDatabaseService db, String name) {
+	private static Node addNode(GraphDatabaseService db, String name) {
 		// Wrap a transaction around node creation.
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
@@ -190,7 +195,7 @@ public class Neo4jTest {
 		return newNode;
 	}
 	
-	public static Relationship addEdge(GraphDatabaseService db, Node first, Node second)
+	private static Relationship addEdge(GraphDatabaseService db, Node first, Node second)
 	{
 		// Wrap a transaction around edge creation.
 		Transaction tx = db.beginTx();
@@ -199,7 +204,51 @@ public class Neo4jTest {
 		return newRel;		
 	}
 	
-	public void validateDB(GraphDatabaseService db) {
+	private static void setAllIC(GraphDatabaseService db) {
+		Transaction tx = db.beginTx();
+		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
+		int totalNodes = IteratorUtil.count(nodes) - 1;
+		for (Node n : nodes)
+		{
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			// FIXME: When we have real data, we should calculate this better.
+			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
+			double ic = - Math.log((double)nodesBelow / totalNodes) / Math.log(2);
+			n.setProperty("IC", ic);
+		}
+		tx.success();
+		tx.finish();
+	}
+
+	private static Iterable<String> getProperties(GraphDatabaseService db) {
+		LinkedList<String> properties = new LinkedList<>();
+
+		// Find the first node with properties.
+		for (Node node : GlobalGraphOperations.at(db).getAllNodes())
+		{
+			boolean found = false;
+
+			for (String property : node.getPropertyKeys())
+			{
+				// Get all the properties.
+				properties.add(property);
+				found = true;
+			}
+
+			// Once we've found a nontrivial node, stop.
+			if (found)
+			{
+				break;
+			}
+		}
+
+		return properties;
+	}
+
+	private void validateDB(GraphDatabaseService db) {
 		validateDBNodes(db);
 		System.out.println();
 		validateDBPairwise(db);
@@ -214,22 +263,22 @@ public class Neo4jTest {
 				System.out.println("NODE: " + node.getProperty("name"));
 				System.out.println("IC: " + node.getProperty("IC"));
 				System.out.println("Parents:");
-				for (Node parent : getParents(node))
+				for (Node parent : Neo4jTraversals.getParents(node))
 				{
 					System.out.println(parent.getProperty("name"));
 				}
 				System.out.println("Children:");
-				for (Node child : getChildren(node))
+				for (Node child : Neo4jTraversals.getChildren(node))
 				{
 					System.out.println(child.getProperty("name"));
 				}
 				System.out.println("Ancestors:");
-				for (Node ancestor : getAncestors(node))
+				for (Node ancestor : Neo4jTraversals.getAncestors(node))
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
 				System.out.println("Descendants:");
-				for (Node descendant : getDescendants(node))
+				for (Node descendant : Neo4jTraversals.getDescendants(node))
 				{
 					System.out.println(descendant.getProperty("name"));
 				}
@@ -260,11 +309,11 @@ public class Neo4jTest {
 				}
 				System.out.println("NODES: " + first_name + " " + second_name);
 				System.out.println("Common Ancestors:");
-				for (Node ancestor : getCommonAncestors(first, second))
+				for (Node ancestor : Neo4jTraversals.getCommonAncestors(first, second))
 				{
 					System.out.println(ancestor.getProperty("name"));
 				}
-				Node lcs = getLCS(first, second);
+				Node lcs = Neo4jTraversals.getLCS(first, second);
 				if (lcs == null)
 				{
 					System.out.println("LCS: Null");
@@ -309,7 +358,7 @@ public class Neo4jTest {
 			// Find all common ancestors.
 			System.out.println("Common Ancestors:");
 			start = System.nanoTime();
-			Iterable<Node> ancestors = getCommonAncestors(m, n);
+			Iterable<Node> ancestors = Neo4jTraversals.getCommonAncestors(m, n);
 			end = System.nanoTime();
 			ancestorTime += (end - start);
 			for (Node ancestor : ancestors)
@@ -320,7 +369,7 @@ public class Neo4jTest {
 			
 			// Find the LCS.
 			start = System.nanoTime();
-			Node lcs = getLCS(m, n);
+			Node lcs = Neo4jTraversals.getLCS(m, n);
 			end = System.nanoTime();
 			lcsTime += (end - start);
 			if (!subsumerCounts.containsKey(lcs))
@@ -380,7 +429,7 @@ public class Neo4jTest {
 	public void test() {
 //		validateDBNodes(treeDB);
 //		validateMonarchDB();
-//		validateDBPairwise(completeDB);
+		validateDBPairwise(completeDB);
 //		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
 //		{
 //			if (n.hasProperty("uri"))

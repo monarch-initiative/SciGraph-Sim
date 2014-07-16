@@ -5,16 +5,21 @@ import java.util.Random;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.monarch.sim.Neo4jTraversals.RelTypes;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class CypherTest {
+	
+	// Define the relationships we want to use.
+	static enum RelTypes implements RelationshipType {
+		SUBCLASS,
+	}
 	
 	// Complete graph.
 	static GraphDatabaseService completeDB;

@@ -21,38 +21,9 @@ import org.neo4j.kernel.OrderedByTypeExpander;
 import org.neo4j.kernel.StandardExpander;
 import org.neo4j.kernel.Traversal;
 import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.traversal.BranchState;
 
 public class Neo4jTraversals {
-	
-	// Define the relationships we want to use.
-	static enum RelTypes implements RelationshipType {
-		SUBCLASS,
-	}
-
-	public static Iterable<String> getProperties(GraphDatabaseService db) {
-		LinkedList<String> properties = new LinkedList<>();
-		
-		// Find the first node with properties.
-		for (Node node : GlobalGraphOperations.at(db).getAllNodes())
-		{
-			boolean found = false;
-			
-			for (String property : node.getPropertyKeys())
-			{
-				// Get all the properties.
-				properties.add(property);
-				found = true;
-			}
-			
-			// Once we've found a nontrivial node, stop.
-			if (found)
-			{
-				break;
-			}
-		}
-		
-		return properties;
-	}
 	
 	public static Iterable<Node> getDirectedNeighbors(Node node, Direction dir) {
 		// Get the relationships.
@@ -124,29 +95,10 @@ public class Neo4jTraversals {
 		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
 	}
 	
-	// FIXME: Write getAncestors using PathExpanders.
+	// FIXME: Write getAncestors using Expanders.
 	public static Iterable<Node> getAncestors2(Node n) {
 		// FIXME: Write this.
 		return null;
-	}
-	
-	public static void setAllIC(GraphDatabaseService db) {
-		Transaction tx = db.beginTx();
-		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
-		int totalNodes = IteratorUtil.count(nodes) - 1;
-		for (Node n : nodes)
-		{
-			if (n.getId() == 0)
-			{
-				continue;
-			}
-			// FIXME: When we have real data, we should calculate this better.
-			int nodesBelow = IteratorUtil.count(getDescendants(n));
-			double ic = - Math.log((double)nodesBelow / totalNodes) / Math.log(2);
-			n.setProperty("IC", ic);
-		}
-		tx.success();
-		tx.finish();
 	}
 	
 }
