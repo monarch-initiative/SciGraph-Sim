@@ -1,31 +1,25 @@
 package org.monarch.sim;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 
+import org.neo4j.graphalgo.impl.ancestor.AncestorsUtil;
 import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.PathExpander;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipExpander;
-import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.tooling.GlobalGraphOperations;
-import org.neo4j.graphalgo.impl.ancestor.AncestorsUtil;
-import org.neo4j.helpers.collection.IteratorUtil;
-import org.neo4j.kernel.OrderedByTypeExpander;
-import org.neo4j.kernel.StandardExpander;
 import org.neo4j.kernel.Traversal;
-import org.neo4j.graphdb.*;
-import org.neo4j.graphdb.traversal.BranchState;
+
+import com.google.common.base.Optional;
 
 public class Neo4jTraversals {
 	
-	public static Iterable<Node> getDirectedNeighbors(Node node, Direction dir) {
+	private static Iterable<Node> getDirectedNeighbors(Node node, Direction dir) {
 		// Get the relationships.
 		Iterable<Relationship> rels = node.getRelationships(dir);
 		
@@ -46,7 +40,7 @@ public class Neo4jTraversals {
 		return getDirectedNeighbors(node, Direction.OUTGOING);
 	}
 
-	public static Iterable<Node> getDirectedDescendants(Node node, Direction dir) {
+	private static Iterable<Node> getDirectedDescendants(Node node, Direction dir) {
 		Set<Node> descendants = new HashSet<>();
 		LinkedList<Node> toTry = new LinkedList<>();
 		toTry.add(node);
@@ -86,18 +80,61 @@ public class Neo4jTraversals {
 		return firstAncestors;
 	}
 	
-	// FIXME: This doesn't use IC scores yet.
-	public static Node getLCS(Node first, Node second) {
-		List<Node> nodes = new ArrayList<Node>();
-		nodes.add(first);
-		nodes.add(second);
-		RelationshipExpander expander = Traversal.expanderForAllTypes(Direction.OUTGOING);
-		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
-	}
+//	// FIXME: This doesn't use IC scores yet.
+//	public static Node getLCS(Node first, Node second) {
+//		List<Node> nodes = new ArrayList<Node>();
+//		nodes.add(first);
+//		nodes.add(second);
+//		RelationshipExpander expander = Traversal.expanderForAllTypes(Direction.OUTGOING);
+//		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
+//	}
 	
-	// FIXME: Write getAncestors using Expanders.
-	public static Iterable<Node> getAncestors2(Node n) {
-		// FIXME: Write this.
+	public static Node getLCS(Node first, Node second) {
+		// TODO: We can probably swap the nodes based on IC.
+		// Start with the ancestors of the first node.
+		HashSet<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
+		
+		// We want to expand ancestors of the second node in order of
+		// decreasing IC score. 
+		Comparator<Node> icComparator = new Comparator<Node>() {
+			public int compare(Node first, Node second) {
+				double firstIC = (double)first.getProperty("IC");
+				double secondIC = (double)second.getProperty("IC");
+				if (firstIC < secondIC)
+					return -1;
+				else if (firstIC > secondIC)
+					return 1;
+				else
+					return 0;
+			}
+		};
+		// NOTE: The magic number 11 is the default heap capacity, but there
+		// isn't a sensible constructor.
+		PriorityQueue<Node> heap = new PriorityQueue<Node>(11, icComparator);
+		heap.add(second);
+		HashSet<Node> visited = new HashSet<>();
+		
+		// Expand outward from the second node.
+		while (!heap.isEmpty())
+		{
+			Node toExpand = heap.remove();			
+			if (!visited.add(toExpand))
+			{
+				continue;
+			}
+			// If we hit an ancestor of the first node, it must be our LCS.
+			if (firstAncestors.contains(toExpand))
+			{
+				return toExpand;
+			}
+			for (Node parent : getParents(toExpand))
+			{
+				heap.add(parent);
+			}
+		}
+		
+		// FIXME: This should throw some sort of error.
+		// Our graph is rooted, so this should never happen.
 		return null;
 	}
 	

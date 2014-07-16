@@ -52,7 +52,7 @@ public class Neo4jTest {
 		buildCompleteDB(16);
 		buildTreeDB(15);	
 		buildCycleDB();
-//		buildMonarchDB();
+		buildMonarchDB();
 //		buildWineDB();
 	}
 
@@ -159,6 +159,22 @@ public class Neo4jTest {
 				}
 			}
 		}
+		
+		// Point all nodes without edges to node 1.
+		for (Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
+		{
+			boolean found = false;
+			for (@SuppressWarnings("unused") Relationship edge : n.getRelationships())
+			{
+				found = true;
+				break;
+			}
+			if (!found)
+			{
+				addEdge(monarchDB, n, monarchDB.getNodeById(1));
+			}
+		}
+		
 		setAllIC(monarchDB);
 	}
 
@@ -170,10 +186,10 @@ public class Neo4jTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// Clean up the databases.
-		waterDB.shutdown();
-		completeDB.shutdown();
-		treeDB.shutdown();
-		cycleDB.shutdown();
+//		waterDB.shutdown();
+//		completeDB.shutdown();
+//		treeDB.shutdown();
+//		cycleDB.shutdown();
 //		monarchDB.shutdown();
 //		wineDB.shutdown();
 	}
@@ -183,6 +199,7 @@ public class Neo4jTest {
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
 		tx.success();
+		tx.finish();
 		return newNode;
 	}
 	
@@ -192,6 +209,7 @@ public class Neo4jTest {
 		Node newNode = db.createNode();
 		newNode.setProperty("name", name);
 		tx.success();
+		tx.finish();
 		return newNode;
 	}
 	
@@ -201,6 +219,7 @@ public class Neo4jTest {
 		Transaction tx = db.beginTx();
 		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
 		tx.success();
+		tx.finish();
 		return newRel;		
 	}
 	
@@ -328,7 +347,7 @@ public class Neo4jTest {
 	
 	public void validateMonarchDB() {
 		// Keep track of some statistics.
-		int trials = 1000;
+		int trials = 10000;
 		int totalCommonAncestors = 0;
 		HashMap<Node, Integer> subsumerCounts = new HashMap<>();
 		int relevantSubsumerCount = 5;
@@ -401,7 +420,7 @@ public class Neo4jTest {
 		System.out.println("Milliseconds to compute ancestors: " + ancestorTime / 1000000);
 		System.out.println("Milliseconds to compute LCS: " + lcsTime / 1000000);
 		System.out.println("Average common ancestors: " + averageCommonAncestors);
-		System.out.println("Average IC:" + averageIC);
+		System.out.println("Average IC: " + averageIC);
 		System.out.println("Average LCS IC: " + averageLCSIC);
 		System.out.println();
 		System.out.println("Common LCS nodes:");
@@ -428,8 +447,8 @@ public class Neo4jTest {
 	@Test
 	public void test() {
 //		validateDBNodes(treeDB);
-//		validateMonarchDB();
-		validateDBPairwise(completeDB);
+		validateMonarchDB();
+//		validateDBPairwise(treeDB);
 //		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
 //		{
 //			if (n.hasProperty("uri"))
