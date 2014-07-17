@@ -1,7 +1,10 @@
 package org.monarch.sim;
 
-import org.monarch.sim.Neo4jTraversals;
-
+import java.io.File;
+import java.io.FileFilter;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,12 +12,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
+import net.lingala.zip4j.core.ZipFile;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -27,6 +35,9 @@ import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTest {
+	
+	@Rule
+    public TemporaryFolder folder = new TemporaryFolder();
 	
 	// Define the relationships we want to use.
 	static enum RelTypes implements RelationshipType {
@@ -46,8 +57,8 @@ public class Neo4jTest {
 	// Graph of wines.
 	static GraphDatabaseService wineDB;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	@Before
+	public void setUpBeforeClass() throws Exception {
 		buildWaterDB();		
 		buildCompleteDB(16);
 		buildTreeDB(15);	
@@ -113,13 +124,25 @@ public class Neo4jTest {
 		setAllIC(cycleDB);
 	}
 	
-	private static void buildMonarchDB() {
+	private void buildMonarchDB() throws Exception {
 		// Build a database from the monarchGraph folder.
 		monarchDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
 
 		// All the edges in the given graph are undirected, so we need to rebuild.
 		Transaction tx = monarchDB.beginTx();
-		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase("monarchGraph");
+		
+		// Copy data into a test folder.
+		File tempFolder = folder.newFolder();
+		String tempPath = tempFolder.getAbsolutePath();
+		ZipFile zipped = new ZipFile(new File("monarchGraph.zip").getAbsolutePath());
+		zipped.extractAll(tempPath);
+		tempPath += "/monarchGraph";
+		String lockFile = tempPath + "/lock";
+		Files.deleteIfExists(Paths.get(lockFile));
+		
+		// Build the database.
+		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempPath);		
+		
 		HashMap<Node, Node> map = new HashMap<>();
 		Node tempRoot = null;
 		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())

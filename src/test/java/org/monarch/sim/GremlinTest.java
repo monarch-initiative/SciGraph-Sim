@@ -34,7 +34,7 @@ public class GremlinTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		buildTree();
-//		buildMonarchGraph();
+		buildMonarchGraph();
 	}
 
 	private static void buildTree() {
@@ -103,7 +103,7 @@ public class GremlinTest {
 	public static void tearDownAfterClass() throws Exception {
 		// Clean up existing graphs.
 		tree.shutdown();
-		monarch.shutdown();
+//		monarch.shutdown();
 	}
 	
 	// Make sure getParents works.
@@ -274,7 +274,7 @@ public class GremlinTest {
 	public void test() {
 		checkParents();
 		checkAncestors();
-//		validateMonarch();
+		validateMonarch();
 	}
 
 }
