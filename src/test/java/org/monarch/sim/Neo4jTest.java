@@ -121,11 +121,18 @@ public class Neo4jTest {
 		Transaction tx = monarchDB.beginTx();
 		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase("monarchGraph");
 		HashMap<Node, Node> map = new HashMap<>();
+		// FIXME: Remove this once the version on Jenkins works.
+		// Node tempRoot = tempDB.getNodeById(1);
+		Node tempRoot = null;
 		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
 		{
 			if (n.getId() == 0)
 			{
 				continue;
+			}
+			if (tempRoot == null || n.getId() < tempRoot.getId())
+			{
+				tempRoot = n;
 			}
 			Node newNode = addNode(monarchDB, "" + n.getId());
 			for (String property : n.getPropertyKeys())
@@ -137,21 +144,6 @@ public class Neo4jTest {
 		tx.success();
 		tx.finish();
 		
-		// FIXME: Remove this once the version on Jenkins works.
-		// Node tempRoot = tempDB.getNodeById(1);
-		Node tempRoot = null;
-		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
-		{
-			if (tempRoot == null)
-			{
-				tempRoot = n;
-				continue;
-			}
-			if (n.getId() < tempRoot.getId())
-			{
-				tempRoot = n;
-			}
-		}
 		
 		// Expand outward starting with node 1.
 		HashSet<Node> visited = new HashSet<>();
