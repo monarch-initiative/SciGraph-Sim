@@ -2,6 +2,9 @@ package org.monarch.sim;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
+
+import net.lingala.zip4j.core.ZipFile;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -31,7 +36,6 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTest {
 	
-	// Create a data folder for the sake of testing.
 	@Rule
     public TemporaryFolder folder = new TemporaryFolder();
 	
@@ -129,20 +133,17 @@ public class Neo4jTest {
 		
 		// Copy data into a test folder.
 		File tempFolder = folder.newFolder();
-		FileUtils.copyDirectory(new File("monarchGraph").getAbsoluteFile(), tempFolder, new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				if (pathname.getName().equals("lock"))
-				{
-					return false;
-				}
-				return true;
-			}
-		});
-		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempFolder.getAbsolutePath());
+		String tempPath = tempFolder.getAbsolutePath();
+		ZipFile zipped = new ZipFile(new File("monarchGraph.zip").getAbsolutePath());
+		zipped.extractAll(tempPath);
+		tempPath += "/monarchGraph";
+		String lockFile = tempPath + "/lock";
+		Files.deleteIfExists(Paths.get(lockFile));
+		
+		// Build the database.
+		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempPath);		
+		
 		HashMap<Node, Node> map = new HashMap<>();
-		// FIXME: Remove this once the version on Jenkins works.
-		// Node tempRoot = tempDB.getNodeById(1);
 		Node tempRoot = null;
 		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
 		{
@@ -164,8 +165,7 @@ public class Neo4jTest {
 		tx.success();
 		tx.finish();
 		
-		
-		// Expand outward starting with node 1.
+		// Expand outward starting with the root node.
 		HashSet<Node> visited = new HashSet<>();
 		LinkedList<Node> toExpand = new LinkedList<>();
 		toExpand.add(tempRoot);
@@ -188,7 +188,7 @@ public class Neo4jTest {
 			}
 		}
 		
-		// Point all nodes without edges to node 1.
+		// Point all nodes without edges to the root node.
 		for (Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
 		{
 			boolean found = false;
@@ -476,7 +476,7 @@ public class Neo4jTest {
 	public void test() {
 //		validateDBNodes(treeDB);
 		validateMonarchDB();
-//		validateDBPairwise(treeDB);
+//		validateDBPairwise(cycleDB);
 //		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
 //		{
 //			if (n.hasProperty("uri"))
