@@ -78,15 +78,6 @@ public class Neo4jTraversals {
 		return firstAncestors;
 	}
 	
-//	// FIXME: This doesn't use IC scores yet.
-//	public static Node getLCS(Node first, Node second) {
-//		List<Node> nodes = new ArrayList<Node>();
-//		nodes.add(first);
-//		nodes.add(second);
-//		RelationshipExpander expander = Traversal.expanderForAllTypes(Direction.OUTGOING);
-//		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
-//	}
-	
 	public static void setAllIC(GraphDatabaseService db) {
 		Transaction tx = db.beginTx();
 		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
@@ -158,6 +149,43 @@ public class Neo4jTraversals {
 		// FIXME: This should throw some sort of error.
 		// Our graph is rooted, so this should never happen.
 		return null;
+	}
+	
+	public static double getMaxIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes)	{
+		double maxIC = 0;
+		
+		// Check each pair of nodes.
+		for (Node first : firstNodes)
+		{
+			for (Node second : secondNodes)
+			{
+				double lcsIC = getIC(getLCS(first, second));
+				if (lcsIC > maxIC)
+				{
+					maxIC = lcsIC;
+				}
+			}
+		}
+		
+		return maxIC;
+	}
+	
+	public static double getAverageIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes)	{
+		double totalIC = 0;
+		int count = 0;
+		
+		// Check each pair of nodes.
+		for (Node first : firstNodes)
+		{
+			for (Node second : secondNodes)
+			{
+				double lcsIC = getIC(getLCS(first, second));
+				totalIC += lcsIC;
+				count++;
+			}
+		}
+		
+		return totalIC / count;
 	}
 	
 }
