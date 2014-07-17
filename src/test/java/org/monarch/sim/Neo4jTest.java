@@ -75,7 +75,7 @@ public class Neo4jTest {
 		Node waterC = addNode(waterDB, "C");
 		addEdge(waterDB, waterA, waterB);
 		addEdge(waterDB, waterC, waterB);
-		setAllIC(waterDB);
+		Neo4jTraversals.setAllIC(waterDB);
 	}
 	
 	private static void buildCompleteDB(int numNodes) {
@@ -91,7 +91,7 @@ public class Neo4jTest {
 			}
 			ids.add(newNode.getId());
 		}
-		setAllIC(completeDB);
+		Neo4jTraversals.setAllIC(completeDB);
 	}
 
 	private static void buildTreeDB(int numNodes) {
@@ -105,7 +105,7 @@ public class Neo4jTest {
 				addEdge(treeDB, newNode, treeDB.getNodeById(i / 2));
 			}
 		}
-		setAllIC(treeDB);
+		Neo4jTraversals.setAllIC(treeDB);
 	}
 
 	private static void buildCycleDB() {
@@ -121,7 +121,7 @@ public class Neo4jTest {
 		addEdge(cycleDB, d, c);
 		addEdge(cycleDB, e, d);
 		addEdge(cycleDB, e, a);
-		setAllIC(cycleDB);
+		Neo4jTraversals.setAllIC(cycleDB);
 	}
 	
 	private void buildMonarchDB() throws Exception {
@@ -203,7 +203,7 @@ public class Neo4jTest {
 			}
 		}
 		
-		setAllIC(monarchDB);
+		Neo4jTraversals.setAllIC(monarchDB);
 	}
 
 	private static void buildWineDB() {
@@ -250,25 +250,6 @@ public class Neo4jTest {
 		tx.finish();
 		return newRel;		
 	}
-	
-	private static void setAllIC(GraphDatabaseService db) {
-		Transaction tx = db.beginTx();
-		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
-		int totalNodes = IteratorUtil.count(nodes) - 1;
-		for (Node n : nodes)
-		{
-			if (n.getId() == 0)
-			{
-				continue;
-			}
-			// FIXME: When we have real data, we should calculate this better.
-			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
-			double ic = - Math.log((double)nodesBelow / totalNodes) / Math.log(2);
-			n.setProperty("IC", ic);
-		}
-		tx.success();
-		tx.finish();
-	}
 
 	private static Iterable<String> getProperties(GraphDatabaseService db) {
 		LinkedList<String> properties = new LinkedList<>();
@@ -308,7 +289,7 @@ public class Neo4jTest {
 			if (node.hasProperty("name"))
 			{
 				System.out.println("NODE: " + node.getProperty("name"));
-				System.out.println("IC: " + node.getProperty("IC"));
+				System.out.println("IC: " + Neo4jTraversals.getIC(node));
 				System.out.println("Parents:");
 				for (Node parent : Neo4jTraversals.getParents(node))
 				{
@@ -398,8 +379,8 @@ public class Neo4jTest {
 			int k = rand.nextInt(count - 1) + 1;
 			Node m = monarchDB.getNodeById(j);
 			Node n = monarchDB.getNodeById(k);
-			totalIC += (double)m.getProperty("IC");
-			totalIC += (double)n.getProperty("IC");
+			totalIC += Neo4jTraversals.getIC(m);
+			totalIC += Neo4jTraversals.getIC(n);
 			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
 			
 			// Find all common ancestors.
@@ -424,7 +405,7 @@ public class Neo4jTest {
 				subsumerCounts.put(lcs, 0);
 			}
 			subsumerCounts.put(lcs, subsumerCounts.get(lcs) + 1);
-			lcsIC += (double)lcs.getProperty("IC");
+			lcsIC += Neo4jTraversals.getIC(lcs);
 			System.out.println("LCS: " + lcs.getProperty("name"));
 			System.out.println();			
 		}
@@ -462,7 +443,7 @@ public class Neo4jTest {
 			}
 			System.out.println("Node " + key.getProperty("name") + ": " + value + " times");
 			System.out.println(key.getProperty("label"));
-			System.out.println("IC: " + key.getProperty("IC"));
+			System.out.println("IC: " + Neo4jTraversals.getIC(key));
 			relevantSubsumerCount--;
 			if (relevantSubsumerCount == 0)
 			{

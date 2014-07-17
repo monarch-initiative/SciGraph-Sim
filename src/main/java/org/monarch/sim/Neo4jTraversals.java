@@ -1,14 +1,19 @@
 package org.monarch.sim;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.helpers.collection.IteratorUtil;
+import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTraversals {
 	
@@ -82,6 +87,30 @@ public class Neo4jTraversals {
 //		return AncestorsUtil.lowestCommonAncestor(nodes, expander);
 //	}
 	
+	public static void setAllIC(GraphDatabaseService db) {
+		Transaction tx = db.beginTx();
+		Iterable<Node> nodes = GlobalGraphOperations.at(db).getAllNodes();
+		int totalNodes = IteratorUtil.count(nodes) - 1;
+		for (Node n : nodes)
+		{
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			
+			// FIXME: When we have real data, we should calculate this better.
+			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
+			double ic = -Math.log((double)nodesBelow / totalNodes) / Math.log(2);
+			n.setProperty("IC", ic);
+		}
+		tx.success();
+		tx.finish();
+	}
+	
+	public static double getIC(Node n) {
+		return (double)n.getProperty("IC");
+	}
+	
 	public static Node getLCS(Node first, Node second) {
 		// TODO: We can probably swap the nodes based on IC.
 		// Start with the ancestors of the first node.
@@ -91,8 +120,8 @@ public class Neo4jTraversals {
 		// decreasing IC score. 
 		Comparator<Node> icComparator = new Comparator<Node>() {
 			public int compare(Node first, Node second) {
-				double firstIC = (double)first.getProperty("IC");
-				double secondIC = (double)second.getProperty("IC");
+				double firstIC = getIC(first);
+				double secondIC = getIC(second);
 				if (firstIC < secondIC)
 					return -1;
 				else if (firstIC > secondIC)
