@@ -34,7 +34,7 @@ public class GremlinTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		buildTree();
-//		buildMonarchGraph();
+		buildMonarchGraph();
 	}
 
 	private static void buildTree() {
@@ -272,9 +272,15 @@ public class GremlinTest {
 
 	@Test
 	public void test() {
+<<<<<<< HEAD
 //		checkParents();
 //		checkAncestors();
 //		validateMonarch();
+=======
+		checkParents();
+		checkAncestors();
+		validateMonarch();
+>>>>>>> parent of 27079c4... Fixed getLCS and commented out most of GremlinTest.
 	}
 
 }

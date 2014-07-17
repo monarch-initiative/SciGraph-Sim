@@ -83,6 +83,7 @@ public class Neo4jTraversals {
 //	}
 	
 	public static Node getLCS(Node first, Node second) {
+		// TODO: We can probably swap the nodes based on IC.
 		// Start with the ancestors of the first node.
 		HashSet<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
 		
@@ -93,9 +94,9 @@ public class Neo4jTraversals {
 				double firstIC = (double)first.getProperty("IC");
 				double secondIC = (double)second.getProperty("IC");
 				if (firstIC < secondIC)
-					return 1;
-				else if (firstIC > secondIC)
 					return -1;
+				else if (firstIC > secondIC)
+					return 1;
 				else
 					return 0;
 			}

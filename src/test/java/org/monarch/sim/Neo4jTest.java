@@ -141,6 +141,8 @@ public class Neo4jTest {
 		});
 		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempFolder.getAbsolutePath());
 		HashMap<Node, Node> map = new HashMap<>();
+		// FIXME: Remove this once the version on Jenkins works.
+		// Node tempRoot = tempDB.getNodeById(1);
 		Node tempRoot = null;
 		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
 		{
@@ -162,7 +164,8 @@ public class Neo4jTest {
 		tx.success();
 		tx.finish();
 		
-		// Expand outward starting with the root node.
+		
+		// Expand outward starting with node 1.
 		HashSet<Node> visited = new HashSet<>();
 		LinkedList<Node> toExpand = new LinkedList<>();
 		toExpand.add(tempRoot);
@@ -185,7 +188,7 @@ public class Neo4jTest {
 			}
 		}
 		
-		// Point all nodes without edges to the root node.
+		// Point all nodes without edges to node 1.
 		for (Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
 		{
 			boolean found = false;
@@ -473,7 +476,7 @@ public class Neo4jTest {
 	public void test() {
 //		validateDBNodes(treeDB);
 		validateMonarchDB();
-//		validateDBPairwise(cycleDB);
+//		validateDBPairwise(treeDB);
 //		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
 //		{
 //			if (n.hasProperty("uri"))
