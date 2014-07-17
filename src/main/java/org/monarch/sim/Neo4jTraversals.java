@@ -1,21 +1,14 @@
 package org.monarch.sim;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import org.neo4j.graphalgo.impl.ancestor.AncestorsUtil;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipExpander;
-import org.neo4j.kernel.Traversal;
-
-import com.google.common.base.Optional;
 
 public class Neo4jTraversals {
 	

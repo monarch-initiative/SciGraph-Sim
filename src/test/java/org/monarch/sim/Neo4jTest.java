@@ -1,6 +1,6 @@
 package org.monarch.sim;
 
-import org.monarch.sim.Neo4jTraversals.*;
+import org.monarch.sim.Neo4jTraversals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -137,10 +137,26 @@ public class Neo4jTest {
 		tx.success();
 		tx.finish();
 		
+		// FIXME: Remove this once the version on Jenkins works.
+		// Node tempRoot = tempDB.getNodeById(1);
+		Node tempRoot = null;
+		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
+		{
+			if (tempRoot == null)
+			{
+				tempRoot = n;
+				continue;
+			}
+			if (n.getId() < tempRoot.getId())
+			{
+				tempRoot = n;
+			}
+		}
+		
 		// Expand outward starting with node 1.
 		HashSet<Node> visited = new HashSet<>();
 		LinkedList<Node> toExpand = new LinkedList<>();
-		toExpand.add(tempDB.getNodeById(1));
+		toExpand.add(tempRoot);
 		while (!toExpand.isEmpty())
 		{
 			Node next = toExpand.removeFirst();
@@ -171,7 +187,7 @@ public class Neo4jTest {
 			}
 			if (!found)
 			{
-				addEdge(monarchDB, n, monarchDB.getNodeById(1));
+				addEdge(monarchDB, n, map.get(tempRoot));
 			}
 		}
 		
@@ -186,11 +202,11 @@ public class Neo4jTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// Clean up the databases.
-//		waterDB.shutdown();
-//		completeDB.shutdown();
-//		treeDB.shutdown();
-//		cycleDB.shutdown();
-//		monarchDB.shutdown();
+		waterDB.shutdown();
+		completeDB.shutdown();
+		treeDB.shutdown();
+		cycleDB.shutdown();
+		monarchDB.shutdown();
 //		wineDB.shutdown();
 	}
 	

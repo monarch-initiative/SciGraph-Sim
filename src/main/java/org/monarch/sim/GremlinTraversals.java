@@ -1,11 +1,8 @@
 package org.monarch.sim;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import com.google.common.base.Optional;
 import com.tinkerpop.blueprints.Direction;

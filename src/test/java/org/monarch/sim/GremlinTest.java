@@ -1,16 +1,13 @@
 package org.monarch.sim;
 
-import static org.monarch.sim.GremlinTraversals.*;
+import static org.monarch.sim.GremlinTraversals.getAncestors;
+import static org.monarch.sim.GremlinTraversals.getCommonAncestors;
+import static org.monarch.sim.GremlinTraversals.getParents;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
-import java.util.Map.Entry;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
