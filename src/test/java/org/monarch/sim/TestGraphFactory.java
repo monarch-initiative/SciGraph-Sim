@@ -9,8 +9,6 @@ import java.util.LinkedList;
 
 import net.lingala.zip4j.core.ZipFile;
 
-import org.junit.Rule;
-import org.junit.rules.TemporaryFolder;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
