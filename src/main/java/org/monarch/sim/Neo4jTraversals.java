@@ -101,6 +101,11 @@ public class Neo4jTraversals {
 	}
 	
 	public static double getIC(Node n) {
+		// This should never happen.
+		if (n == null)
+		{
+			return 0;
+		}
 		return (double)n.getProperty("IC");
 	}
 	

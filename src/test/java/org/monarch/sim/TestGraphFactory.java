@@ -127,12 +127,6 @@ public class TestGraphFactory {
 	}
 	
 	public GraphDatabaseService buildMonarchDB() {
-		// Build a database from the monarchGraph folder.
-		GraphDatabaseService monarchDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
-
-		// All the edges in the given graph are undirected, so we need to rebuild.
-		Transaction tx = monarchDB.beginTx();
-		
 		// Copy data into a test folder.
 		String tempPath = "";
 		try
@@ -152,67 +146,20 @@ public class TestGraphFactory {
 		}
 		
 		// Build the database.
-		GraphDatabaseService tempDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempPath);		
+		GraphDatabaseService monarchDB = new GraphDatabaseFactory().newEmbeddedDatabase(tempPath);
+		removeUnlabeledEdges(monarchDB);
 		
-		HashMap<Node, Node> map = new HashMap<>();
-		Node tempRoot = null;
-		for (Node n : GlobalGraphOperations.at(tempDB).getAllNodes())
+		// Remove all nodes without edges.
+		Transaction tx = monarchDB.beginTx();
+		for (Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
 		{
-			if (n.getId() == 0)
+			if (!n.getRelationships().iterator().hasNext() && n.getId() != 0)
 			{
-				continue;
+				n.delete();
 			}
-			if (tempRoot == null || n.getId() < tempRoot.getId())
-			{
-				tempRoot = n;
-			}
-			Node newNode = addNode(monarchDB, "" + n.getId());
-			for (String property : n.getPropertyKeys())
-			{
-				newNode.setProperty(property, n.getProperty(property));
-			}
-			map.put(n, newNode);
 		}
 		tx.success();
 		tx.finish();
-		
-		// Expand outward starting with the root node.
-		HashSet<Node> visited = new HashSet<>();
-		LinkedList<Node> toExpand = new LinkedList<>();
-		toExpand.add(tempRoot);
-		while (!toExpand.isEmpty())
-		{
-			Node next = toExpand.removeFirst();
-			if (!visited.add(next))
-			{
-				continue;
-			}
-			
-			for (Relationship edge : next.getRelationships(Direction.INCOMING))
-			{
-				Node child = edge.getStartNode();
-				if (!visited.contains(child))
-				{
-					addEdge(monarchDB, map.get(child), map.get(next));
-					toExpand.add(child);
-				}
-			}
-		}
-		
-		// Point all nodes without edges to the root node.
-		for (Node n : GlobalGraphOperations.at(monarchDB).getAllNodes())
-		{
-			boolean found = false;
-			for (@SuppressWarnings("unused") Relationship edge : n.getRelationships())
-			{
-				found = true;
-				break;
-			}
-			if (!found)
-			{
-				addEdge(monarchDB, n, map.get(tempRoot));
-			}
-		}
 		
 		Neo4jTraversals.setAllIC(monarchDB);
 		

@@ -1,5 +1,6 @@
 package org.monarch.sim;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +16,8 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.tooling.GlobalGraphOperations;
+
+import com.google.common.collect.Lists;
 
 public class Neo4jTest {
 
@@ -171,19 +174,25 @@ public class Neo4jTest {
 		long start, end;
 		
 		// We need to know how many nodes there are to choose one uniformly.
-		int count = IteratorUtil.count(GlobalGraphOperations.at(monarchDB).getAllNodes());
+		ArrayList<Node> nodes = Lists.newArrayList(GlobalGraphOperations.at(monarchDB).getAllNodes());
+		int count = nodes.size();
 		
 		for (int i = 0; i < trials; i++)
 		{
 			// Pick any two nodes.
 			Random rand = new Random();
-			int j = rand.nextInt(count - 1) + 1;
-			int k = rand.nextInt(count - 1) + 1;
-			Node m = monarchDB.getNodeById(j);
-			Node n = monarchDB.getNodeById(k);
+			Node m, n;
+			do
+			{
+				int j = rand.nextInt(count);
+				int k = rand.nextInt(count);
+				m = nodes.get(j);
+				n = nodes.get(k);
+			}
+			while (m.getId() == 0 || n.getId() == 0);
 			totalIC += Neo4jTraversals.getIC(m);
 			totalIC += Neo4jTraversals.getIC(n);
-			System.out.println("NODES: " + m.getProperty("name") + " " + n.getProperty("name"));
+			System.out.println("NODES: " + m + " " + n);
 			
 			// Find all common ancestors.
 			System.out.println("Common Ancestors:");
@@ -193,7 +202,7 @@ public class Neo4jTest {
 			ancestorTime += (end - start);
 			for (Node ancestor : ancestors)
 			{
-				System.out.println(ancestor.getProperty("name"));
+				System.out.println(ancestor);
 				totalCommonAncestors++;
 			}
 			
@@ -208,7 +217,7 @@ public class Neo4jTest {
 			}
 			subsumerCounts.put(lcs, subsumerCounts.get(lcs) + 1);
 			lcsIC += Neo4jTraversals.getIC(lcs);
-			System.out.println("LCS: " + lcs.getProperty("name"));
+			System.out.println("LCS: " + lcs);
 			System.out.println();			
 		}
 		
@@ -243,8 +252,11 @@ public class Neo4jTest {
 			{
 				break;
 			}
-			System.out.println("Node " + key.getProperty("name") + ": " + value + " times");
-			System.out.println(key.getProperty("label"));
+			System.out.println("Node " + key + ": " + value + " times");
+			if (key.hasProperty("label"))
+			{
+				System.out.println(key.getProperty("label"));
+			}
 			System.out.println("IC: " + Neo4jTraversals.getIC(key));
 			relevantSubsumerCount--;
 			if (relevantSubsumerCount == 0)
