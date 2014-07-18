@@ -90,6 +90,8 @@ public class Neo4jTraversals {
 			}
 			
 			// FIXME: When we have real data, we should calculate this better.
+			// NOTE: Node properties have to be primitives, so we can't use a
+			// map to represent multiple IC scores or a list to store descendants.
 			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
 			double ic = -Math.log((double)nodesBelow / totalNodes) / Math.log(2);
 			n.setProperty("IC", ic);
@@ -103,7 +105,6 @@ public class Neo4jTraversals {
 	}
 	
 	public static Node getLCS(Node first, Node second) {
-		// TODO: We can probably swap the nodes based on IC.
 		// Start with the ancestors of the first node.
 		HashSet<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
 		
