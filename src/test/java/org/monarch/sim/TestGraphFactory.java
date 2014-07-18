@@ -220,12 +220,38 @@ public class TestGraphFactory {
 	}
 
 	public GraphDatabaseService buildWineDB() {
-		OwlTestUtil.loadOntology("http://www.w3.org/TR/owl-guide/wine.rdf", "target/wine");
-		GraphDatabaseService wineDB = new GraphDatabaseFactory().newEmbeddedDatabase("target/wine");
+		return buildOntologyDB("http://www.w3.org/TR/owl-guide/wine.rdf", "target/wine");
+	}
+	
+	public GraphDatabaseService buildMPSubsetDB() {
+		return buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
+	}
+	
+	private GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
+		OwlTestUtil.loadOntology(url, graphLocation);
+		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
 		
-		Neo4jTraversals.setAllIC(wineDB);
+		removeUnlabeledEdges(db);
 		
-		return wineDB;
+		Neo4jTraversals.setAllIC(db);
+		
+		return db;
+	}
+
+	private void removeUnlabeledEdges(GraphDatabaseService db) {
+		Transaction tx = db.beginTx();
+		
+		// Check if each edge has a label.
+		for (Relationship edge : GlobalGraphOperations.at(db).getAllRelationships())
+		{
+			if (!edge.hasProperty("fragment"))
+			{
+				edge.delete();
+			}
+		}
+		
+		tx.success();
+		tx.finish();
 	}
 
 }

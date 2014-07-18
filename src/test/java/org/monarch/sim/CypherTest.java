@@ -228,7 +228,7 @@ public class CypherTest {
 //				System.out.println(CypherTraversals.getCommonAncestors(first, second, completeEngine));
 //			}
 //		}
-		benchmarkAugTree();
+//		benchmarkAugTree();
 //		for (Relationship edge : GlobalGraphOperations.at(completeDB).getAllRelationships())
 //		{
 //			System.out.println(edge.getStartNode() + "->" + edge.getEndNode());
