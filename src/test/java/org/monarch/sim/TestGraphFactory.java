@@ -3,13 +3,11 @@ package org.monarch.sim;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 
 import net.lingala.zip4j.core.ZipFile;
 
-import org.neo4j.graphdb.Direction;
+import org.monarch.sim.Neo4jTraversals;
+import org.monarch.sim.OwlTestUtil;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -174,7 +172,7 @@ public class TestGraphFactory {
 		return buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
 	}
 	
-	private GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
+	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
 		OwlTestUtil.loadOntology(url, graphLocation);
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
 		

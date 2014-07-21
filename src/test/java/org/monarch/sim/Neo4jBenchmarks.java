@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
@@ -22,7 +21,7 @@ public class Neo4jBenchmarks {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-		testDB = factory.buildMPSubsetDB();
+		testDB = factory.buildCompleteDB(256);
 	}
 
 	@AfterClass

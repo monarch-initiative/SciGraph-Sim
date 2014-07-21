@@ -1,0 +1,452 @@
+MP:0020184	altered susceptibility to parasitic infection	results_from_abnormality_in	GO:0009608	response to symbiont					
+MP:0012246	abnormal hepatic cord morphology	results_from_abnormality_in	GO:0001889	liver development	2	1	0.5960891922	0.7873455747	
+MP:0012167	abnormal epigenetic regulation of gene expression	equivalent_to	GO:0071514	genetic imprinting					
+MP:0012014	abnormal olfactory neuron innervation pattern	results_in_some_abnormal	GO:0007608	sensory perception of smell	1	1	0.972523945	1	
+MP:0011967	increased or absent threshold for auditory brainstem response	results_in_some_abnormal	GO:0007605	sensory perception of sound	1	1	0.988481977	0.8587837176	
+MP:0011518	abnormal cell chemotaxis	results_from_abnormality_in	GO:0060326	cell chemotaxis					
+MP:0011232	abnormal vitamin A level	results_from_abnormality_in	GO:0071939	vitamin A import					
+MP:0010755	abnormal heart right ventricle pressure	results_from_abnormality_in	GO:0008217	regulation of blood pressure					
+MP:0010435	abnormal heart atrium and ventricle connection	results_from_abnormality_in	GO:0003179	heart valve morphogenesis	3	1	0.1202722405	0.4496068992	
+MP:0009944	abnormal olfactory lobe morphology	results_from_abnormality_in	GO:0021988	olfactory lobe development	1	2	0.8853897708	0.9823859648	
+MP:0009890	cleft secondary palate	results_from_abnormality_in	GO:0060022	hard palate development					
+MP:0009538	abnormal synapse morphology	results_from_abnormality_in	GO:0050808	synapse development					
+MP:0009403	increased variability of skeletal muscle fiber size	results_from_abnormality_in	GO:0048747	muscle fiber development					
+MP:0009115	abnormal fat cell morphology	results_in_some_abnormal	GO:0060612	adipose tissue development	1	3	0.8082076164	0.3442446885	
+MP:0009081	thin uterus	results_from_abnormality_in	GO:0060065	uterus development	2	1	1	0.9362638725	
+MP:0008957	abnormal placenta junctional zone morphology	results_from_abnormality_in	GO:0001892	embryonic placenta development					
+MP:0008801	abnormal erythroid progenitor cell morphology	results_from_abnormality_in	GO:0048821	erythrocyte development					
+MP:0008750	abnormal interferon level	results_from_abnormality_in	GO:0001816	cytokine production					
+MP:0008567	decreased interferon-gamma secretion	results_from_abnormality_in	GO:0032729	positive regulation of interferon-gamma production	1	1	0.8820697641	0.9945779892	
+MP:0008329	decreased somatotroph cell number	results_in_some_abnormal	GO:0021984	adenohypophysis development	1	1	1	0.8473976948	
+MP:0008288	abnormal adrenal cortex morphology	results_from_abnormality_in	GO:0035801	adrenal cortex development					
+MP:0008280	abnormal male germ cell apoptosis	results_from_abnormality_in	GO:0097285	cell-type specific apoptotic process					
+MP:0008260	abnormal autophagy	results_from_abnormality_in	GO:0006914	autophagy	2	1	1	1	
+MP:0008166	abnormal B-2 B cell morphology	results_from_abnormality_in	GO:0030183	B cell development	1	1	1	0.8477736955	
+MP:0008131	abnormal Peyer's patch number	results_from_abnormality_in	GO:0048541	Peyer's patch development					
+MP:0006402	small molars	results_from_underactivity_of	GO:0042475	odontogenesis of dentin-containing tooth	1	1	0.5580251161	0.5711391423	
+MP:0006279	abnormal limb development	results_from_abnormality_in	GO:0060173	limb development	1	1	0.594513189	1	
+MP:0005437	abnormal glycogen level	results_from_abnormality_in	GO:0005977	glycogen metabolic process	1	2	0.3622507245	0.7467014934	
+MP:0005400	abnormal vitamin level	results_from_abnormality_in	GO:0006766	vitamin metabolic process	2	1	0.9773139546	1	
+MP:0005348	increased T cell proliferation	results_from_abnormality_in	GO:0042098	T cell proliferation	1	1	0.5313910628	1	
+MP:0005342	abnormal intestinal lipid absorption	results_from_abnormality_in	GO:0050892	intestinal absorption					
+MP:0005292	improved glucose tolerance	results_from_abnormality_in	GO:2000970	regulation of detection of glucose					
+MP:0005280	abnormal fatty acid level	results_from_abnormality_in	GO:0006633	fatty acid synthesis					
+MP:0005275	abnormal skin tensile strength	results_from_abnormality_in	GO:0030199	collagen fibril organization	1	1	1	1	
+MP:0004982	abnormal osteoclast morphology	results_from_abnormality_in	GO:0030316	osteoclast differentiation	1	2	1	0.763477527	
+MP:0004982	abnormal osteoclast morphology	results_in_some_abnormal	GO:0046849	bone remodeling	3	1	0.3892847786	0.8276116552	
+MP:0004773	abnormal bile composition	results_in_some_abnormal	GO:0008206	bile acid metabolic process	1	3	1	0.9820699641	
+MP:0004773	abnormal bile composition	results_from_abnormality_in	GO:0006699	bile acid synthesis					
+MP:0004713	split notochord	results_from_abnormality_in	GO:0030903	notochord development	2	1	0.3137226274	0.5074570149	
+MP:0004484	altered response of heart to induced stress	results_from_abnormality_in	GO:0003300	cardiac muscle hypertrophy	1	1	0.5037670075	0.6663553327	
+MP:0004399	abnormal cochlear outer hair cell morphology	results_from_abnormality_in	GO:0042473	outer ear morphogenesis					
+MP:0004133	heterotaxia	results_from_abnormality_in	GO:0060972	left/right pattern formation	1	1	1	0.8822017644	
+MP:0003925	abnormal cellular glucose import	results_from_abnormality_in	GO:0061490	glucose import into cell					
+MP:0003909	increased eating behavior	results_in_some_abnormal	GO:0007631	feeding behavior	2	2	1	0.4798769598	
+MP:0003702	abnormal chromosome morphology	results_from_abnormality_in	GO:0051276	chromosome organization					
+MP:0003421	abnormal thyroid gland development	results_from_abnormality_in	GO:0030878	thyroid gland development	2	1	0.9766099532	0.9626719253	
+MP:0003416	premature bone ossification	results_from_abnormality_in	GO:0001503	ossification					
+MP:0003396	abnormal embryonic hematopoiesis	results_from_abnormality_in	GO:0035162	embryonic hemopoiesis	1	3	0.9421918844	0.4445988892	
+MP:0003231	abnormal placenta vasculature	results_from_abnormality_in	GO:0060674	placenta blood vessel development	2	1	0.237486475	0.7686935374	
+MP:0003191	abnormal cellular cholesterol metabolism	results_from_abnormality_in	GO:0008203	cholesterol metabolic process					
+MP:0003186	abnormal redox activity	results_from_abnormality_in	GO:0072593	reactive oxygen species metabolic process	1	1	0.506511013	0.2873805748	
+MP:0003186	abnormal redox activity	results_from_abnormality_in	GO:0042743	hydrogen peroxide metabolic process	2	2	0.1297842596	0.9776819554	
+MP:0003115	abnormal respiratory system development	results_from_abnormality_in	GO:0060541	respiratory system development	1	1	0.8479196958	1	
+MP:0003088	abnormal prepulse inhibition	results_in_some_abnormal	GO:0001964	startle response	1	1	0.9685519371	1	
+MP:0003071	decreased vascular permeability	results_from_abnormality_in	GO:0045907	positive regulation of vasoconstriction	1	3	0.7201254403	0.8652277305	
+MP:0002995	primary sex reversal	results_from_abnormality_in	GO:0007530	sex determination	1	4	0.9639099278	0.903487807	
+MP:0002891	increased insulin sensitivity	results_from_abnormality_in	GO:0046626	regulation of insulin receptor signaling pathway	1	2	0.5504711009	0.9265678531	
+MP:0002862	altered righting response	results_in_some_abnormal	GO:0007626	locomotory behavior	2	2	0.575985152	0.5013890028	
+MP:0002769	abnormal vas deferens morphology	results_from_abnormality_in	GO:0048608	reproductive structure development					
+MP:0002769	abnormal vas deferens morphology	results_in_some_abnormal	GO:0007618	mating	2	1	0.6928373857	1	
+MP:0002745	abnormal atrioventricular valve morphology	results_from_abnormality_in	GO:0003171	atrioventricular valve development					
+MP:0002694	abnormal pancreas secretion	results_from_abnormality_in	GO:0030157	pancreatic juice secretion					
+MP:0002471	abnormal complement pathway	results_from_abnormality_in	GO:0002430	complement receptor mediated signaling pathway					
+MP:0002454	abnormal macrophage antigen presentation	results_from_abnormality_in	GO:0060333	interferon-gamma-mediated signaling pathway	1	1	0.9212658425	0.9832079664	
+MP:0002356	abnormal spleen red pulp morphology	results_from_abnormality_in	GO:0048536	spleen development	1	2	0.4046568093	0.7938095876	
+MP:0001930	abnormal meiosis	results_from_abnormality_in	GO:0007126	meiosis					
+MP:0001917	intraventricular hemorrhage	results_from_abnormality_in	GO:0021591	ventricular system development	13	19	0.2415504831	0.100510201	
+MP:0001905	abnormal dopamine level	results_in_some_abnormal	GO:0042417	dopamine metabolic process					
+MP:0001905	abnormal dopamine level	results_from_abnormality_in	GO:0042416	dopamine biosynthesis					
+MP:0001881	abnormal mammary gland physiology	results_from_abnormality_in	GO:0030879	mammary gland development	2	1	0.7983775968	0.9699399399	
+MP:0001836	abnormal antigen presentation via MHC class I	results_from_abnormality_in	GO:0002474	antigen processing and presentation of peptide antigen via MHC class I	1	1	1	0.9276278553	
+MP:0001716	abnormal placenta labyrinth morphology	results_from_abnormality_in	GO:0001890	placenta development	1	1	1	1	
+MP:0001706	abnormal left-right axis patterning	results_from_abnormality_in	GO:0007368	determination of left/right symmetry	7	1	0.2839545679	1	
+MP:0001502	abnormal circadian rhythm	results_from_abnormality_in	GO:0007623	circadian rhythm	3	1	0.7728335457	1	
+MP:0001488	increased startle reflex	results_in_some_abnormal	GO:0001964	startle response	11	3	0.3206086412	0.8898077796	
+MP:0001440	abnormal grooming behavior	results_from_abnormality_in	GO:0007625	grooming behavior	1	1	1	0.9873539747	
+MP:0001438	aphagia	results_from_abnormality_in	GO:0007631	feeding behavior					
+MP:0001407	short stride length	results_from_abnormality_in	GO:0050905	neuromuscular process	1	2	1	0.3969667939	
+MP:0001396	unidirectional circling	results_from_abnormality_in	GO:0048512	circadian behavior	4	5	0.337008674	0.3947927896	
+MP:0001396	unidirectional circling	results_from_abnormality_in	GO:0007622	rhythmic behavior	3	14	0.3413486827	0.1296282593	
+MP:0001386	abnormal maternal nurturing	results_from_abnormality_in	GO:0042711	maternal behavior	4	8	0.1341842684	0.1190802382	
+MP:0001332	abnormal optic nerve innervation	results_from_abnormality_in	GO:0021554	optic nerve development	4	3	0.406010812	0.3914587829	
+MP:0001328	disorganized retinal layers	results_in_some_abnormal	GO:0007601	visual perception	11	15	0.15998232	0.1328682657	
+MP:0001328	disorganized retinal layers	results_from_abnormality_in	GO:0010842	retinal layer formation					
+MP:0001176	abnormal lung development	results_from_abnormality_in	GO:0030324	lung development	1	3	0.8148736297	0.3575647151	
+MP:0001158	abnormal prostate gland morphology	results_from_abnormality_in	GO:0030850	prostate gland development	12	5	0.3472766946	0.6376252753	
+MP:0001149	testicular hyperplasia	results_from_abnormality_in	GO:0071371	cellular response to gonadotropin stimulus	12	11	0.3536487073	0.1057182114	
+MP:0001139	abnormal vagina morphology	results_from_abnormality_in	GO:0060068	vagina development	3	1	0.3826407653	0.8593617187	
+MP:0001077	abnormal spinal nerve morphology	results_from_abnormality_in	GO:0048934	peripheral nervous system neuron differentiation	4	2	0.1103662207	0.5847371695	
+MP:0001046	abnormal enteric neuron morphology	results_from_abnormality_in	GO:0048484	enteric nervous system development	2	1	0.5642531285	1	
+MP:0000972	abnormal mechanoreceptor morphology	results_from_abnormality_in	GO:0042490	mechanoreceptor differentiation	1	1	0.9801379603	0.5999872	
+MP:0000919	cranioschisis	results_from_abnormality_in	GO:0001843	neural tube closure					
+MP:0000889	abnormal cerebellar molecular layer	results_from_abnormality_in	GO:0021695	cerebellar cortex development					
+MP:0000878	abnormal Purkinje cell number	results_from_abnormality_in	GO:0021702	cerebellar Purkinje cell differentiation	3	4	0.199480399	0.4035828072	
+MP:0000854	abnormal cerebellum development	results_from_abnormality_in	GO:0021549	cerebellum development					
+MP:0000848	abnormal pons morphology	results_from_abnormality_in	GO:0021548	pons development					
+MP:0000823	abnormal lateral ventricle morphology	results_from_abnormality_in	GO:0021670	lateral ventricle development					
+MP:0000819	abnormal olfactory bulb morphology	results_from_abnormality_in	GO:0021772	olfactory bulb development	7	10	0.128482257	0.2635385271	
+MP:0000812	abnormal dentate gyrus morphology	results_from_abnormality_in	GO:0021542	dentate gyrus development	1	1	0.6993313987	1	
+MP:0000808	abnormal hippocampus development	results_from_abnormality_in	GO:0021766	hippocampus development					
+MP:0000767	abnormal smooth muscle morphology	results_from_abnormality_in	GO:0051145	smooth muscle cell differentiation	1	1	0.9718819438	0.8983757968	
+MP:0000740	impaired smooth muscle contractility	results_from_underactivity_of	GO:0006939	smooth muscle contraction	1	1	1	0.911975824	
+MP:0000628	abnormal mammary gland development	results_from_abnormality_in	GO:0030879	mammary gland development	1	2	1	0.9396778794	
+MP:0000478	delayed intestine development	results_from_abnormality_in	GO:0048565	intestine development					
+MP:0000430	absent maxillary shelf	results_from_abnormality_in	GO:0042475	odontogenesis of dentin-containing tooth	6	5	0.1728683457	0.1495662991	
+MP:0000417	short hair	results_from_abnormality_in	GO:0022405	hair cycle process	6	2	0.2724185448	0.7201774404	
+MP:0000417	short hair	results_from_abnormality_in	GO:0001942	hair follicle development	9	2	0.2016104032	0.7201774404	
+MP:0000382	underdeveloped hair follicles	results_from_abnormality_in	GO:0042633	hair cycle	3	6	0.8095596191	0.1871103742	
+MP:0000304	abnormal cardiac stroke volume	results_from_abnormality_in	GO:0045823	positive regulation of heart contraction	8	19	0.168508337	0.1322982646	
+MP:0000269	abnormal heart looping	results_from_abnormality_in	GO:0001947	heart looping					
+MP:0000184	abnormal circulating HDL cholesterol level	results_from_abnormality_in	GO:0008203	cholesterol metabolic process					
+MP:0000045	abnormal hair cell morphology	results_from_abnormality_in	GO:0060119	inner ear receptor cell development					
+HP:0200118	Malabsorption of Vitamin B12	results_from_abnormality_in	GO:0015889	cobalamin transport					
+HP:0200024	Premature chromatid separation	results_from_abnormality_in	GO:0000819	sister chromatid segregation					
+HP:0200023	Priapism	results_from_abnormality_in	GO:0043084	penile erection					
+HP:0100856	Poorly ossified vertebrae	results_from_abnormality_in	GO:0001503	ossification					
+HP:0100831	Abnormality of vitamin K metabolism	results_from_abnormality_in	GO:0042373	vitamin K metabolic process					
+HP:0100767	Abnormality of the placenta	results_from_abnormality_in	GO:0001890	placenta development					
+HP:0100755	Abnormality of salivation	results_from_abnormality_in	GO:0046541	saliva secretion					
+HP:0100707	Abnormality of the astrocytes	results_from_abnormality_in	GO:0014002	astrocyte development					
+HP:0100706	Abnormality of the oligodendroglia	results_from_abnormality_in	GO:0014003	oligodendrocyte development					
+HP:0100543	Cognitive impairment	results_from_abnormality_in	GO:0050890	cognition					
+HP:0100519	Anuria	results_from_abnormality_in	GO:0060073	micturition					
+HP:0100514	Abnormality of vitamin E metabolism	results_from_abnormality_in	GO:0042360	vitamin E metabolic process					
+HP:0100511	Abnormality of vitamin D metabolism	results_from_abnormality_in	GO:0042359	vitamin D metabolic process					
+HP:0100509	Abnormality of vitamin C metabolism	results_from_abnormality_in	GO:0019852	L-ascorbic acid metabolic process					
+HP:0100508	Abnormality of vitamin metabolism	results_from_abnormality_in	GO:0006766	vitamin metabolic process					
+HP:0100018	Nuclear cataract	results_in_some_abnormal	GO:0007601	visual perception	2	2	0.7067074134	0.6376652753	
+HP:0012590	Abnormal urine output	results_in_some_abnormal	GO:0060073	micturition					
+HP:0012531	Pain	results_from_abnormality_in	GO:0048265	response to pain					
+HP:0012346	Abnormal protein glycosylation	results_from_abnormality_in	GO:0006486	protein glycosylation			0.412502825	0.2950385901	
+HP:0012331	Abnormal autonomic nervous system morphology	results_from_abnormality_in	GO:0048483	autonomic nervous system development	1	3	1	0.883017766	
+HP:0012261	Abnormal respiratory motile cilium physiology	results_from_abnormality_in	GO:0003341	cilium movement	3	1	0.6407432815	1	
+HP:0012245	Sex reversal	results_from_abnormality_in	GO:0007530	sex determination					
+HP:0012206	Abnormal sperm motility	results_from_abnormality_in	GO:0030317	sperm motility	1	1	0.8816497633	0.9573299147	
+HP:0012176	Abnormality of natural killer cells	results_from_abnormality_in	GO:0001779	natural killer cell differentiation					
+HP:0012113	Abnormality of creatine metabolism	results_from_abnormality_in	GO:0006600	creatine metabolic process					
+HP:0012103	Abnormality of the mitochondrion	results_from_abnormality_in	GO:0070584	mitochondrion morphogenesis					
+HP:0012099	Abnormality of circulating catecholamine level	results_from_abnormality_in	GO:0006584	catecholamine metabolic process	4	1	0.2764045528	0.9742679485	
+HP:0012072	Aciduria	results_from_abnormality_in	GO:1901606	alpha-amino acid catabolic process	2	1	0.9529679059	1	
+HP:0012025	Abnormality of ornithine metabolism	results_from_abnormality_in	GO:0006591	ornithine metabolic process					
+HP:0012024	Hypergalactosemia	results_from_abnormality_in	GO:0019388	galactose catabolic process					
+HP:0012024	Hypergalactosemia	results_from_abnormality_in	GO:0006012	galactose metabolic process					
+HP:0012023	Galactosuria	results_from_abnormality_in	GO:0019388	galactose catabolic process					
+HP:0011965	Abnormality of citrulline metabolism	results_from_abnormality_in	GO:0000052	citrulline metabolic process					
+HP:0011732	Abnormality of adrenal morphology	results_from_abnormality_in	GO:0030325	adrenal gland development	1	1	1	1	
+HP:0011675	Arrhythmia	results_from_abnormality_in	GO:0060047	heart contraction					
+HP:0011663	Right ventricular cardiomyopathy	results_from_abnormality_in	GO:0086005	ventricular cardiac muscle cell action potential					
+HP:0011400	Abnormal CNS myelination	results_from_abnormality_in	GO:0022010	central nervous system myelination					
+HP:0011368	Epidermal thickening	results_from_abnormality_in	GO:0031424	keratinization					
+HP:0011115	Abnormality of chemokine secretion	results_from_abnormality_in	GO:0090195	chemokine secretion					
+HP:0011113	Abnormality of cytokine secretion	results_from_abnormality_in	GO:0050663	cytokine secretion					
+HP:0011096	Peripheral demyelination	results_from_abnormality_in	GO:0032287	peripheral nervous system myelin maintenance					
+HP:0011038	Abnormality of renal resorption	results_from_abnormality_in	GO:0070293	renal absorption					
+HP:0011037	Decreased urine output	results_from_abnormality_in	GO:0060073	micturition					
+HP:0011034	Amyloidosis	results_from_abnormality_in	GO:0050435	beta-amyloid metabolic process	2	1	0.9980459961	1	
+HP:0011033	Impairment of fructose metabolism	results_from_abnormality_in	GO:0006000	fructose metabolic process					
+HP:0011032	Abnormality of fluid regulation	results_from_abnormality_in	GO:0050878	regulation of body fluids					
+HP:0011030	Abnormality of transition element cation homeostasis	results_from_abnormality_in	GO:0055076	transition metal ion homeostasis	1	1	0.8772537545	1	
+HP:0011028	Abnormality of blood circulation	results_from_abnormality_in	GO:0008015	blood circulation					
+HP:0011019	Abnormality of chromosome condensation	results_from_abnormality_in	GO:0030261	chromosome condensation					
+HP:0011018	Abnormality of the cell cycle	results_from_abnormality_in	GO:0007049	cell cycle					
+HP:0011017	Abnormality of cell physiology	results_from_abnormality_in	GO:0048468	cell development					
+HP:0011014	Abnormal glucose homeostasis	results_from_abnormality_in	GO:0042593	glucose homeostasis					
+HP:0011013	Abnormality of carbohydrate metabolism/homeostasis	results_from_abnormality_in	GO:0005975	carbohydrate metabolism					
+HP:0011013	Abnormality of carbohydrate metabolism/homeostasis	results_from_abnormality_in	GO:0033500	carbohydrate homeostasis					
+HP:0011001	Increased bone mineral density	results_from_abnormality_in	GO:0030282	bone mineralization					
+HP:0010990	Abnormality of the common coagulation pathway	results_from_abnormality_in	GO:0072377	blood coagulation, common pathway					
+HP:0010989	Abnormality of the intrinsic pathway	results_from_abnormality_in	GO:0007597	intrinsic pathway					
+HP:0010972	Anemia of inadequate production	results_from_abnormality_in	GO:0030218	erythrocyte differentiation					
+HP:0010933	Abnormality of xanthine metabolism	results_from_abnormality_in	GO:0046110	xanthine metabolic process					
+HP:0010932	Abnormality of nucleobase metabolism	results_from_abnormality_in	GO:0009112	nucleobase metabolic process					
+HP:0010930	Abnormality of monovalent inorganic cation homeostasis	results_from_abnormality_in	GO:0055067	monovalent inorganic cation homeostasis					
+HP:0010929	Abnormality of cation homeostasis	results_from_abnormality_in	GO:0055080	cation homeostasis					
+HP:0010927	Abnormality of divalent inorganic cation homeostasis	results_from_abnormality_in	GO:0072507	divalent inorganic cation homeostasis					
+HP:0010919	Abnormality of homocysteine metabolism	results_from_abnormality_in	GO:0050667	homocysteine metabolic process					
+HP:0010918	Abnormality of cysteine metabolism	results_from_abnormality_in	GO:0015811	L-cystine transport					
+HP:0010918	Abnormality of cysteine metabolism	results_from_abnormality_in	GO:0006534	cysteine metabolic process					
+HP:0010917	Abnormality of tyrosine metabolism	results_from_abnormality_in	GO:0006572	tyrosine catabolic process					
+HP:0010917	Abnormality of tyrosine metabolism	results_from_abnormality_in	GO:0006570	tyrosine metabolic process					
+HP:0010916	Abnormality of alanine metabolism	results_from_abnormality_in	GO:0006522	alanine metabolic process					
+HP:0010915	Abnormality of pyruvate family amino acid metabolism	results_from_abnormality_in	GO:0009078	pyruvate family amino acid metabolic process					
+HP:0010914	Abnormality of valine metabolism	results_from_abnormality_in	GO:0006573	valine metabolic process					
+HP:0010912	Abnormality of isoleucine metabolism	results_from_abnormality_in	GO:0006549	isoleucine metabolic process					
+HP:0010909	Abnormality of arginine metabolism	results_from_abnormality_in	GO:0006525	arginine metabolic process					
+HP:0010908	Abnormality of lysine metabolism	results_from_abnormality_in	GO:0006553	lysine metabolic process					
+HP:0010907	Abnormality of proline metabolism	results_from_abnormality_in	GO:0006560	proline metabolic process					
+HP:0010905	Abnormality of histidine metabolism	results_from_abnormality_in	GO:0006547	histidine metabolic process					
+HP:0010904	Abnormality of histidine family amino acid metabolism	results_from_abnormality_in	GO:0009075	histidine family amino acid metabolic process					
+HP:0010903	Abnormality of glutamine metabolism	results_from_abnormality_in	GO:0006541	glutamine metabolic process					
+HP:0010902	Abnormality of glutamine family amino acid metabolism	results_from_abnormality_in	GO:0009064	glutamine family amino acid metabolic process					
+HP:0010901	Abnormality of methionine metabolism	results_from_abnormality_in	GO:0006555	methionine metabolic process					
+HP:0010900	Abnormality of threonine metabolism	results_from_abnormality_in	GO:0006566	threonine metabolic process					
+HP:0010899	Abnormality of aspartate family amino acid metabolism	results_from_abnormality_in	GO:0009066	aspartate family amino acid metabolic process					
+HP:0010895	Abnormality of glycine metabolism	results_from_abnormality_in	GO:0006544	glycine metabolic process					
+HP:0010894	Abnormality of serine family amino acid metabolism	results_from_abnormality_in	GO:0009069	serine family amino acid metabolic process					
+HP:0010893	Abnormality of phenylalanine metabolism	results_from_abnormality_in	GO:0046146	tetrahydrobiopterin metabolic process					
+HP:0010893	Abnormality of phenylalanine metabolism	results_from_abnormality_in	GO:0006558	L-phenylalanine metabolic process					
+HP:0010892	Abnormality of branched chain family amino acid metabolism	results_from_abnormality_in	GO:0009083	branched-chain amino acid catabolic process					
+HP:0010892	Abnormality of branched chain family amino acid metabolism	results_from_abnormality_in	GO:0009081	branched chain family amino acid metabolic process					
+HP:0010836	Abnormality of copper homeostasis	results_from_abnormality_in	GO:0006825	copper ion transport	1	1	1	0.8097096194	
+HP:0010836	Abnormality of copper homeostasis	results_from_abnormality_in	GO:0055070	copper ion homeostasis	2	2	1	0.8021656043	
+HP:0010831	Impaired proprioception	results_from_abnormality_in	GO:0019230	proprioception					
+HP:0010720	Abnormal hair pattern	results_from_abnormality_in	GO:0042640	anagen					GO-def: The growth phase of the hair cycle.
+HP:0010471	Oligosacchariduria	results_from_abnormality_in	GO:0009311	oligosaccharide metabolic process					
+HP:0010314	Premature thelarche	results_from_abnormality_in	GO:0042695	thelarche					
+HP:0009929	Abnormality of the columella	results_from_abnormality_in	GO:0043585	nose morphogenesis					
+HP:0009900	Unilateral deafness	results_from_abnormality_in	GO:0007605	sensory perception of sound					
+HP:0009765	Low hanging columella	results_from_abnormality_in	GO:0043585	nose morphogenesis					
+HP:0009107	Abnormal ossification involving the femoral head and neck	results_from_abnormality_in	GO:0001503	ossification					
+HP:0009106	Abnormal pelvis bone ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0009105	Abnormal ossification of the pubic bone	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008829	Delayed femoral head ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008828	Delayed proximal femoral epiphyseal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008820	Absent ossification of capital femoral epiphysis	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008788	Delayed pubic bone ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008785	Delayed ossification of pubic rami	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008669	Abnormal spermatogenesis	results_from_abnormality_in	GO:0007283	spermatogenesis					
+HP:0008609	Morphological abnormality of the middle ear	results_from_abnormality_in	GO:0042474	middle ear morphogenesis					
+HP:0008372	Abnormality of vitamin A metabolism	results_from_abnormality_in	GO:0006776	vitamin A metabolic process					
+HP:0008369	Abnormal tarsal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008322	Abnormal mitochondrial morphology	results_from_abnormality_in	GO:0070584	mitochondrion morphogenesis	1	2	1	0.3774047548	
+HP:0008297	Transient hyperphenylalaninemia	results_from_abnormality_in	GO:0006729	tetrahydrobiopterin biosynthetic process					
+HP:0008277	Abnormality of zinc homeostasis	results_from_abnormality_in	GO:0055069	zinc ion homeostasis					
+HP:0008166	Decreased beta-galactosidase activity	results_from_abnormality_in	GO:0004565	beta-galactosidase activity					
+HP:0008134	Irregular tarsal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008108	Advanced tarsal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008103	Delayed tarsal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0008087	Nonossified fifth metatarsal	results_from_abnormality_in	GO:0001503	ossification					
+HP:0007984	Reduced amplitude of b-wave (ERG)	results_from_abnormality_in	GO:0060040	retinal bipolar neuron differentiation					
+HP:0006979	Sleep-wake cycle disturbance	results_from_abnormality_in	GO:0022410	circadian sleep/wake cycle process					
+HP:0006956	Dilation of lateral ventricles	results_from_abnormality_in	GO:0021591	ventricular system development	1	4	0.9881519763	0.3392106784	
+HP:0006789	Mitochondrial encephalopathy	results_from_abnormality_in	GO:0005739	mitochondrion					
+HP:0006628	Absent sternal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0006607	Precocious costochondral ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0006598	Irregular ossification at anterior rib ends	results_from_abnormality_in	GO:0001503	ossification					
+HP:0006454	Severely delayed patellae ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0006285	Hypomineralization of enamel	results_from_abnormality_in	GO:0070166	enamel mineralization					
+HP:0006257	Abnormality of carpal bone ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0006069	Severe carpal ossification delay	results_from_abnormality_in	GO:0001503	ossification					
+HP:0005982	Reduced phenylalanine hydroxylase activity	results_from_abnormality_in	GO:0004505	phenylalanine 4-monooxygenase activity					
+HP:0005959	Impaired gluconeogenesis	results_from_abnormality_in	GO:0006094	gluconeogenesis					
+HP:0005938	Abnormal respiratory motile cilium morphology	results_from_abnormality_in	GO:0044458	motile cilium assembly					
+HP:0005921	Abnormal ossification of hand bones	results_from_abnormality_in	GO:0001503	ossification					
+HP:0005832	Dysharmonic delayed bone age	results_from_abnormality_in	GO:0070977	bone maturation					
+HP:0005623	Absent ossification of calvaria	results_from_abnormality_in	GO:0001503	ossification					
+HP:0005616	Accelerated skeletal maturation	results_from_abnormality_in	GO:0070977	bone maturation					
+HP:0005484	Postnatal microcephaly	results_from_abnormality_in	GO:0035265	organ growth					poor
+HP:0005474	Decreased calvarial ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0005451	Decreased cranial base ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0005384	Defective B cell activation	results_from_abnormality_in	GO:0042113	B cell activation					
+HP:0005374	Cellular immunodeficiency	results_from_abnormality_in	GO:0061057	immune deficiency pathway					
+HP:0005357	Defective B cell differentiation	results_from_abnormality_in	GO:0030183	B cell differentiation					
+HP:0005089	Abnormal metaphyseal trabeculation	results_from_abnormality_in	GO:0060343	trabecula formation					
+HP:0004921	Abnormality of magnesium homeostasis	results_from_abnormality_in	GO:0010960	magnesium ion homeostasis					
+HP:0004915	Impairment of galactose metabolism	results_from_abnormality_in	GO:0006012	galactose metabolic process					
+HP:0004915	Impairment of galactose metabolism	results_from_abnormality_in	GO:0019388	galactose catabolic process					
+HP:0004757	Paroxysmal atrial fibrillation	results_from_abnormality_in	GO:0060372	regulation of atrial cardiac muscle cell membrane repolarization					
+HP:0004606	Unossified vertebral bodies	results_from_abnormality_in	GO:0001503	ossification					
+HP:0004606	Unossified vertebral bodies	results_from_abnormality_in	GO:0014028	notochord formation					
+HP:0004605	Absent vertebral body mineralization	results_from_abnormality_in	GO:0031214	biomineral formation					
+HP:0004431	Complement deficiency	results_from_abnormality_in	GO:0006957	complement activation, alternative pathway	2	1	0.3118686237	0.9012938026	
+HP:0004408	Abnormality of the sense of smell	results_from_abnormality_in	GO:0007608	sensory perception of smell					
+HP:0004371	Abnormality of glycosaminoglycan metabolism	results_from_abnormality_in	GO:0030203	glycosaminoglycan metabolic process	2	1	0.67502335	0.9708619417	
+HP:0004371	Abnormality of glycosaminoglycan metabolism	results_from_abnormality_in	GO:0030203	glycosaminoglycan metabolic process					
+HP:0004370	Abnormality of temperature regulation	results_from_abnormality_in	GO:0001659	temperature homeostasis					
+HP:0004370	Abnormality of temperature regulation	results_from_abnormality_in	GO:0001659	temperature homeostasis					
+HP:0004367	Abnormality of glycoprotein metabolism	results_from_abnormality_in	GO:0009100	glycoprotein metabolic process					
+HP:0004366	Abnormality of glycolysis	results_from_abnormality_in	GO:0006096	glycolysis					
+HP:0004365	Abnormality of tryptophan metabolism	results_from_abnormality_in	GO:0006568	tryptophan metabolic process					
+HP:0004363	Abnormality of calcium homeostasis	results_from_abnormality_in	GO:0055074	calcium ion homeostasis					
+HP:0004359	Abnormality of fatty-acid metabolism	results_from_abnormality_in	GO:0006631	fatty acid metabolic process					
+HP:0004358	Abnormality of superoxide metabolism	results_from_abnormality_in	GO:0006801	superoxide metabolic process					
+HP:0004357	Abnormality of leucine metabolism	results_from_abnormality_in	GO:0006551	leucine metabolic process					
+HP:0004355	Abnormality of proteoglycan metabolism	results_from_abnormality_in	GO:0006029	proteoglycan metabolic process					
+HP:0004354	Abnormality of carboxylic acid metabolism	results_from_abnormality_in	GO:0019752	carboxylic acid metabolic process					
+HP:0004353	Abnormality of pyrimidine metabolism	results_from_abnormality_in	GO:0006206	pyrimidine base metabolic process					
+HP:0004345	Abnormality of ganglioside metabolism	results_from_abnormality_in	GO:0001573	ganglioside metabolic process					
+HP:0004343	Abnormality of glycosphingolipid metabolism	results_from_abnormality_in	GO:0006687	glycosphingolipid metabolic process					
+HP:0004341	Abnormality of the vitamin B12 metabolism	results_from_abnormality_in	GO:0009235	cobalamin metabolic process	1	2	1	0.6956193912	
+HP:0004339	Abnormality of sulfur amino acid metabolism	results_from_abnormality_in	GO:0000096	sulfur amino acid metabolic process					
+HP:0004338	Abnormality of aromatic amino acid family metabolism	results_from_abnormality_in	GO:0009072	aromatic amino acid family metabolic process					
+HP:0004337	Abnormality of amino acid metabolism	results_from_abnormality_in	GO:0006520	cellular amino acid metabolic process					
+HP:0004336	Myelin outfoldings	results_from_abnormality_in	GO:0032290	peripheral nervous system myelin formation					
+HP:0004331	Decreased skull ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0004330	Increased skull ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0004305	Involuntary movements	results_from_abnormality_in	GO:0003010	voluntary skeletal muscle contraction					
+HP:0004280	Irregular ossification of hand bones	results_from_abnormality_in	GO:0001503	ossification					
+HP:0003947	Delayed elbow epiphyseal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0003894	Delayed humeral epiphyseal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0003893	Advanced ossification of the humeral epiphysis	results_from_abnormality_in	GO:0001503	ossification					
+HP:0003840	Delayed upper limb epiphyseal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0003737	Mitochondrial myopathy	results_from_abnormality_in	GO:0005739	mitochondrion					
+HP:0003655	Reduced activity of N-acetylglucosaminyltransferase II	results_from_abnormality_in	GO:0008455	alpha-1,6-mannosylglycoprotein 2-beta-N-acetylglucosaminyltransferase activity					
+HP:0003654	Reduced dihydropyrimidine dehydrogenase activity	results_from_abnormality_in	GO:0017113	dihydropyrimidine dehydrogenase (NADP+) activity					
+HP:0003649	Abnormality of glycoside metabolism	results_from_abnormality_in	GO:0016137	glycoside metabolic process					
+HP:0003643	Sulfite oxidase deficiency	results_from_abnormality_in	GO:0008482	sulfite oxidase activity					
+HP:0003637	Reduced 4-Hydroxyphenylpyruvate dioxygenase activity	results_from_abnormality_in	GO:0003868	4-hydroxyphenylpyruvate dioxygenase activity					
+HP:0003568	Decreased glucosephosphate isomerase activity	results_from_abnormality_in	GO:0004347	glucose-6-phosphate isomerase activity					
+HP:0003549	Abnormality of connective tissue	results_from_abnormality_in	GO:0061448	connective tissue development					
+HP:0003540	Impaired platelet aggregation	results_from_abnormality_in	GO:0070527	platelet aggregation					
+HP:0003538	Increased serum iduronate sulfatase activity	results_from_abnormality_in	GO:0004423	iduronate-2-sulfatase activity					
+HP:0003537	Hypouricemia	results_from_abnormality_in	GO:0046415	urate metabolic process					
+HP:0003536	Decreased fumarate hydratase activity	results_from_abnormality_in	GO:0004333	fumarate hydratase activity					
+HP:0003534	Reduced xanthine dehydrogenase activity	results_from_abnormality_in	GO:0004854	xanthine dehydrogenase activity					
+HP:0003524	Decreased methionine synthase activity	results_from_abnormality_in	GO:0006555	methionine metabolic process					
+HP:0003481	Segmental peripheral demyelination/remyelination	results_in_some_abnormal	GO:0007272	ensheathment of neurons	1	5	0.4158528317	0.2372064744	
+HP:0003477	Peripheral axonal neuropathy	results_from_abnormality_in	GO:0061564	axon development					
+HP:0003464	Abnormal cholesterol homeostasis	results_from_abnormality_in	GO:0042632	cholesterol homeostasis					
+HP:0003451	Increased rate of premature chromosome condensation	results_from_abnormality_in	GO:0030261	chromosome condensation					
+HP:0003429	Hypomyelination	results_from_abnormality_in	GO:0042552	myelination					
+HP:0003401	Paresthesia	results_from_abnormality_in	GO:0007600	sensory perception					
+HP:0003400	Basal lamina 'onion bulb' formation	results_from_abnormality_in	GO:0005605	basal lamina					
+HP:0003398	Abnormality of the neuromuscular junction	results_from_abnormality_in	GO:0031594	neuromuscular junction					
+HP:0003390	Sensory axonal neuropathy	results_from_abnormality_in	GO:0043005	neuron process					
+HP:0003353	Propionyl-CoA carboxylase deficiency	results_from_abnormality_in	GO:0004658	propionyl-CoA carboxylase activity					
+HP:0003349	Low cholesterol esterification rates	results_from_abnormality_in	GO:0034435	cholesterol esterification					
+HP:0003287	Abnormality of mitochondrial metabolism	results_from_abnormality_in	GO:0008152	metabolic process					
+HP:0003281	Increased serum ferritin	results_in_some_abnormal	GO:0045454	cell redox homeostasis	1	2	1	0.9556859114	
+HP:0003267	Reduced orotidine 5-prime phosphate decarboxylase activity	results_from_abnormality_in	GO:0004590	orotidine 5'-phosphate decarboxylase activity					
+HP:0003254	Abnormality of DNA repair	results_from_abnormality_in	GO:0006281	DNA repair					
+HP:0003233	Hypoalphalipoproteinemia	results_from_abnormality_in	GO:0055088	lipid homeostasis	1	3	0.9476178952	0.3350926702	
+HP:0003231	Hypertyrosinemia	results_from_abnormality_in	GO:0006572	tyrosine catabolic process					
+HP:0003214	Prolonged G2 phase of cell cycle	results_from_abnormality_in	GO:0051319	G2 phase					
+HP:0003210	Decreased methylmalonyl-CoA mutase activity	results_from_abnormality_in	GO:0004494	methylmalonyl-CoA mutase activity					
+HP:0003209	Decreased pyruvate carboxylase activity	results_from_abnormality_in	GO:0004736	pyruvate carboxylase activity					
+HP:0003159	Hyperoxaluria	results_from_abnormality_in	GO:0046487	glyoxylate metabolic process					
+HP:0003146	Hypocholesterolemia	results_from_abnormality_in	GO:0030299	intestinal cholesterol absorption	5	1	0.3227646455	0.6436592873	
+HP:0003145	Decreased adenosylcobalamin	results_from_abnormality_in	GO:0009236	cobalamin biosynthetic process					
+HP:0003137	Prolinuria	results_from_abnormality_in	GO:0006560	proline metabolic process					
+HP:0003130	Abnormal peripheral myelination	results_from_abnormality_in	GO:0043209	myelin sheath					
+HP:0003119	Abnormality of lipid metabolism	results_from_abnormality_in	GO:0006629	lipid metabolic process					
+HP:0003107	Abnormality of cholesterol metabolism	results_from_abnormality_in	GO:0008203	cholesterol metabolic process					
+HP:0003011	Abnormality of the musculature	results_from_abnormality_in	GO:0007517	muscle organ development					
+HP:0002932	Aldehyde oxidase deficiency	results_from_abnormality_in	GO:0004031	aldehyde oxidase activity					
+HP:0002916	Abnormality of chromosome segregation	results_from_abnormality_in	GO:0007059	chromosome segregation					
+HP:0002883	Hyperventilation	results_from_abnormality_in	GO:0007585	respiratory gaseous exchange					
+HP:0002832	Calcific stippling	results_from_abnormality_in	GO:0030282	bone calcification					
+HP:0002797	Osteolysis	results_from_abnormality_in	GO:0045453	bone resorption					
+HP:0002791	Hypoventilation	results_from_abnormality_in	GO:0007585	respiratory gaseous exchange					
+HP:0002789	Tachypnea	results_from_abnormality_in	GO:0007585	respiratory gaseous exchange					
+HP:0002750	Delayed skeletal maturation	results_from_abnormality_in	GO:0070977	bone maturation					
+HP:0002731	Defective lymphocyte apoptosis	results_from_abnormality_in	GO:0070227	lymphocyte apoptosis					
+HP:0002725	Systemic lupus erythematosus	results_from_abnormality_in	GO:0006958	complement activation, classical pathway	1	1	0.6653313307	1	
+HP:0002721	Immunodeficiency	results_from_abnormality_in	GO:0006955	immune response					
+HP:0002718	Recurrent bacterial infections	results_from_abnormality_in	GO:0042742	defense response to bacterium					
+HP:0002715	Abnormality of the immune system	results_from_abnormality_in	GO:0002520	immune system development					
+HP:0002703	Abnormality of skull ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0002663	Delayed epiphyseal ossification	results_from_abnormality_in	GO:0001503	ossification					
+HP:0002615	Hypotension	results_from_abnormality_in	GO:0003044	regulation of systemic arterial blood pressure mediated by a chemical signal	1	1	0.5833571667	1	
+HP:0002597	Abnormality of the vasculature	results_from_abnormality_in	GO:0001944	vasculature development					
+HP:0002591	Polyphagia	results_from_abnormality_in	GO:0032098	regulation of appetite					
+HP:0002591	Polyphagia	results_in_some_abnormal	GO:0007631	feeding behavior	2	3	1	0.3700947402	
+HP:0002494	Abnormal rapid eye movement (REM) sleep	results_from_abnormality_in	GO:0042747	circadian sleep/wake cycle, REM sleep					
+HP:0002487	Hyperkinesis	results_from_abnormality_in	GO:0042465	kinesis					
+HP:0002450	Abnormality of the motor neurons	results_from_abnormality_in	GO:0021522	spinal cord motor neuron differentiation	1	4	1	0.395482791	
+HP:0002435	Meningocele	results_from_abnormality_in	GO:0001843	neural tube closure					
+HP:0002375	Hypokinesia	results_from_abnormality_in	GO:0042465	kinesis					
+HP:0002374	Diminished movement	results_from_abnormality_in	GO:0042465	kinesis					
+HP:0002360	Sleep disturbance	results_from_abnormality_in	GO:0030431	sleep					
+HP:0002269	Abnormality of neuronal migration	results_from_abnormality_in	GO:0001764	neuron migration					
+HP:0002267	Exaggerated startle response	results_in_some_abnormal	GO:0001964	startle response					
+HP:0002188	Delayed CNS myelination	results_from_abnormality_in	GO:0022010	central nervous system myelination					
+HP:0002110	Bronchiectasis	results_from_abnormality_in	GO:0001539	cilium or flagellum-dependent cell motility					
+HP:0002104	Apnea	results_from_abnormality_in	GO:0007585	respiratory gaseous exchange					
+HP:0002101	Abnormal lung lobation	results_from_abnormality_in	GO:0060464	lung lobe formation					
+HP:0002098	Respiratory distress	results_from_underactivity_of	GO:0007585	respiratory gaseous exchange					
+HP:0002086	Abnormality of the respiratory system	results_from_abnormality_in	GO:0060541	respiratory system development					
+HP:0002039	Anorexia	results_from_abnormality_in	GO:0032098	regulation of appetite					
+HP:0002033	Poor suck	results_from_abnormality_in	GO:0001967	suckling behavior					
+HP:0002033	Poor suck	results_in_some_abnormal	GO:0001967	suckling behavior	1	1	1	0.8802137604	
+HP:0002024	Malabsorption	results_from_abnormality_in	GO:0050892	intestinal absorption					
+HP:0002019	Constipation	results_from_abnormality_in	GO:0030421	defecation					
+HP:0002000	Short columella	results_from_abnormality_in	GO:0043585	nose morphogenesis					
+HP:0001978	Extramedullary hematopoiesis	results_from_abnormality_in	GO:0030097	hemopoiesis					
+HP:0001954	Episodic fever	results_from_abnormality_in	GO:0001660	fever					
+HP:0001952	Abnormal glucose tolerance	results_from_abnormality_in	GO:0042593	glucose homeostasis					
+HP:0001946	Ketosis	results_from_abnormality_in	GO:0046951	ketone body biosynthetic process					
+HP:0001939	Abnormality of metabolism/homeostasis	results_from_abnormality_in	GO:0008152	metabolic process					
+HP:0001928	Abnormality of coagulation	results_from_abnormality_in	GO:0050817	coagulation					
+HP:0001730	Progressive hearing impairment	results_from_abnormality_in	GO:0031032	actomyosin structure organization	3	9	0.5611251223	0.2831905664	
+HP:0001730	Progressive hearing impairment	results_in_some_abnormal	GO:0007605	sensory perception of sound	5	6	0.4645889292	0.1661983324	
+HP:0001657	Prolonged QT interval	results_from_abnormality_in	GO:0071805	potassium ion transmembrane transport					
+HP:0001639	Hypertrophic cardiomyopathy	equivalent_to	GO:0003300	cardiac muscle hypertrophy					
+HP:0001635	Congestive heart failure	results_from_abnormality_in	GO:0060047	heart contraction					
+HP:0001626	Abnormality of the cardiovascular system	results_from_abnormality_in	GO:0072358	cardiovascular system development					
+HP:0001622	Premature birth	results_from_abnormality_in	GO:0007567	parturition					
+HP:0001598	Concave nail	results_from_abnormality_in	GO:0035878	nail development					
+HP:0001598	Concave nail	results_from_abnormality_in	GO:0035878	nail development					
+HP:0001597	Abnormality of the nail	results_from_abnormality_in	GO:0035878	nail development					
+HP:0001574	Abnormality of the integument	results_from_abnormality_in	GO:0080060	integument development					
+HP:0001561	Polyhydramnios	results_from_abnormality_in	GO:0007565	female pregnacy					
+HP:0001519	Disproportionate tall stature	results_from_abnormality_in	GO:0007179	transforming growth factor beta receptor signaling pathway	3	2	0.4405368811	0.7397654795	
+HP:0001511	Intrauterine growth retardation	results_from_abnormality_in	GO:0009790	embryonic development					
+HP:0001510	Growth delay	results_from_abnormality_in	GO:0040007	growth					
+HP:0001508	Failure to thrive	results_from_abnormality_in	GO:0040007	growth					
+HP:0001507	Growth abnormality	results_from_abnormality_in	GO:0040007	growth					
+HP:0001480	Freckling	results_from_abnormality_in	GO:0043473	pigmentation	2	2	0.889517779	0.8919057838	
+HP:0001427	Mitochondrial inheritance	results_from_abnormality_in	GO:0005739	mitochondrion					
+HP:0001407	Hepatic cysts	results_from_abnormality_in	GO:0015012	heparan sulfate proteoglycan biosynthetic process	5	2	0.2277104554	0.4284208568	
+HP:0001407	Hepatic cysts	results_from_abnormality_in	GO:0030201	heparan sulfate proteoglycan metabolic process	7	8	0.1911983824	0.3057666115	
+HP:0001362	Skull defect	results_from_abnormality_in	GO:0001503	ossification					
+HP:0001347	Hyperreflexia	results_from_abnormality_in	GO:0060004	reflex					
+HP:0001265	Hyporeflexia	results_from_abnormality_in	GO:0060004	reflex					
+HP:0001263	Global developmental delay	results_from_abnormality_in	GO:0032502	development					
+HP:0001249	Intellectual disability	results_from_abnormality_in	GO:0050890	cognition					
+HP:0001216	Delayed ossification of carpal bones	results_from_abnormality_in	GO:0001503	ossification					
+HP:0001107	Ocular albinism	results_from_abnormality_in	GO:0048069	eye pigmentation					
+HP:0001107	Ocular albinism	results_from_abnormality_in	GO:0006582	melanin metabolic process					
+HP:0001084	Corneal arcus	results_from_abnormality_in	GO:0061303	cornea development in camera-type eye					
+HP:0001075	Atrophic scars	results_from_abnormality_in	GO:0043206	extracellular fibril organization	3	5	0.5546071092	0.2388824778	
+HP:0001056	Milia	results_from_abnormality_in	GO:0031581	hemidesmosome assembly	1	1	1	1	
+HP:0001022	Albinism	results_from_abnormality_in	GO:0006582	melanin metabolic process					
+HP:0001013	Eruptive xanthomas	results_from_abnormality_in	GO:0034370	triglyceride-rich lipoprotein particle remodeling					
+HP:0001010	Hypopigmentation of the skin	results_from_abnormality_in	GO:0050931	pigment cell differentiation					
+HP:0001004	Lymphedema	results_from_abnormality_in	GO:0036303	lymph vessel morphogenesis	7	2	0.4667649335	0.6074552149	
+HP:0000927	Abnormality of skeletal maturation	results_from_abnormality_in	GO:0070977	bone maturation					
+HP:0000924	Abnormality of the skeletal system	results_from_abnormality_in	GO:0001501	skeletal system development					
+HP:0000853	Goiter	results_from_abnormality_in	GO:0030878	thyroid gland development					
+HP:0000845	Growth hormone excess	results_from_abnormality_in	GO:0030252	growth hormone secretion					
+HP:0000830	Anterior hypopituitarism	results_from_abnormality_in	GO:0046903	secretion					
+HP:0000824	Growth hormone deficiency	results_from_abnormality_in	GO:0030252	growth hormone secretion					
+HP:0000821	Hypothyroidism	results_from_abnormality_in	GO:0006590	thyroid hormone generation	1	1	0.7581695163	0.9207958416	
+HP:0000818	Abnormality of the endocrine system	results_from_abnormality_in	GO:0035270	endocrine system development					
+HP:0000816	Abnormality of Krebs cycle metabolism	results_from_abnormality_in	GO:0006099	tricarboxylic acid cycle					
+HP:0000764	Peripheral axonal degeneration	results_from_abnormality_in	GO:0061564	axon development					
+HP:0000707	Abnormality of the nervous system	results_from_abnormality_in	GO:0007399	nervous system development					
+HP:0000705	Amelogenesis imperfecta	results_from_abnormality_in	GO:0097186	amelogenesis	3	4	0.5933931868	0.1544063088	
+HP:0000682	Abnormality of dental enamel	results_from_abnormality_in	GO:0031214	biomineral tissue development					
+HP:0000618	Blindness	results_from_abnormality_in	GO:0007601	visual perception					
+HP:0000598	Abnormality of the ear	results_from_abnormality_in	GO:0043583	ear development					
+HP:0000575	Scotoma	results_from_abnormality_in	GO:0021554	optic nerve development	2	8	0.7841055682	0.2157564315	
+HP:0000552	Tritanomaly	results_from_abnormality_in	GO:0018298	protein-chromophore linkage					
+HP:0000505	Visual impairment	results_from_abnormality_in	GO:0007601	visual perception					
+HP:0000504	Abnormality of vision	results_from_abnormality_in	GO:0007601	visual perception					
+HP:0000479	Abnormality of the retina	results_from_abnormality_in	GO:0060041	retina development in camera-type eye					
+HP:0000478	Abnormality of the eye	results_from_abnormality_in	GO:0043010	camera-type eye development					
+HP:0000458	Anosmia	results_from_abnormality_in	GO:0007608	sensory perception of smell					
+HP:0000405	Conductive hearing impairment	results_from_abnormality_in	GO:0055127	vibrational conductance of sound to the inner ear					
+HP:0000365	Hearing impairment	results_from_abnormality_in	GO:0007605	sensory perception of sound					
+HP:0000364	Hearing abnormality	results_from_abnormality_in	GO:0007605	sensory perception of sound					
+HP:0000243	Trigonocephaly	results_from_abnormality_in	GO:0097094	craniofacial suture morphogenesis	2	4	0.6468352937	0.4143348287	
+HP:0000142	Abnormality of the vagina	results_from_abnormality_in	GO:0060068	vagina development	7	4	0.1896163792	0.1407902816	
+HP:0000141	Amenorrhea	results_from_abnormality_in	GO:0042703	menstruation					
+HP:0000140	Abnormality of the menstrual cycle	results_from_abnormality_in	GO:0042698	ovulation cycle					
+HP:0000117	Renal phosphate wasting	results_from_abnormality_in	GO:0015698	inorganic anion transport					
+HP:0000103	Polyuria	results_from_abnormality_in	GO:0060073	micturition					
+HP:0000086	Ectopic kidney	results_from_abnormality_in	GO:0090184	positive regulation of kidney development	4	4	0.3116166232	0.2761965524	
+HP:0000085	Horseshoe kidney	results_from_abnormality_in	GO:0090184	positive regulation of kidney development					
+HP:0000077	Abnormality of the kidney	results_from_abnormality_in	GO:0001822	kidney development					
+HP:0000037	Male pseudohermaphroditism	results_from_abnormality_in	GO:0006702	androgen biosynthetic process	8	1	0.2629245258	0.8632537265	
+HP:0000037	Male pseudohermaphroditism	results_from_abnormality_in	GO:0008209	androgen metabolic process	16	1	0.1166942334	0.837497675	

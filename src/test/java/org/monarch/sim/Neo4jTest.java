@@ -12,9 +12,10 @@ import java.util.Random;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.monarch.sim.Neo4jTraversals;
+import org.monarch.sim.TestGraphFactory;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 import com.google.common.collect.Lists;
@@ -252,7 +253,7 @@ public class Neo4jTest {
 			{
 				break;
 			}
-			System.out.println("Node " + key + ": " + value + " times");
+			System.out.println(key + ": " + value + " times");
 			if (key.hasProperty("label"))
 			{
 				System.out.println(key.getProperty("label"));
@@ -279,6 +280,9 @@ public class Neo4jTest {
 //				System.out.println(n.getProperty("uri"));
 //			}
 //		}
+
+		GraphDatabaseService db = new TestGraphFactory().buildMPSubsetDB();
+		System.out.println(Neo4jTest.getProperties(db));
 	}
 	
 }
