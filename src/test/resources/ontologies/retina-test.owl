@@ -1,0 +1,1792 @@
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <owlapi:ontology:ont0>
+
+
+Annotations: 
+    <http://www.geneontology.org/formats/oboInOwl#hasOBOFormatVersion> "1.2"^^xsd:string
+
+AnnotationProperty: <http://www.geneontology.org/formats/oboInOwl#hasDbXref>
+
+    Annotations: 
+        rdfs:label "database_cross_reference"^^xsd:string
+    
+    Annotations: 
+        rdfs:label "database_cross_reference"^^xsd:string
+    
+    
+AnnotationProperty: <http://www.geneontology.org/formats/oboInOwl#shorthand>
+
+    Annotations: 
+        rdfs:label "shorthand"^^xsd:string
+    
+    Annotations: 
+        rdfs:label "shorthand"^^xsd:string
+    
+    
+AnnotationProperty: <http://www.geneontology.org/formats/oboInOwl#hasOBOFormatVersion>
+
+    Annotations: 
+        rdfs:label "has_obo_format_version"^^xsd:string
+    
+    Annotations: 
+        rdfs:label "has_obo_format_version"^^xsd:string
+    
+    
+AnnotationProperty: rdfs:label
+
+    
+AnnotationProperty: <http://www.geneontology.org/formats/oboInOwl#id>
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002296>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002296"^^xsd:string,
+        rdfs:label "results in development of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "results_in_development_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "results_in_development_of"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#results_in_developmental_progression_of>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002202>
+
+    Annotations: 
+        rdfs:label "develops_from"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002202"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "develops_from"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "develops_from"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#developmentally_preceded_by>,
+        <http://purl.obolibrary.org/obo/RO_0002254>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_material_contribution_from>
+    
+    Characteristics: 
+        Transitive
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#subdivision_of>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "subdivision_of"^^xsd:string,
+        rdfs:label "subdivision of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "subdivision_of"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#in_taxon>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_material_contribution_from>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#conduit_for>
+
+    Annotations: 
+        rdfs:label "conduit for"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "conduit_for"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "conduit_for"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/BFO_0000050>
+
+    Annotations: 
+        rdfs:label "part_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BFO:00000050"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BFO:0000050"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "part_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "part_of"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#overlaps>
+    
+    Characteristics: 
+        Transitive
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/BFO_0000051>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "has_part"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BFO:0000051"^^xsd:string,
+        rdfs:label "has_part"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "has_part"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#overlaps>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_material_contribution_from>
+    
+    Characteristics: 
+        Transitive
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/BSPO_0001106>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BSPO:0001106"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "proximalmost_part_of"^^xsd:string,
+        rdfs:label "proximalmost_part_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "proximalmost_part_of"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#in_proximal_side_of>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/BSPO_0000096>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BSPO:0000096"^^xsd:string,
+        rdfs:label "anterior_to"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "anterior_to"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "anterior_to"^^xsd:string
+    
+    Characteristics: 
+        Transitive
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0000053>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0000053"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "bearer_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "bearer_of"^^xsd:string,
+        rdfs:label "bearer of"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0000052>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "inheres_in"^^xsd:string,
+        rdfs:label "inheres in"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "inheres_in"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0000052"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/RO_0002314>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/BSPO_0000126>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "in_lateral_side_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "in_lateral_side_of"^^xsd:string,
+        rdfs:label "in_lateral_side_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "BSPO:0000126"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#developmentally_preceded_by>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002176>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002176"^^xsd:string,
+        rdfs:label "connects"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "connects"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "connects"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002488>
+
+    Annotations: 
+        rdfs:label "existence starts during"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_starts_during"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_starts_during"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002488"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/RO_0002496>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002387>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "has_potential_to_develop_into"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "has_potential_to_develop_into"^^xsd:string,
+        rdfs:label "has potential to develop into"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002387"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_developmental_potential_involving>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002489>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_starts_with"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002489"^^xsd:string,
+        rdfs:label "existence starts with"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_starts_with"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/RO_0002488>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#results_in_developmental_progression_of>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002219>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "surrounded_by"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "surrounded_by"^^xsd:string,
+        rdfs:label "surrounded_by"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002219"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002254>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "has_developmental_contribution_from"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "has_developmental_contribution_from"^^xsd:string,
+        rdfs:label "has developmental contribution from"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002254"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#developmentally_preceded_by>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_material_contribution_from>
+    
+    Characteristics: 
+        Transitive
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002256>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "developmentally_induced_by"^^xsd:string,
+        rdfs:label "developmentally_induced_by"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "developmentally_induced_by"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002256"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#encloses>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "encloses"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "encloses"^^xsd:string,
+        rdfs:label "encloses"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#directly_develops_from>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002493>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002493"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_ends_with"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_ends_with"^^xsd:string,
+        rdfs:label "existence ends with"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/RO_0002492>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002492>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002492"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_ends_during"^^xsd:string,
+        rdfs:label "existence ends during"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_ends_during"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/RO_0002497>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002002>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "has_boundary"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "has_boundary"^^xsd:string,
+        rdfs:label "has boundary"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002002"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#in_proximal_side_of>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002497>
+
+    Annotations: 
+        rdfs:label "existence ends during or before"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_ends_during_or_before"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002497"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_ends_during_or_before"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002496>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "existence_starts_during_or_after"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002496"^^xsd:string,
+        rdfs:label "existence starts during or after"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "existence_starts_during_or_after"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002495>
+
+    Annotations: 
+        rdfs:label "immediate transformation of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002495"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "immediate_transformation_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "immediate_transformation_of"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#transformation_of>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#directly_develops_from>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#transformation_of>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002433>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "contributes_to_morphology_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "contributes_to_morphology_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002433"^^xsd:string,
+        rdfs:label "contributes to morphology of"^^xsd:string
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#overlaps>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002160>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "only_in_taxon"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "only_in_taxon"^^xsd:string,
+        rdfs:label "only in taxon"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002160"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#in_taxon>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002007>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "bounding_layer_of"^^xsd:string,
+        rdfs:label "bounding layer of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "bounding_layer_of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002007"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/RO_0002314>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#shorthand> "inheres_in_part_of"^^xsd:string,
+        rdfs:label "inheres in part of"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#hasDbXref> "RO:0002314"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "inheres_in_part_of"^^xsd:string
+    
+    SubPropertyOf: 
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#depends_on>
+    
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#depends_on>
+
+    
+ObjectProperty: <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#has_developmental_potential_involving>
+
+    
+Class: <http://purl.obolibrary.org/obo/GO_0044707>
+
+    Annotations: 
+        rdfs:label "single-multicellular organism process"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0044707"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0032501>,
+        <http://purl.obolibrary.org/obo/GO_0044699>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0009888>
+
+    Annotations: 
+        rdfs:label "tissue development"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0009888"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000479>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004906>
+
+    Annotations: 
+        rdfs:label "ectodermal part of digestive tract"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004906"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0004921>
+         and (<http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001555>)
+         and (<http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0004921>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001555>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001456>
+
+    Annotations: 
+        rdfs:label "face"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001456"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002433> some <http://purl.obolibrary.org/obo/UBERON_0000033>,
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000165>,
+        <http://purl.obolibrary.org/obo/UBERON_0001444>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001555>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001555"^^xsd:string,
+        rdfs:label "digestive tract"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002176> some <http://purl.obolibrary.org/obo/UBERON_0000165>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001007>,
+        <http://purl.obolibrary.org/obo/RO_0002495> some <http://purl.obolibrary.org/obo/UBERON_0007026>,
+        <http://purl.obolibrary.org/obo/UBERON_0000025>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0000478>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0000478"^^xsd:string,
+        rdfs:label "Abnormality of the eye"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+         and (<http://purl.obolibrary.org/obo/RO_0000052> some <http://purl.obolibrary.org/obo/UBERON_0010230>)
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier> some <http://purl.obolibrary.org/obo/PATO_0000460>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0000118>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005764>
+
+    Annotations: 
+        rdfs:label "acellular membrane"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005764"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000476>
+         and (<http://purl.obolibrary.org/obo/RO_0002007> some <http://purl.obolibrary.org/obo/UBERON_0000061>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000476>,
+        <http://purl.obolibrary.org/obo/RO_0002007> some <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000033>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000033"^^xsd:string,
+        rdfs:label "head"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0007811>,
+        <http://purl.obolibrary.org/obo/UBERON_0011676>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000153>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0048513>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0048513"^^xsd:string,
+        rdfs:label "organ development"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000062>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0048856>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/GO_0048731>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0007026>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0007026"^^xsd:string,
+        rdfs:label "primitive gut"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0002050>,
+        <http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0001555>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005769>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005769"^^xsd:string,
+        rdfs:label "basement membrane of epithelium"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000483>,
+        <http://purl.obolibrary.org/obo/UBERON_0005764>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0000118>
+
+    Annotations: 
+        rdfs:label "Phenotypic abnormality"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0000118"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+         and (<http://purl.obolibrary.org/obo/RO_0002314> some <http://purl.obolibrary.org/obo/UBERON_0000468>)
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier> some <http://purl.obolibrary.org/obo/PATO_0000460>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001048>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001048"^^xsd:string,
+        rdfs:label "primordium"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000468>,
+        <http://purl.obolibrary.org/obo/UBERON_0005423>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0007811>
+
+    Annotations: 
+        rdfs:label "craniocervical region"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0007811"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000033>,
+        <http://purl.obolibrary.org/obo/UBERON_0000475>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0013702>,
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0006562>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000153>
+    
+    
+Class: <http://purl.obolibrary.org/obo/PATO_0000001>
+
+    Annotations: 
+        rdfs:label "quality"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "PATO:0000001"^^xsd:string
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000490>
+
+    Annotations: 
+        rdfs:label "unilaminar epithelium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000490"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000483>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001444>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001444"^^xsd:string,
+        rdfs:label "subdivision of head"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000475>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000033>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010230>
+
+    Annotations: 
+        rdfs:label "eyeball of camera-type eye"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010230"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000019>,
+        <http://purl.obolibrary.org/obo/UBERON_0000020>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003056>
+
+    Annotations: 
+        rdfs:label "pre-chordal neural plate"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003056"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0005291>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0003075>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001802>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001802"^^xsd:string,
+        rdfs:label "posterior segment of eyeball"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0010230>,
+        <http://purl.obolibrary.org/obo/UBERON_0000063>,
+        <http://purl.obolibrary.org/obo/RO_0002433> some <http://purl.obolibrary.org/obo/UBERON_0000019>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000047>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000047"^^xsd:string,
+        rdfs:label "simple eye"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000970>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0011676>
+
+    Annotations: 
+        rdfs:label "subdivision of organism along main body axis"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0011676"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000475>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0013701>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001801>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001801"^^xsd:string,
+        rdfs:label "anterior segment of eyeball"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000063>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0010230>,
+        <http://purl.obolibrary.org/obo/RO_0002433> some <http://purl.obolibrary.org/obo/UBERON_0000019>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0002050>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0002050"^^xsd:string,
+        rdfs:label "embryonic structure"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+         and (<http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>,
+        <http://purl.obolibrary.org/obo/UBERON_0005423>,
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0006562>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0006562"^^xsd:string,
+        rdfs:label "pharynx"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0004921>
+    
+    
+Class: <http://purl.obolibrary.org/obo/PATO_0000068>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "PATO:0000068"^^xsd:string,
+        rdfs:label "qualitative"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+    
+    
+Class: <http://purl.obolibrary.org/obo/PATO_0000069>
+
+    Annotations: 
+        rdfs:label "deviation(from_normal)"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "PATO:0000069"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/PATO_0000068>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0002104>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0002104"^^xsd:string,
+        rdfs:label "visual system"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0001032>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000930>
+
+    Annotations: 
+        rdfs:label "stomodeum"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000930"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0002050>,
+        <http://purl.obolibrary.org/obo/UBERON_0000481>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0007026>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0008150>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0008150"^^xsd:string,
+        rdfs:label "biological_process"^^xsd:string
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005423>
+
+    Annotations: 
+        rdfs:label "developing anatomical structure"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005423"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000465>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003951>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003951"^^xsd:string,
+        rdfs:label "ocular fundus"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000064>,
+        <http://purl.obolibrary.org/obo/RO_0002433> some <http://purl.obolibrary.org/obo/UBERON_0001802>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001802>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0044699>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0044699"^^xsd:string,
+        rdfs:label "single-organism process"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0008150>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005426>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005426"^^xsd:string,
+        rdfs:label "lens vesicle"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003073>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000119>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000119"^^xsd:string,
+        rdfs:label "cell layer"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004111>
+
+    Annotations: 
+        rdfs:label "anatomical conduit"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004111"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000477>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#conduit_for> some <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010371>
+
+    Annotations: 
+        rdfs:label "ecto-epithelium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010371"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000483>
+         and (<http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0000483>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000019>
+
+    Annotations: 
+        rdfs:label "camera-type eye"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000019"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BSPO_0000126> some <http://purl.obolibrary.org/obo/UBERON_0000033>,
+        <http://purl.obolibrary.org/obo/UBERON_0015212>,
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000966>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003072>,
+        <http://purl.obolibrary.org/obo/UBERON_0000047>,
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000965>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/UBERON_0010314>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0004088>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000965>
+
+    Annotations: 
+        rdfs:label "lens of camera-type eye"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000965"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0005426>,
+        <http://purl.obolibrary.org/obo/UBERON_0005389>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001801>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003073>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/RO_0002433> some <http://purl.obolibrary.org/obo/UBERON_0001801>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000966>
+
+    Annotations: 
+        rdfs:label "retina"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000966"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0005388>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001802>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003072>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004921>
+
+    Annotations: 
+        rdfs:label "subdivision of digestive tract"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004921"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0013522>
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#subdivision_of> some <http://purl.obolibrary.org/obo/UBERON_0001555>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0013522>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001555>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#subdivision_of> some <http://purl.obolibrary.org/obo/UBERON_0001555>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0007497>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0007497"^^xsd:string,
+        rdfs:label "developing epithelial placode"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000483>
+         and (<http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000061>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000485>,
+        <http://purl.obolibrary.org/obo/UBERON_0001048>,
+        <http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0044767>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0044767"^^xsd:string,
+        rdfs:label "single-organism developmental process"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0032502>,
+        <http://purl.obolibrary.org/obo/GO_0044699>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004128>
+
+    Annotations: 
+        rdfs:label "optic vesicle"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004128"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0002346>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003071>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0010312>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0011814>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0011814"^^xsd:string,
+        rdfs:label "non-neurogenic ectodermal placode"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0005085>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0032501>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0032501"^^xsd:string,
+        rdfs:label "multicellular organismal process"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0008150>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0012274>
+
+    Annotations: 
+        rdfs:label "columnar epithelium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0012274"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000483>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0032502>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0032502"^^xsd:string,
+        rdfs:label "developmental process"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0008150>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003071>
+
+    Annotations: 
+        rdfs:label "eye primordium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003071"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0001048>
+         and (<http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000019>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0003056>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003056>,
+        <http://purl.obolibrary.org/obo/UBERON_0005291>,
+        <http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000019>,
+        <http://purl.obolibrary.org/obo/UBERON_0007497>,
+        <http://purl.obolibrary.org/obo/UBERON_0010371>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003072>
+
+    Annotations: 
+        rdfs:label "optic cup"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003072"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002256> some <http://purl.obolibrary.org/obo/UBERON_0003073>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0004128>,
+        <http://purl.obolibrary.org/obo/UBERON_0000481>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0010312>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000020>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000020"^^xsd:string,
+        rdfs:label "sense organ"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001032>,
+        <http://purl.obolibrary.org/obo/UBERON_0000062>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004121>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004121"^^xsd:string,
+        rdfs:label "ectoderm-derived structure"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+         and (<http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0013522>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0013522"^^xsd:string,
+        rdfs:label "subdivision of tube"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000464>,
+        <http://purl.obolibrary.org/obo/UBERON_0000064>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000025>,
+        <http://purl.obolibrary.org/obo/owlapi:ontology:ont0#subdivision_of> some <http://purl.obolibrary.org/obo/UBERON_0000025>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003075>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003075"^^xsd:string,
+        rdfs:label "neural plate"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0005291>,
+        <http://purl.obolibrary.org/obo/UBERON_0016879>,
+        <http://purl.obolibrary.org/obo/UBERON_0007497>,
+        <http://purl.obolibrary.org/obo/UBERON_0010371>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000025>
+
+    Annotations: 
+        rdfs:label "tube"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000025"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000464>,
+        <http://purl.obolibrary.org/obo/UBERON_0004111>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0003073>
+
+    Annotations: 
+        rdfs:label "lens placode"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0003073"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0005085>
+         and (<http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000965>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0002546>,
+        <http://purl.obolibrary.org/obo/UBERON_0011814>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0010312>,
+        <http://purl.obolibrary.org/obo/RO_0002387> some <http://purl.obolibrary.org/obo/UBERON_0000965>,
+        <http://purl.obolibrary.org/obo/RO_0002256> some <http://purl.obolibrary.org/obo/UBERON_0004128>,
+        <http://purl.obolibrary.org/obo/UBERON_0010312>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001032>
+
+    Annotations: 
+        rdfs:label "sensory system"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001032"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0004456>,
+        <http://purl.obolibrary.org/obo/UBERON_0000467>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0002546>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0002546"^^xsd:string,
+        rdfs:label "cranial placode"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000033>,
+        <http://purl.obolibrary.org/obo/UBERON_0005085>
+    
+    
+Class: <http://purl.obolibrary.org/obo/PATO_0000460>
+
+    Annotations: 
+        rdfs:label "abnormal"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "PATO:0000460"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/PATO_0000069>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000464>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000464"^^xsd:string,
+        rdfs:label "anatomical space"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000466>,
+        <http://purl.obolibrary.org/obo/RO_0002219> some <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004088>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004088"^^xsd:string,
+        rdfs:label "ocular region"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000477>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0001456>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000466>
+
+    Annotations: 
+        rdfs:label "immaterial anatomical entity"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000466"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0001062>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000465>
+
+    Annotations: 
+        rdfs:label "material anatomical entity"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000465"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0001062>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0007275>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0007275"^^xsd:string,
+        rdfs:label "multicellular organismal development"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0044707>,
+        <http://purl.obolibrary.org/obo/GO_0044767>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0001098>
+
+    Annotations: 
+        rdfs:label "Abnormality of the fundus"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0001098"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+         and (<http://purl.obolibrary.org/obo/RO_0000052> some <http://purl.obolibrary.org/obo/UBERON_0003951>)
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier> some <http://purl.obolibrary.org/obo/PATO_0000460>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0004329>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001007>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001007"^^xsd:string,
+        rdfs:label "digestive system"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000467>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0006598>
+
+    Annotations: 
+        rdfs:label "presumptive structure"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0006598"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>,
+        <http://purl.obolibrary.org/obo/UBERON_0005423>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000467>
+
+    Annotations: 
+        rdfs:label "anatomical system"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000467"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000468>,
+        <http://purl.obolibrary.org/obo/UBERON_0000480>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000468>
+
+    Annotations: 
+        rdfs:label "multi-cellular organism"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000468"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0016880>
+
+    Annotations: 
+        rdfs:label "future nervous system"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0016880"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0006598>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0002346>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0002346"^^xsd:string,
+        rdfs:label "neurectoderm"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0004121>,
+        <http://purl.obolibrary.org/obo/UBERON_0000923>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0016879>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0016879"^^xsd:string,
+        rdfs:label "future central nervous system"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0016880>,
+        <http://purl.obolibrary.org/obo/UBERON_0005423>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010000>
+
+    Annotations: 
+        rdfs:label "multicellular anatomical structure"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010000"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000970>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000970"^^xsd:string,
+        rdfs:label "eye"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0002104>,
+        <http://purl.obolibrary.org/obo/UBERON_0000020>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0012372>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0012372"^^xsd:string,
+        rdfs:label "Abnormal eye morphology"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0000478>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0060041>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0060041"^^xsd:string,
+        rdfs:label "retina development in camera-type eye"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/GO_0043010>)
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000966>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0009888>,
+        <http://purl.obolibrary.org/obo/GO_0048856>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/GO_0043010>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005085>
+
+    Annotations: 
+        rdfs:label "ectodermal placode"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005085"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000924>,
+        <http://purl.obolibrary.org/obo/UBERON_0001048>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0004329>
+
+    Annotations: 
+        rdfs:label "Abnormality of the posterior segment of the eye"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0004329"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+         and (<http://purl.obolibrary.org/obo/RO_0000052> some <http://purl.obolibrary.org/obo/UBERON_0001802>)
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier> some <http://purl.obolibrary.org/obo/PATO_0000460>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0012374>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0012374>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0012374"^^xsd:string,
+        rdfs:label "Abnormality of the globe"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0012372>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0013701>
+
+    Annotations: 
+        rdfs:label "main body axis"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0013701"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000475>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0048731>
+
+    Annotations: 
+        rdfs:label "system development"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0048731"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000467>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/GO_0007275>,
+        <http://purl.obolibrary.org/obo/GO_0048856>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0002532>
+
+    Annotations: 
+        rdfs:label "epiblast (generic)"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0002532"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0002050>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0013702>
+
+    Annotations: 
+        rdfs:label "body proper"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0013702"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000475>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0013701>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000485>
+
+    Annotations: 
+        rdfs:label "simple columnar epithelium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000485"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000490>,
+        <http://purl.obolibrary.org/obo/UBERON_0012274>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000481>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000481"^^xsd:string,
+        rdfs:label "multi-tissue structure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>,
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000483>
+
+    Annotations: 
+        rdfs:label "epithelium"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000483"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000051> some <http://purl.obolibrary.org/obo/UBERON_0005769>,
+        <http://purl.obolibrary.org/obo/UBERON_0000119>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000480>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000480"^^xsd:string,
+        rdfs:label "anatomical group"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000468>,
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0001062>
+
+    Annotations: 
+        rdfs:label "anatomical entity"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0001062"^^xsd:string
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0007423>
+
+    Annotations: 
+        rdfs:label "sensory organ development"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0007423"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000020>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0044767>,
+        <http://purl.obolibrary.org/obo/GO_0048513>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005389>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005389"^^xsd:string,
+        rdfs:label "transparent eye structure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000970>,
+        <http://purl.obolibrary.org/obo/UBERON_0000064>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0000001>
+
+    Annotations: 
+        rdfs:label "All"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0000001"^^xsd:string
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005388>
+
+    Annotations: 
+        rdfs:label "photoreceptor array"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005388"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000970>,
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000153>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000153"^^xsd:string,
+        rdfs:label "anterior region of body"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000475>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000923>
+
+    Annotations: 
+        rdfs:label "germ layer"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000923"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>,
+        <http://purl.obolibrary.org/obo/UBERON_0010316>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0002532>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000922>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000922"^^xsd:string,
+        rdfs:label "embryo"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000468>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000924>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000924"^^xsd:string,
+        rdfs:label "ectoderm"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000923>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000477>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000477"^^xsd:string,
+        rdfs:label "anatomical cluster"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000480>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000476>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000476"^^xsd:string,
+        rdfs:label "acellular anatomical structure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0015212>
+
+    Annotations: 
+        rdfs:label "lateral structure"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0015212"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+         and (<http://purl.obolibrary.org/obo/BSPO_0000126> some <http://purl.obolibrary.org/obo/UBERON_0000465>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BSPO_0000126> some <http://purl.obolibrary.org/obo/UBERON_0000465>,
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000475>
+
+    Annotations: 
+        rdfs:label "organism subdivision"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000475"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000468>
+    
+    
+Class: <http://purl.obolibrary.org/obo/HP_0000479>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "HP:0000479"^^xsd:string,
+        rdfs:label "Abnormality of the retina"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/PATO_0000001>
+         and (<http://purl.obolibrary.org/obo/RO_0000052> some <http://purl.obolibrary.org/obo/UBERON_0000966>)
+         and (<http://purl.obolibrary.org/obo/owlapi:ontology:ont0#qualifier> some <http://purl.obolibrary.org/obo/PATO_0000460>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/HP_0001098>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000063>
+
+    Annotations: 
+        rdfs:label "organ segment"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000063"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000064>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0043010>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0043010"^^xsd:string,
+        rdfs:label "camera-type eye development"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000019>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0001654>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000064>
+
+    Annotations: 
+        rdfs:label "organ part"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000064"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000062>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0005291>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0005291"^^xsd:string,
+        rdfs:label "embryonic tissue"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+         and (<http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0002050>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0002050>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000922>,
+        <http://purl.obolibrary.org/obo/UBERON_0000479>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0048856>
+
+    Annotations: 
+        rdfs:label "anatomical structure development"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0048856"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0032502>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000165>
+
+    Annotations: 
+        rdfs:label "mouth"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000165"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0004921>
+         and (<http://purl.obolibrary.org/obo/BSPO_0001106> some <http://purl.obolibrary.org/obo/UBERON_0001555>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/BSPO_0001106> some <http://purl.obolibrary.org/obo/UBERON_0001555>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000033>,
+        <http://purl.obolibrary.org/obo/UBERON_0004906>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0000930>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010316>
+
+    Annotations: 
+        rdfs:label "germ layer / neural crest"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010316"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0005291>,
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0002532>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010314>
+
+    Annotations: 
+        rdfs:label "structure with developmental contribution from neural crest"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010314"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000061>
+    
+    
+Class: <http://purl.obolibrary.org/obo/GO_0001654>
+
+    Annotations: 
+        rdfs:label "eye development"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "GO:0001654"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/GO_0048856>
+         and (<http://purl.obolibrary.org/obo/RO_0002296> some <http://purl.obolibrary.org/obo/UBERON_0000970>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/GO_0007423>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000061>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000061"^^xsd:string,
+        rdfs:label "anatomical structure"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000465>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0010312>
+
+    Annotations: 
+        rdfs:label "immature eye"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0010312"^^xsd:string
+    
+    EquivalentTo: 
+        <http://purl.obolibrary.org/obo/UBERON_0005423>
+         and (<http://purl.obolibrary.org/obo/RO_0002254> some <http://purl.obolibrary.org/obo/UBERON_0003071>)
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/RO_0002202> some <http://purl.obolibrary.org/obo/UBERON_0003071>,
+        <http://purl.obolibrary.org/obo/UBERON_0005423>,
+        <http://purl.obolibrary.org/obo/RO_0002254> some <http://purl.obolibrary.org/obo/UBERON_0003071>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000479>
+
+    Annotations: 
+        rdfs:label "tissue"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000479"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000468>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0000062>
+
+    Annotations: 
+        rdfs:label "organ"^^xsd:string,
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0000062"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0010000>,
+        <http://purl.obolibrary.org/obo/BFO_0000050> some <http://purl.obolibrary.org/obo/UBERON_0000467>
+    
+    
+Class: <http://purl.obolibrary.org/obo/UBERON_0004456>
+
+    Annotations: 
+        <http://www.geneontology.org/formats/oboInOwl#id> "UBERON:0004456"^^xsd:string,
+        rdfs:label "entire sense organ system"^^xsd:string
+    
+    SubClassOf: 
+        <http://purl.obolibrary.org/obo/UBERON_0000467>
+    
+    
