@@ -19,7 +19,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 import com.google.common.io.Files;
 
-public class TestGraphFactory {
+public class GraphFactory {
 	
 	// Define the relationships we want to use.
 	enum RelTypes implements RelationshipType {

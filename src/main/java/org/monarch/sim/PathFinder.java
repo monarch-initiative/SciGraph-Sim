@@ -1,60 +1,60 @@
 package org.monarch.sim;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public class Paths {
+public class PathFinder {
 	
 	static GraphDatabaseService db;
 	static HashMap<String, Node> map;
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		TestGraphFactory factory = new TestGraphFactory();
-//		db = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch");
-		// FIXME: Find some way to do this more programatically.
-		db = factory.loadOntologyDB("target/monarch");
+	
+	public PathFinder(String url, String graphLocation, boolean forceLoad) {
+		GraphFactory factory = new GraphFactory();
+		if (forceLoad /* FIXME: Check if location is already in use. */)
+		{
+			db = factory.buildOntologyDB(url, graphLocation);
+		}
+		else
+		{
+			db = factory.loadOntologyDB(graphLocation);
+		}
 		getPropertyMap("fragment");
-		
-		System.out.println("Finished Setup");
-		System.out.println();
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		db.shutdown();
 	}
 	
-	private static Iterable<String []> getPairs(String filename) throws Exception {
+	public Iterable<String []> getPairs(String filename) {
 		ArrayList<String []> pairs = new ArrayList<>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader(filename));
-		String line;
-		while ((line = reader.readLine()) != null)
+		try
 		{
-			// Pull out the two pieces we care about.
-			String [] pieces = line.split("\t");
-			String [] pair = new String [2];
-			pair[0] = pieces[0];
-			pair[1] = pieces[3];
-			pairs.add(pair);
+			// Get the lines from the appropriate file.
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			String line;
+			while ((line = reader.readLine()) != null)
+			{
+				// Pull out the two columns we care about.
+				String [] pieces = line.split("\t");
+				String [] pair = new String [2];
+				pair[0] = pieces[0];
+				pair[1] = pieces[3];
+				pairs.add(pair);
+			}
+			reader.close();
 		}
-		reader.close();
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 		
 		return pairs;
 	}
 	
-	private static void getPropertyMap(String property) {
+	private void getPropertyMap(String property) {
 		map = new HashMap<>();
 		
 		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
@@ -66,7 +66,7 @@ public class Paths {
 		}
 	}
 	
-	private static Node getLCS(String [] pair) {
+	public Node getLCS(String [] pair) {
 		Node first = map.get(makeCanonical("fragment", pair[0]));
 		Node second = map.get(makeCanonical("fragment", pair[1]));
 		
@@ -87,23 +87,23 @@ public class Paths {
 			return null;
 		}
 		
-		System.out.println(makeString(first) + " ancestors:");
+		System.out.println(nodeToString(first) + " ancestors:");
 		for (Node n : Neo4jTraversals.getAncestors(first))
 		{
-			System.out.println(makeString(n));
+			System.out.println(nodeToString(n));
 		}
 		System.out.println();
-		System.out.println(makeString(second) + " ancestors:");
+		System.out.println(nodeToString(second) + " ancestors:");
 		for (Node n : Neo4jTraversals.getAncestors(second))
 		{
-			System.out.println(makeString(n));
+			System.out.println(nodeToString(n));
 		}
 		System.out.println();
 		
 		return Neo4jTraversals.getLCS(first, second);
 	}
 	
-	private static String makeCanonical(String property, String data) {
+	private String makeCanonical(String property, String data) {
 		if (property.equals("fragment"))
 		{
 			return data.replaceAll("_", ":");
@@ -112,11 +112,16 @@ public class Paths {
 		return data;
 	}
 	
-	private static String makeString(Node n) {
+	public String nodeToString(Node n) {
+		if (n == null)
+		{
+			return "null";
+		}
+		
 		String str = "";
 		if (n.hasProperty("fragment"))
 		{
-			str += n.getProperty("fragment") + " ";
+			str += makeCanonical("fragment", (String)n.getProperty("fragment")) + " ";
 		}
 		if (n.hasProperty("http://www.w3.org/2000/01/rdf-schema#label"))
 		{
@@ -131,21 +136,12 @@ public class Paths {
 		return str;
 	}
 	
-	@Test
-	public void test() {
-		try
-		{
-			for (String [] pair : getPairs("HPGO.tsv"))
-			{
-				System.out.println(getLCS(pair));
-				System.out.println();
-			}
-		}
-		catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Node getNodeByFragment(String fragment) {
+		return map.get(makeCanonical("fragment", fragment));
+	}
+	
+	public void close() {
+		db.shutdown();
 	}
 
 }
