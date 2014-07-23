@@ -1,5 +1,7 @@
 package org.monarch.sim;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 
 import org.junit.AfterClass;
@@ -25,7 +27,8 @@ public class PathTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		monarchPathFinder.close();
+		//monarchPathFinder.close();
+		retinaPathFinder.close();
 	}
 	
 	@Test
@@ -49,6 +52,21 @@ public class PathTest {
 		System.out.println(retinaPathFinder.nodeToString(first) + ", " + retinaPathFinder.nodeToString(second));
 		String [] pair = {"HP:0000479", "GO:0060041"};
 		System.out.println(retinaPathFinder.getLCS(pair));
+	}
+	
+	@Test
+	public void ancestorsTest() {
+		Iterable<Node> ancs = Neo4jTraversals.getAncestors(retinaPathFinder.getNodeByFragment("GO:0060041"));
+		boolean found = false;
+		for (Node n : ancs) {
+			if (n.equals(retinaNode()))
+				found = true;
+		}
+		assertTrue(found);
+	}
+	
+	private Node retinaNode() {
+		return retinaPathFinder.getNodeByFragment("UBERON:0000966");
 	}
 
 }
