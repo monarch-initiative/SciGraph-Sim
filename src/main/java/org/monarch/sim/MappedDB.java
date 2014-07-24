@@ -8,8 +8,8 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public abstract class MappedDB {
 	
-	static GraphDatabaseService db;
-	static HashMap<String, Node> fragmentMap;
+	protected static GraphDatabaseService db;
+	protected static HashMap<String, Node> fragmentMap;
 	
 	public MappedDB(String url, String graphLocation, boolean forceBuild) {
 		GraphFactory factory = new GraphFactory();

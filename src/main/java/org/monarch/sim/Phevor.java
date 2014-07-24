@@ -2,16 +2,14 @@ package org.monarch.sim;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
 public class Phevor extends MappedDB {
 	
-	double totalScore = 0;
-	HashMap<Node, Double> scoreMap = new HashMap<>(); 
+	private double totalScore = 0;
+	private HashMap<Node, Double> scoreMap = new HashMap<>(); 
 	
 	public Phevor(String url, String graphLocation, boolean forceLoad) {
 		super(url, graphLocation, forceLoad);
@@ -43,14 +41,12 @@ public class Phevor extends MappedDB {
 		
 		// FIXME: Remove magic number.
 		int relevantLevels = 5;
-		int levelScore = (int)Math.round(Math.pow(2, relevantLevels));
 		
 		HashMap<Node, Double> parents = new HashMap<>();
 		HashMap<Node, Double> children = new HashMap<>();
 		parents.put(n, 1.0);
 		children.put(n, 1.0);
-		
-		while (levelScore > 0)
+		while (relevantLevels > 0)
 		{
 			// TODO: This could be much cleaner.
 			// Iterate out in both directions.
@@ -58,7 +54,7 @@ public class Phevor extends MappedDB {
 			HashMap<Node, Double> newChildren = new HashMap<>();
 			for (Node parent : parents.keySet())
 			{
-				double nextLevelScore = levelScore * parents.get(parent);
+				double nextLevelScore = parents.get(parent) / 2;
 				Iterable<Node> grandparents = Neo4jTraversals.getParents(parent);
 				for (Node grandparent : grandparents)
 				{
@@ -68,7 +64,7 @@ public class Phevor extends MappedDB {
 			}
 			for (Node child : children.keySet())
 			{
-				double nextLevelScore = levelScore * parents.get(child);
+				double nextLevelScore = children.get(child) / 2;
 				Iterable<Node> grandchildren = Neo4jTraversals.getChildren(child);
 				for (Node grandchild : grandchildren)
 				{
@@ -77,10 +73,10 @@ public class Phevor extends MappedDB {
 				}
 			}
 			
-			// Set up the next iteration. 
+			// Set up the next iteration.
 			parents = newParents;
 			children = newChildren;
-			levelScore /= 2;
+			relevantLevels--;
 		}
 	}
 	
@@ -132,21 +128,32 @@ public class Phevor extends MappedDB {
 		for (Object node : nodes)
 		{
 			double score;
+			Node toLookup;
 			// Handle nodes and fragments.
 			if (node instanceof Node)
 			{
-				score = scoreMap.get(node);
+				toLookup = (Node)node;
 			}
 			else if (node instanceof String)
 			{
-				score = scoreMap.get(fragmentMap.get(node));
+				toLookup = fragmentMap.get((String)node);
 			}
 			else
 			{
 				// This should throw an error.
-				score = -1;
+				toLookup = null;
 			}
 			
+			// Look up the score.
+			if (scoreMap.containsKey(toLookup))
+			{
+				score = scoreMap.get(toLookup);
+			}
+			else
+			{
+				score = 0;
+			}
+						
 			if (score > maxScore)
 			{
 				maxScore = score;
