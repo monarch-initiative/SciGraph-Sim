@@ -1,6 +1,7 @@
 package org.monarch.sim;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 
@@ -57,12 +58,7 @@ public class PathTest {
 	@Test
 	public void ancestorsTest() {
 		Iterable<Node> ancs = Neo4jTraversals.getAncestors(retinaPathFinder.getNodeByFragment("GO:0060041"));
-		boolean found = false;
-		for (Node n : ancs) {
-			if (n.equals(retinaNode()))
-				found = true;
-		}
-		assertTrue(found);
+    assertThat("Retina should be an ancestor", ancs, hasItem(retinaNode()));
 	}
 	
 	private Node retinaNode() {
