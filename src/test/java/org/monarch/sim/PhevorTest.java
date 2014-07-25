@@ -17,7 +17,7 @@ public class PhevorTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		GraphFactory factory = new GraphFactory();
+		TestGraphFactory factory = new TestGraphFactory();
 		dbs = new ArrayList<>();
 		completeDB = factory.buildCompleteDB(15);
 		dbs.add(completeDB);

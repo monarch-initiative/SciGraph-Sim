@@ -20,7 +20,7 @@ public class Neo4jBenchmarks {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		GraphFactory factory = new GraphFactory();
+		TestGraphFactory factory = new TestGraphFactory();
 		testDB = factory.buildCompleteDB(256);
 	}
 

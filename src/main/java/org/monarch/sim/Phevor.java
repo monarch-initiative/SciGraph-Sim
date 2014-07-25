@@ -25,7 +25,7 @@ public class Phevor {
 		{
 			PhevorDB ontology = new PhevorDB(db);
 			ontologies.add(ontology);
-			// NOTE: This doesn't work if any nodes have the same fragment.
+			// FIXME: This doesn't work if any nodes have the same fragment.
 			fragmentMap.putAll(ontology.getFragmentMap());
 		}
 		

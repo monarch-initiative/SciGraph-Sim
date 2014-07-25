@@ -12,8 +12,6 @@ import java.util.Random;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.monarch.sim.Neo4jTraversals;
-import org.monarch.sim.GraphFactory;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.tooling.GlobalGraphOperations;
@@ -37,7 +35,7 @@ public class Neo4jTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		GraphFactory factory = new GraphFactory();
+		TestGraphFactory factory = new TestGraphFactory();
 		waterDB = factory.buildWaterDB();
 		completeDB = factory.buildCompleteDB(16);
 		treeDB = factory.buildTreeDB(15);	
@@ -281,7 +279,7 @@ public class Neo4jTest {
 //			}
 //		}
 
-		GraphDatabaseService db = new GraphFactory().buildMPSubsetDB();
+		GraphDatabaseService db = new TestGraphFactory().buildMPSubsetDB();
 		System.out.println(Neo4jTest.getProperties(db));
 	}
 	
