@@ -1,5 +1,7 @@
 package org.monarch.sim;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -8,14 +10,14 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public abstract class MappedDB {
 	
-	protected static GraphDatabaseService db;
-	protected static HashMap<String, Node> fragmentMap;
+	protected GraphDatabaseService db;
+	protected HashMap<String, Node> fragmentMap;
 	
 	public MappedDB(String url, String graphLocation, boolean forceBuild) {
 		GraphFactory factory = new GraphFactory();
 		// If we were told to rebuild or the target location is empty, build from
 		// the given url.
-		if (forceBuild /* FIXME: Check if location is already in use. */)
+		if (forceBuild || !Files.exists(Paths.get(graphLocation)))
 		{
 			db = factory.buildOntologyDB(url, graphLocation);
 		}
@@ -27,8 +29,8 @@ public abstract class MappedDB {
 		getPropertyMap("fragment");
 	}
 	
-	public MappedDB(GraphDatabaseService oldDB) {
-		db = oldDB;
+	public MappedDB(GraphDatabaseService db) {
+		this.db = db;
 		getPropertyMap("fragment");
 	}
 	
