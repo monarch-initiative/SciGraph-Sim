@@ -76,6 +76,10 @@ public class GraphFactory {
 		for (int i = 1; i <= numNodes; i++)
 		{
 			Node newNode = addNode(completeDB, "" + i);
+			Transaction tx = completeDB.beginTx();
+			newNode.setProperty("fragment", "COMPLETE:" + newNode.getId());
+			tx.success();
+			tx.finish();
 			for (Long id : ids)
 			{
 				addEdge(completeDB, newNode, completeDB.getNodeById(id));
@@ -94,6 +98,10 @@ public class GraphFactory {
 		for (int i = 1; i <= numNodes; i++)
 		{
 			Node newNode = addNode(treeDB, "" + i);
+			Transaction tx = treeDB.beginTx();
+			newNode.setProperty("fragment", "TREE:" + newNode.getId());
+			tx.success();
+			tx.finish();
 			if (i != 1)
 			{
 				addEdge(treeDB, newNode, treeDB.getNodeById(i / 2));
