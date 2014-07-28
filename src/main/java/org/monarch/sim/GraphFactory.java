@@ -43,6 +43,22 @@ public class GraphFactory {
 		tx.finish();
 		return newRel;		
 	}
+
+	protected void removeUnlabeledEdges(GraphDatabaseService db) {
+		Transaction tx = db.beginTx();
+		
+		// Check if each edge has a label.
+		for (Relationship edge : GlobalGraphOperations.at(db).getAllRelationships())
+		{
+			if (!edge.hasProperty("fragment"))
+			{
+				edge.delete();
+			}
+		}
+		
+		tx.success();
+		tx.finish();
+	}
 	
 	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
 		OwlTestUtil.loadOntology(url, graphLocation);
@@ -59,22 +75,6 @@ public class GraphFactory {
 		Neo4jTraversals.setAllIC(db);
 		
 		return db;
-	}
-
-	protected void removeUnlabeledEdges(GraphDatabaseService db) {
-		Transaction tx = db.beginTx();
-		
-		// Check if each edge has a label.
-		for (Relationship edge : GlobalGraphOperations.at(db).getAllRelationships())
-		{
-			if (!edge.hasProperty("fragment"))
-			{
-				edge.delete();
-			}
-		}
-		
-		tx.success();
-		tx.finish();
 	}
 
 }
