@@ -141,5 +141,11 @@ public class TestGraphFactory extends GraphFactory {
 	public GraphDatabaseService buildMPSubsetDB() {
 		return buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
 	}
+	
+	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
+		OwlTestUtil.loadOntology(url, graphLocation);
+		
+		return loadOntologyDB(graphLocation);
+	}
 
 }
