@@ -58,9 +58,9 @@ public class PathTest {
 	@Test
 	public void ancestorsTest() {
 		Iterable<Node> ancs = Neo4jTraversals.getAncestors(retinaPathFinder.getNodeByFragment("GO:0060041"));
-    assertThat("Retina should be an ancestor", ancs, hasItem(retinaNode()));
+		assertThat("Retina should be an ancestor", ancs, hasItem(retinaNode()));
 	}
-	
+
 	private Node retinaNode() {
 		return retinaPathFinder.getNodeByFragment("UBERON:0000966");
 	}

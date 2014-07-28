@@ -135,17 +135,16 @@ public class TestGraphFactory extends GraphFactory {
 	}
 
 	public GraphDatabaseService buildWineDB() {
-		return buildOntologyDB("http://www.w3.org/TR/owl-guide/wine.rdf", "target/wine");
+		
+		GraphDatabaseService db = buildOntologyDB("http://www.w3.org/TR/owl-guide/wine.rdf", "target/wine");
+		removeUnlabeledEdges(db);
+		return db;
 	}
 	
 	public GraphDatabaseService buildMPSubsetDB() {
-		return buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
-	}
-	
-	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
-		OwlTestUtil.loadOntology(url, graphLocation);
-		
-		return loadOntologyDB(graphLocation);
+		GraphDatabaseService db = buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
+		removeUnlabeledEdges(db);
+		return db;
 	}
 
 }
