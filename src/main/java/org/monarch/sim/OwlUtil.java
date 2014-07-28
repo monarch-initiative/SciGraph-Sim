@@ -4,7 +4,7 @@ import edu.sdsc.scigraph.neo4j.OntologyConfiguration;
 import edu.sdsc.scigraph.owlapi.OwlLoadConfiguration;
 import edu.sdsc.scigraph.owlapi.OwlLoader;
 
-public class OwlTestUtil {
+public class OwlUtil {
 
 	/***
 	 * Load an OWL import chain.

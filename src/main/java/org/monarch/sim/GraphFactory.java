@@ -61,7 +61,7 @@ public class GraphFactory {
 	}
 	
 	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
-		OwlTestUtil.loadOntology(url, graphLocation);
+		OwlUtil.loadOntology(url, graphLocation);
 		
 		return loadOntologyDB(graphLocation);
 	}
