@@ -223,7 +223,6 @@ public class Phevor {
 		}
 		
 		public double getScore(String fragment) {
-			
 			Node node = fragmentMap.get(fragment);
 			if (scoreMap.containsKey(node))
 			{

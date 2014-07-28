@@ -153,6 +153,8 @@ public class Neo4jTest {
 					continue;
 				}
 				System.out.println("LCS: " + lcs.getProperty("name"));
+				System.out.println(Neo4jTraversals.getShortestPath(first, lcs));
+				System.out.println(Neo4jTraversals.getShortestPath(second, lcs));
 				System.out.println();
 			}
 		}
@@ -269,8 +271,8 @@ public class Neo4jTest {
 	@Test
 	public void test() {
 //		validateDBNodes(treeDB);
-		validateMonarchDB();
-//		validateDBPairwise(cycleDB);
+//		validateMonarchDB();
+		validateDBPairwise(treeDB);
 //		for (Node n : GlobalGraphOperations.at(wineDB).getAllNodes())
 //		{
 //			if (n.hasProperty("uri"))
@@ -279,8 +281,8 @@ public class Neo4jTest {
 //			}
 //		}
 
-		GraphDatabaseService db = new TestGraphFactory().buildMPSubsetDB();
-		System.out.println(Neo4jTest.getProperties(db));
+//		GraphDatabaseService db = new TestGraphFactory().buildMPSubsetDB();
+//		System.out.println(Neo4jTest.getProperties(db));
 	}
 	
 }

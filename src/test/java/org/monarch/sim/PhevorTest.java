@@ -24,6 +24,8 @@ public class PhevorTest {
 		treeDB = factory.buildTreeDB(15);
 		dbs.add(treeDB);
 		ArrayList<String []> links = new ArrayList<>();
+		String [] link = {"TREE:4", "COMPLETE:3"};
+		links.add(link);
 		phevor = new Phevor(dbs, links);
 	}
 

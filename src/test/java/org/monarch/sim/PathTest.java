@@ -10,6 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
+import com.tinkerpop.pipes.util.structures.Pair;
+
 public class PathTest {
 
 	static PathFinder monarchPathFinder;
@@ -28,7 +30,7 @@ public class PathTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		//monarchPathFinder.close();
+//		monarchPathFinder.close();
 		retinaPathFinder.close();
 	}
 	
@@ -38,6 +40,7 @@ public class PathTest {
 //		{
 //			for (String [] pair : monarchPathFinder.getPairs("HPGO.tsv"))
 //			{
+//				System.out.println(pair[0] + ", " + pair[1]);
 //				System.out.println(monarchPathFinder.nodeToString(monarchPathFinder.getLCS(pair)));
 //				System.out.println();
 //			}
@@ -48,11 +51,17 @@ public class PathTest {
 //			e.printStackTrace();
 //		}
 		
-		Node first = retinaPathFinder.getNodeByFragment("HP:0000479");
-		Node second = retinaPathFinder.getNodeByFragment("GO:0060041");
+		String firstFragment = "HP:0000479";
+		Node first = retinaPathFinder.getNodeByFragment(firstFragment);
+		String secondFragment = "GO:0060041";
+		Node second = retinaPathFinder.getNodeByFragment(secondFragment);
 		System.out.println(retinaPathFinder.nodeToString(first) + ", " + retinaPathFinder.nodeToString(second));
-		String [] pair = {"HP:0000479", "GO:0060041"};
-		System.out.println(retinaPathFinder.getLCS(pair));
+		Pair<String, String> pair = new Pair<>(firstFragment, secondFragment);
+		Node lcs = retinaPathFinder.getLCS(pair);
+		String lcsFragment = (String) lcs.getProperty("fragment");
+		System.out.println(retinaPathFinder.nodeToString(lcs));
+		System.out.println(retinaPathFinder.getShortestPath(firstFragment, lcsFragment));
+		System.out.println(retinaPathFinder.getShortestPath(secondFragment, lcsFragment));
 	}
 	
 	@Test

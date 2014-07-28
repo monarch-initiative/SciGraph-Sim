@@ -3,7 +3,9 @@ package org.monarch.sim;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
@@ -156,7 +158,55 @@ public class Neo4jTraversals {
 		return null;
 	}
 	
-	public static double getMaxIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes)	{
+	public static List<Node> getShortestPath(Node first, Node second) {
+		HashSet<Node> visited = new HashSet<>();
+		Queue<LinkedList<Node>> paths = new LinkedList<>();
+		
+		// Expand paths starting with our base node. 
+		LinkedList<Node> basePath = new LinkedList<>();
+		basePath.add(first);
+		paths.add(basePath);
+		
+		// Expand paths.
+		while (!paths.isEmpty())
+		{
+			LinkedList<Node> nextPath = paths.remove();
+			Node lastNode = nextPath.getLast();
+			
+			// If we've reached the end node, stop.
+			if (lastNode.equals(second))
+			{
+				return nextPath;
+			}
+			
+			// If we've been here before, don't expand.
+			if (!visited.add(lastNode))
+			{
+				continue;
+			}
+			
+			// If we've gone too far up, don't expand.
+			if ((Double) lastNode.getProperty("IC") < (Double) second.getProperty("IC"))
+			{
+				continue;
+			}
+			
+			// Extend the path to all parents.
+			for (Node parent : getParents(lastNode))
+			{
+				LinkedList<Node> toAdd = new LinkedList<>(nextPath);
+				toAdd.add(parent);
+				paths.add(toAdd);
+			}
+			
+		}
+		
+		// FIXME: This should probably return an Optional.
+		// If we haven't found anything, give up.
+		return null;
+	}
+	
+	public static double getMaxIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes) {
 		double maxIC = 0;
 		
 		// Check each pair of nodes.
@@ -175,7 +225,7 @@ public class Neo4jTraversals {
 		return maxIC;
 	}
 	
-	public static double getAverageIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes)	{
+	public static double getAverageIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes) {
 		double totalIC = 0;
 		int count = 0;
 		
