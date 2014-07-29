@@ -1,5 +1,10 @@
 package org.monarch.sim;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -59,13 +64,7 @@ public class GraphFactory {
 		tx.success();
 		tx.finish();
 	}
-	
-	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
-		OwlUtil.loadOntology(url, graphLocation);
-		
-		return loadOntologyDB(graphLocation);
-	}
-	
+
 	public GraphDatabaseService loadOntologyDB(String graphLocation) {
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
 		
@@ -73,5 +72,42 @@ public class GraphFactory {
 		
 		return db;
 	}
-
+	
+	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
+		// TODO: If it doesn't already, this should clean graphLocation before
+		// writing over it.
+		OwlUtil.loadOntology(url, graphLocation);
+		
+		return loadOntologyDB(graphLocation);
+	}
+	
+	public GraphDatabaseService buildOntologyDB(String url, String graphLocation, boolean forceRebuild) {
+		GraphFactory factory = new GraphFactory();
+		GraphDatabaseService db;
+		
+		String absolutePath = new File(graphLocation).getAbsolutePath();
+		String flagPath = absolutePath + "/buildCompletedFlag";
+		
+		// If we were told to rebuild or the flag isn't set, build from
+		// the given url.
+		if (forceRebuild || !Files.exists(Paths.get(flagPath)))
+		{
+			db = factory.buildOntologyDB(url, absolutePath);
+			try {
+				// Create the flag once the ontology is built.
+				new File(flagPath).createNewFile();
+			} catch (IOException e) {
+				// FIXME: This should probably be handled better.
+				System.out.println(e.getMessage());
+			}
+		}
+		// Otherwise, we've already got the graph stored, and we can use that.
+		else
+		{
+			db = factory.loadOntologyDB(graphLocation);
+		}
+		
+		return db;
+	}
+	
 }

@@ -1,7 +1,5 @@
 package org.monarch.sim;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -13,46 +11,31 @@ public abstract class MappedDB {
 	protected GraphDatabaseService db;
 	protected HashMap<String, Node> fragmentMap;
 	
-	public MappedDB(String url, String graphLocation, boolean forceBuild) {
+	public MappedDB(String url, String graphLocation, boolean forceRebuild) {
 		GraphFactory factory = new GraphFactory();
-		// If we were told to rebuild or the target location is empty, build from
-		// the given url.
-		if (forceBuild || !Files.exists(Paths.get(graphLocation)))
-		{
-			db = factory.buildOntologyDB(url, graphLocation);
-		}
-		// Otherwise, we've already got the graph stored, and we can use that.
-		else
-		{
-			db = factory.loadOntologyDB(graphLocation);
-		}
-		getPropertyMap("fragment");
+		db = factory.buildOntologyDB(url, graphLocation, forceRebuild);
+		getFragmentMap();
 	}
 	
 	public MappedDB(GraphDatabaseService db) {
 		this.db = db;
-		getPropertyMap("fragment");
+		getFragmentMap();
 	}
 	
-	private void getPropertyMap(String property) {
+	private void getFragmentMap() {
 		fragmentMap = new HashMap<>();
 		
 		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
 		{
-			if (n.hasProperty(property))
+			if (n.hasProperty("fragment"))
 			{
-				fragmentMap.put(makeCanonical(property, (String)n.getProperty(property)), n);
+				fragmentMap.put(makeCanonicalFragment((String) n.getProperty("fragment")), n);
 			}
 		}
 	}
 	
-	protected String makeCanonical(String property, String data) {
-		if (property.equals("fragment"))
-		{
-			return data.replaceAll("_", ":");
-		}
-		// TODO: If we want to handle other data, this is the place to do it.
-		return data;
+	protected String makeCanonicalFragment(String data) {
+		return data.replaceAll("_", ":");
 	}
 	
 	public String nodeToString(Node n) {
@@ -65,7 +48,7 @@ public abstract class MappedDB {
 		String str = "";
 		if (n.hasProperty("fragment"))
 		{
-			str += makeCanonical("fragment", (String)n.getProperty("fragment")) + " ";
+			str += makeCanonicalFragment((String) n.getProperty("fragment")) + " ";
 		}
 		if (n.hasProperty("http://www.w3.org/2000/01/rdf-schema#label"))
 		{
@@ -82,7 +65,7 @@ public abstract class MappedDB {
 	}
 	
 	public Node getNodeByFragment(String fragment) {
-		return fragmentMap.get(makeCanonical("fragment", fragment));
+		return fragmentMap.get(makeCanonicalFragment(fragment));
 	}
 	
 	public void close() {
