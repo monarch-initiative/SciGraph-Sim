@@ -59,7 +59,6 @@ public class PathTest {
 			System.out.println();
 		}
 
-		
 //		String firstFragment = "HP:0000479";
 //		Node first = retinaPathFinder.getNodeByFragment(firstFragment);
 //		String secondFragment = "GO:0060041";
