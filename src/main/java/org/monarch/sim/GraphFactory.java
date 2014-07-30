@@ -70,9 +70,9 @@ public class GraphFactory {
 
 	public GraphDatabaseService loadOntologyDB(String graphLocation) {
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
-    logger.info("Starting setAllIC");
+		logger.info("Starting setAllIC");
 		Neo4jTraversals.setAllIC(db);
-    logger.info("Finished setAllIC");
+		logger.info("Finished setAllIC");
 		return db;
 	}
 	
