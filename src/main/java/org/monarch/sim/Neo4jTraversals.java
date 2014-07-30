@@ -85,17 +85,19 @@ public class Neo4jTraversals {
 		int totalNodes = IteratorUtil.count(nodes) - 1;
 		for (Node n : nodes)
 		{
-			if (n.getId() == 0)
-			{
-				continue;
-			}
-			
-			// FIXME: When we have real data, we should calculate this better.
-			// NOTE: Node properties have to be primitives, so we can't use a
-			// map to represent multiple IC scores or a list to store descendants.
-			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
-			double ic = -Math.log((double)nodesBelow / totalNodes) / Math.log(2);
-			n.setProperty("IC", ic);
+			// FIXME: Bad IC scores for testing purposes.
+			n.setProperty("IC", 1.0);
+//			if (n.getId() == 0)
+//			{
+//				continue;
+//			}
+//			
+//			// FIXME: When we have real data, we should calculate this better.
+//			// NOTE: Node properties have to be primitives, so we can't use a
+//			// map to represent multiple IC scores or a list to store descendants.
+//			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
+//			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
+//			n.setProperty("IC", ic);
 		}
 		tx.success();
 		tx.finish();
@@ -107,7 +109,7 @@ public class Neo4jTraversals {
 		{
 			return 0;
 		}
-		return (double)n.getProperty("IC");
+		return (double) n.getProperty("IC");
 	}
 	
 	public static Node getLCS(Node first, Node second) {

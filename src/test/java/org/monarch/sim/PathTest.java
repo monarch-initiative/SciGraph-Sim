@@ -39,23 +39,20 @@ public class PathTest {
 		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO.tsv"))
 		{
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println(pair.getA() + " ancestors:");
-			for (Node ancestor : Neo4jTraversals.getAncestors(monarchPathFinder.getNodeByFragment(pair.getA())))
-			{
-				System.out.println(monarchPathFinder.nodeToString(ancestor));
-			}
-			System.out.println();
-			System.out.println(pair.getB() + " ancestors:");
-			for (Node ancestor : Neo4jTraversals.getAncestors(monarchPathFinder.getNodeByFragment(pair.getB())))
-			{
-				System.out.println(monarchPathFinder.nodeToString(ancestor));
-			}
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println(pair.getA() + ", " + pair.getB());
 			Node lcs = monarchPathFinder.getLCS(pair);
+			if (lcs == null)
+			{
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				System.out.println();
+				continue;
+			}
 			String lcsFragment = (String) lcs.getProperty("fragment");
+			System.out.println();
 			System.out.println(monarchPathFinder.nodeToString(lcs));
 			System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
 			System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println();
 		}
 
