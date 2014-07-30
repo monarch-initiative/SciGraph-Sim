@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -15,6 +16,8 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class GraphFactory {
 	
+  private static final Logger logger = Logger.getLogger(GraphFactory.class.getName());
+
 	// Define the relationships we want to use.
 	enum RelTypes implements RelationshipType {
 		SUBCLASS,
@@ -67,9 +70,9 @@ public class GraphFactory {
 
 	public GraphDatabaseService loadOntologyDB(String graphLocation) {
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
-		
+    logger.info("Starting setAllIC");
 		Neo4jTraversals.setAllIC(db);
-		
+    logger.info("Finished setAllIC");
 		return db;
 	}
 	
