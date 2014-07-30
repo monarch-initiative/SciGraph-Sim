@@ -41,17 +41,14 @@ public class PathTest {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println(pair.getA() + ", " + pair.getB());
 			Node lcs = monarchPathFinder.getLCS(pair);
-			if (lcs == null)
+			if (lcs != null)
 			{
-				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				String lcsFragment = (String) lcs.getProperty("fragment");
 				System.out.println();
-				continue;
+				System.out.println(monarchPathFinder.nodeToString(lcs));
+				System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
+				System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
 			}
-			String lcsFragment = (String) lcs.getProperty("fragment");
-			System.out.println();
-			System.out.println(monarchPathFinder.nodeToString(lcs));
-			System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
-			System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println();
 		}

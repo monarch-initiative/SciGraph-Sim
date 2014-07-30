@@ -76,6 +76,7 @@ public class GraphFactory {
 		return db;
 	}
 	
+	// TODO: Set IC scores as we need them.
 	public GraphDatabaseService loadOntologyDB(String graphLocation) {
 		GraphDatabaseService db = loadOntologyDBHelper(graphLocation);
 		return setAllIC(db);

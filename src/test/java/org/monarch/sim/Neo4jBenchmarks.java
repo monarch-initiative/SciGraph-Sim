@@ -1,5 +1,7 @@
 package org.monarch.sim;
 
+import java.util.Collection;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -17,16 +19,39 @@ public class Neo4jBenchmarks {
 	public TestRule benchmarkRun = new BenchmarkRule();
 	
 	static GraphDatabaseService testDB;
+	static Node root;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-		testDB = factory.buildCompleteDB(256);
+		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+		root = getRoot(testDB);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		testDB.shutdown();
+	}
+	
+	public static Node getRoot(GraphDatabaseService db) {
+		Node first = null;
+		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
+		{
+			if (n.getId() != 0)
+			{
+				first = n;
+				break;
+			}
+		}
+		
+		Collection<Node> parents = Neo4jTraversals.getParents(first);
+		while (!parents.isEmpty())
+		{
+			first = parents.iterator().next();
+			parents = Neo4jTraversals.getParents(first);
+		}
+		
+		return first;
 	}
 	
 	public void getAllByAll(GraphDatabaseService db) {
@@ -51,7 +76,8 @@ public class Neo4jBenchmarks {
 
 	@Test
 	public void test() {
-		getAllByAll(testDB);
+//		getAllByAll(testDB);
+		Neo4jTraversals.getDescendants(root);
 	}
 
 }
