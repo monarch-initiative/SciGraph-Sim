@@ -67,21 +67,27 @@ public class GraphFactory {
 		tx.success();
 		tx.finish();
 	}
-
-	public GraphDatabaseService loadOntologyDB(String graphLocation) {
-		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
+	
+	private GraphDatabaseService setAllIC(GraphDatabaseService db)
+	{
 		logger.info("Starting setAllIC");
 		Neo4jTraversals.setAllIC(db);
 		logger.info("Finished setAllIC");
 		return db;
 	}
 	
+	public GraphDatabaseService loadOntologyDB(String graphLocation) {
+		GraphDatabaseService db = loadOntologyDBHelper(graphLocation);
+		return setAllIC(db);
+	}
+
+	private GraphDatabaseService loadOntologyDBHelper(String graphLocation) {
+		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
+		return db;
+	}
+	
 	public GraphDatabaseService buildOntologyDB(String url, String graphLocation) {
-		// TODO: If it doesn't already, this should clean graphLocation before
-		// writing over it.
-		OwlUtil.loadOntology(url, graphLocation);
-		
-		return loadOntologyDB(graphLocation);
+		return buildOntologyDB(url, graphLocation, true);
 	}
 	
 	public GraphDatabaseService buildOntologyDB(String url, String graphLocation, boolean forceRebuild) {
@@ -95,7 +101,8 @@ public class GraphFactory {
 		// the given url.
 		if (forceRebuild || !Files.exists(Paths.get(flagPath)))
 		{
-			db = factory.buildOntologyDB(url, absolutePath);
+			OwlUtil.loadOntology(url, graphLocation);
+			db = loadOntologyDBHelper(graphLocation);
 			try {
 				// Create the flag once the ontology is built.
 				new File(flagPath).createNewFile();
@@ -107,10 +114,10 @@ public class GraphFactory {
 		// Otherwise, we've already got the graph stored, and we can use that.
 		else
 		{
-			db = factory.loadOntologyDB(graphLocation);
+			db = factory.loadOntologyDBHelper(graphLocation);
 		}
 		
-		return db;
+		return setAllIC(db);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package org.monarch.sim;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class Neo4jTraversals {
 	
-	private static Iterable<Node> getDirectedNeighbors(Node node, Direction dir) {
+	private static Collection<Node> getDirectedNeighbors(Node node, Direction dir) {
 		// Get the relationships.
 		Iterable<Relationship> rels = node.getRelationships(dir);
 		
@@ -31,15 +32,15 @@ public class Neo4jTraversals {
 		return neighbors;
 	}
 	
-	public static Iterable<Node> getChildren(Node node) {
+	public static Collection<Node> getChildren(Node node) {
 		return getDirectedNeighbors(node, Direction.INCOMING);
 	}
 	
-	public static Iterable<Node> getParents(Node node) {
+	public static Collection<Node> getParents(Node node) {
 		return getDirectedNeighbors(node, Direction.OUTGOING);
 	}
 
-	private static Iterable<Node> getDirectedDescendants(Node node, Direction dir) {
+	private static Collection<Node> getDirectedDescendants(Node node, Direction dir) {
 		Set<Node> descendants = new HashSet<>();
 		LinkedList<Node> toTry = new LinkedList<>();
 		toTry.add(node);
@@ -63,18 +64,18 @@ public class Neo4jTraversals {
 		return descendants;
 	}
 
-	public static Iterable<Node> getAncestors(Node node) {
+	public static Collection<Node> getAncestors(Node node) {
 		return getDirectedDescendants(node, Direction.OUTGOING);
 	}
 
-	public static Iterable<Node> getDescendants(Node node) {
+	public static Collection<Node> getDescendants(Node node) {
 		return getDirectedDescendants(node, Direction.INCOMING);
 	}
 
 	// TODO: Write this using Neo4j more directly.
-	public static Iterable<Node> getCommonAncestors(Node first, Node second) {
-		Set<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
-		Set<Node> secondAncestors = (HashSet<Node>)getAncestors(second);
+	public static Collection<Node> getCommonAncestors(Node first, Node second) {
+		Set<Node> firstAncestors = (HashSet<Node>) getAncestors(first);
+		Set<Node> secondAncestors = (HashSet<Node>) getAncestors(second);
 		firstAncestors.retainAll(secondAncestors);
 		return firstAncestors;
 	}
@@ -86,18 +87,21 @@ public class Neo4jTraversals {
 		for (Node n : nodes)
 		{
 			// FIXME: Bad IC scores for testing purposes.
-			n.setProperty("IC", 1.0);
-//			if (n.getId() == 0)
-//			{
-//				continue;
-//			}
-//			
-//			// FIXME: When we have real data, we should calculate this better.
-//			// NOTE: Node properties have to be primitives, so we can't use a
-//			// map to represent multiple IC scores or a list to store descendants.
-//			int nodesBelow = IteratorUtil.count(Neo4jTraversals.getDescendants(n));
-//			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
-//			n.setProperty("IC", ic);
+//			n.setProperty("IC", 1.0);
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			
+			System.out.println(n);
+			// FIXME: When we have real data, we should calculate this better.
+			// NOTE: Node properties have to be primitives, so we can't use a
+			// map to represent multiple IC scores or a list to store descendants.
+			int nodesBelow = getDescendants(n).size();
+			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
+			n.setProperty("IC", ic);
+			System.out.println("Got IC");
+			System.out.println();
 		}
 		tx.success();
 		tx.finish();
@@ -114,7 +118,7 @@ public class Neo4jTraversals {
 	
 	public static Node getLCS(Node first, Node second) {
 		// Start with the ancestors of the first node.
-		HashSet<Node> firstAncestors = (HashSet<Node>)getAncestors(first);
+		HashSet<Node> firstAncestors = (HashSet<Node>) getAncestors(first);
 		
 		// We want to expand ancestors of the second node in order of
 		// decreasing IC score. 
