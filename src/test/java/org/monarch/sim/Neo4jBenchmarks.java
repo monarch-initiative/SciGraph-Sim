@@ -24,7 +24,8 @@ public class Neo4jBenchmarks {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+//		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+		testDB = factory.buildCompleteDB(300);
 		root = getRoot(testDB);
 	}
 
@@ -78,6 +79,11 @@ public class Neo4jBenchmarks {
 	public void test() {
 //		getAllByAll(testDB);
 		Neo4jTraversals.getDescendants(root);
+	}
+	
+	@Test
+	public void setICTest() {
+		Neo4jTraversals.setAllIC(testDB);
 	}
 
 }

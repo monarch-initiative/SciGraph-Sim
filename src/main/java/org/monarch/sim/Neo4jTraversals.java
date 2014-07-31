@@ -1,9 +1,10 @@
 package org.monarch.sim;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -24,7 +25,7 @@ public class Neo4jTraversals {
 		Iterable<Relationship> rels = node.getRelationships(dir);
 		
 		// Turn the relationships into neighbors.
-		LinkedList<Node> neighbors = new LinkedList<>();
+		ArrayList<Node> neighbors = new ArrayList<>();
 		for (Relationship rel : rels)
 		{
 			neighbors.add(rel.getOtherNode(node));
@@ -41,13 +42,13 @@ public class Neo4jTraversals {
 	}
 
 	private static Collection<Node> getDirectedDescendants(Node node, Direction dir) {
-		Set<Node> descendants = new HashSet<>();
-		LinkedList<Node> toTry = new LinkedList<>();
+		Collection<Node> descendants = new HashSet<>();
+		Queue<Node> toTry = new ArrayDeque<>();
 		toTry.add(node);
 		// Check nodes until we run out of possibilities.
 		while (!toTry.isEmpty())
 		{
-			Node curNode = toTry.removeFirst();
+			Node curNode = toTry.remove();
 			// We can skip nodes we've already seen.
 			if (descendants.contains(curNode))
 			{
@@ -72,10 +73,9 @@ public class Neo4jTraversals {
 		return getDirectedDescendants(node, Direction.INCOMING);
 	}
 
-	// TODO: Write this using Neo4j more directly.
 	public static Collection<Node> getCommonAncestors(Node first, Node second) {
-		Set<Node> firstAncestors = (HashSet<Node>) getAncestors(first);
-		Set<Node> secondAncestors = (HashSet<Node>) getAncestors(second);
+		Set<Node> firstAncestors = new HashSet<>(getAncestors(first));
+		Set<Node> secondAncestors = new HashSet<>(getAncestors(second));
 		firstAncestors.retainAll(secondAncestors);
 		return firstAncestors;
 	}
@@ -87,19 +87,19 @@ public class Neo4jTraversals {
 		for (Node n : nodes)
 		{
 			// FIXME: Bad IC scores for testing purposes.
-			n.setProperty("IC", 1.0);
-//			if (n.getId() == 0)
-//			{
-//				continue;
-//			}
-//			
+//			n.setProperty("IC", 1.0);
+			if (n.getId() == 0)
+			{
+				continue;
+			}
+			
 //			System.out.println(n);
-//			// FIXME: When we have real data, we should calculate this better.
-//			// NOTE: Node properties have to be primitives, so we can't use a
-//			// map to represent multiple IC scores or a list to store descendants.
-//			int nodesBelow = getDescendants(n).size();
-//			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
-//			n.setProperty("IC", ic);
+			// FIXME: When we have real data, we should calculate this better.
+			// NOTE: Node properties have to be primitives, so we can't use a
+			// map to represent multiple IC scores or a list to store descendants.
+			int nodesBelow = getDescendants(n).size();
+			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
+			n.setProperty("IC", ic);
 //			System.out.println("Got IC");
 //			System.out.println();
 		}
@@ -166,18 +166,18 @@ public class Neo4jTraversals {
 	
 	public static List<Node> getShortestPath(Node first, Node second) {
 		HashSet<Node> visited = new HashSet<>();
-		Queue<LinkedList<Node>> paths = new LinkedList<>();
+		Queue<ArrayList<Node>> paths = new ArrayDeque<>();
 		
 		// Expand paths starting with our base node. 
-		LinkedList<Node> basePath = new LinkedList<>();
+		ArrayList<Node> basePath = new ArrayList<>();
 		basePath.add(first);
 		paths.add(basePath);
 		
 		// Expand paths.
 		while (!paths.isEmpty())
 		{
-			LinkedList<Node> nextPath = paths.remove();
-			Node lastNode = nextPath.getLast();
+			ArrayList<Node> nextPath = paths.remove();
+			Node lastNode = nextPath.get(nextPath.size() - 1);
 			
 			// If we've reached the end node, stop.
 			if (lastNode.equals(second))
@@ -200,7 +200,7 @@ public class Neo4jTraversals {
 			// Extend the path to all parents.
 			for (Node parent : getParents(lastNode))
 			{
-				LinkedList<Node> toAdd = new LinkedList<>(nextPath);
+				ArrayList<Node> toAdd = new ArrayList<>(nextPath);
 				toAdd.add(parent);
 				paths.add(toAdd);
 			}
@@ -212,7 +212,7 @@ public class Neo4jTraversals {
 		return null;
 	}
 	
-	public static double getMaxIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes) {
+	public static double getMaxIC(Collection<Node> firstNodes, Collection<Node> secondNodes) {
 		double maxIC = 0;
 		
 		// Check each pair of nodes.
@@ -231,7 +231,7 @@ public class Neo4jTraversals {
 		return maxIC;
 	}
 	
-	public static double getAverageIC(Iterable<Node> firstNodes, Iterable<Node> secondNodes) {
+	public static double getAverageIC(Collection<Node> firstNodes, Collection<Node> secondNodes) {
 		double totalIC = 0;
 		int count = 0;
 		

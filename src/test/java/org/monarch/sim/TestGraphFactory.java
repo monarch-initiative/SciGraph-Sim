@@ -35,19 +35,19 @@ public class TestGraphFactory extends GraphFactory {
 		// Build a complete graph with edges directed toward the lower indices.
 		GraphDatabaseService completeDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
 		ArrayList<Long> ids = new ArrayList<>();
+		Transaction tx = completeDB.beginTx();
 		for (int i = 1; i <= numNodes; i++)
 		{
 			Node newNode = addNode(completeDB, "" + i);
-			Transaction tx = completeDB.beginTx();
 			newNode.setProperty("fragment", "COMPLETE:" + newNode.getId());
-			tx.success();
-			tx.finish();
 			for (Long id : ids)
 			{
 				addEdge(completeDB, newNode, completeDB.getNodeById(id));
 			}
 			ids.add(newNode.getId());
 		}
+		tx.success();
+		tx.finish();
 		
 		Neo4jTraversals.setAllIC(completeDB);
 		
