@@ -24,8 +24,8 @@ public class Neo4jBenchmarks {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-//		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
-		testDB = factory.buildCompleteDB(300);
+		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+//		testDB = factory.buildCompleteDB(300);
 		root = getRoot(testDB);
 	}
 
