@@ -10,8 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
-import com.tinkerpop.pipes.util.structures.Pair;
-
 public class PathTest {
 
 	static PathFinder monarchPathFinder;
@@ -19,9 +17,9 @@ public class PathTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		monarchPathFinder = new PathFinder("http://purl.obolibrary.org/obo/upheno/monarch.owl",
-				"target/monarch", false);
-		System.out.println("Finished Monarch Setup");
+//		monarchPathFinder = new PathFinder("http://purl.obolibrary.org/obo/upheno/monarch.owl",
+//				"target/monarch", false);
+//		System.out.println("Finished Monarch Setup");
 		retinaPathFinder = new PathFinder(new File("src/test/resources/ontologies/retina-test.owl").getAbsolutePath(),
 				"target/retina", true);
 		System.out.println("Finished Retina Setup");
@@ -36,22 +34,22 @@ public class PathTest {
 	
 	@Test
 	public void test() {
-		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO.tsv"))
-		{
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println(pair.getA() + ", " + pair.getB());
-			Node lcs = monarchPathFinder.getLCS(pair);
-			if (lcs != null)
-			{
-				String lcsFragment = (String) lcs.getProperty("fragment");
-				System.out.println();
-				System.out.println(monarchPathFinder.nodeToString(lcs));
-				System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
-				System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
-			}
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println();
-		}
+//		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO.tsv"))
+//		{
+//			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//			System.out.println(pair.getA() + ", " + pair.getB());
+//			Node lcs = monarchPathFinder.getLCS(pair);
+//			if (lcs != null)
+//			{
+//				String lcsFragment = (String) lcs.getProperty("fragment");
+//				System.out.println();
+//				System.out.println(monarchPathFinder.nodeToString(lcs));
+//				System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
+//				System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
+//			}
+//			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//			System.out.println();
+//		}
 
 //		String firstFragment = "HP:0000479";
 //		Node first = retinaPathFinder.getNodeByFragment(firstFragment);

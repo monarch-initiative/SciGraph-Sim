@@ -13,7 +13,7 @@
 	<name>SciGraph - core</name>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
+	
 	<repositories>
 		<repository>
 			<id>CRBS</id>
@@ -23,7 +23,7 @@
 	</repositories>
 
 	<properties>
-		<neo4j.version>1.9.8</neo4j.version>
+		<neo4j.version>2.0.4</neo4j.version>
 		<blueprints.version>2.5.0</blueprints.version>
 		<openrdf.version>2.7.6</openrdf.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,7 +70,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.tinkerpop.blueprints</groupId>
-			<artifactId>blueprints-neo4j-graph</artifactId>
+			<artifactId>blueprints-neo4j2-graph</artifactId>
 			<version>${blueprints.version}</version>
 			<exclusions>
 				<exclusion>

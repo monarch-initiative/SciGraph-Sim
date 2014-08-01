@@ -104,7 +104,6 @@ public class Neo4jTraversals {
 //			System.out.println();
 		}
 		tx.success();
-		tx.finish();
 	}
 	
 	public static double getIC(Node n) {

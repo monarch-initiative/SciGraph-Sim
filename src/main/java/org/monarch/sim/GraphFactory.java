@@ -28,7 +28,6 @@ public class GraphFactory {
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -38,7 +37,6 @@ public class GraphFactory {
 		Node newNode = db.createNode();
 		newNode.setProperty("name", name);
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -48,7 +46,6 @@ public class GraphFactory {
 		Transaction tx = db.beginTx();
 		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
 		tx.success();
-		tx.finish();
 		return newRel;		
 	}
 
@@ -65,7 +62,6 @@ public class GraphFactory {
 		}
 		
 		tx.success();
-		tx.finish();
 	}
 	
 	private GraphDatabaseService setAllIC(GraphDatabaseService db)

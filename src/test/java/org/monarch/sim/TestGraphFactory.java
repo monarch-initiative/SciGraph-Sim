@@ -19,7 +19,10 @@ public class TestGraphFactory extends GraphFactory {
 	
 	public GraphDatabaseService buildWaterDB() {
 		// Build a database with three nodes in a ^ configuration.
-		GraphDatabaseService waterDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		GraphDatabaseService waterDB = new GraphDatabaseFactory()
+			.newEmbeddedDatabaseBuilder("target/water")
+			.newGraphDatabase()
+			;
 		Node waterA = addNode(waterDB, "A");
 		Node waterB = addNode(waterDB, "B");
 		Node waterC = addNode(waterDB, "C");
@@ -33,21 +36,23 @@ public class TestGraphFactory extends GraphFactory {
 	
 	public GraphDatabaseService buildCompleteDB(int numNodes) {
 		// Build a complete graph with edges directed toward the lower indices.
-		GraphDatabaseService completeDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		GraphDatabaseService completeDB = new GraphDatabaseFactory()
+			.newEmbeddedDatabaseBuilder("target/complete")
+			.newGraphDatabase()
+			;
 		ArrayList<Long> ids = new ArrayList<>();
-		Transaction tx = completeDB.beginTx();
 		for (int i = 1; i <= numNodes; i++)
 		{
 			Node newNode = addNode(completeDB, "" + i);
+			Transaction tx = completeDB.beginTx();
 			newNode.setProperty("fragment", "COMPLETE:" + newNode.getId());
+			tx.success();
 			for (Long id : ids)
 			{
 				addEdge(completeDB, newNode, completeDB.getNodeById(id));
 			}
 			ids.add(newNode.getId());
 		}
-		tx.success();
-		tx.finish();
 		
 		Neo4jTraversals.setAllIC(completeDB);
 		
@@ -56,14 +61,16 @@ public class TestGraphFactory extends GraphFactory {
 
 	public GraphDatabaseService buildTreeDB(int numNodes) {
 		// Build a balanced binary tree with edges directed toward the lower indices.
-		GraphDatabaseService treeDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		GraphDatabaseService treeDB = new GraphDatabaseFactory()
+			.newEmbeddedDatabaseBuilder("target/tree")
+			.newGraphDatabase()
+			;
 		for (int i = 1; i <= numNodes; i++)
 		{
 			Node newNode = addNode(treeDB, "" + i);
 			Transaction tx = treeDB.beginTx();
 			newNode.setProperty("fragment", "TREE:" + newNode.getId());
 			tx.success();
-			tx.finish();
 			if (i != 1)
 			{
 				addEdge(treeDB, newNode, treeDB.getNodeById(i / 2));
@@ -77,7 +84,10 @@ public class TestGraphFactory extends GraphFactory {
 	
 	public GraphDatabaseService buildCycleDB() {
 		// Build a small pathological graph.
-		GraphDatabaseService cycleDB = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		GraphDatabaseService cycleDB = new GraphDatabaseFactory()
+			.newEmbeddedDatabaseBuilder("target/cycle")
+			.newGraphDatabase()
+			;
 		Node a = addNode(cycleDB, "A");
 		Node b = addNode(cycleDB, "B");
 		Node c = addNode(cycleDB, "C");
@@ -127,7 +137,6 @@ public class TestGraphFactory extends GraphFactory {
 			}
 		}
 		tx.success();
-		tx.finish();
 		
 		Neo4jTraversals.setAllIC(monarchDB);
 		

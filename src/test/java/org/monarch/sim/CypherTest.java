@@ -42,7 +42,6 @@ public class CypherTest {
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -52,7 +51,6 @@ public class CypherTest {
 		Node newNode = db.createNode();
 		newNode.setProperty("name", name);
 		tx.success();
-		tx.finish();
 		return newNode;
 	}
 	
@@ -62,7 +60,6 @@ public class CypherTest {
 		Transaction tx = db.beginTx();
 		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
 		tx.success();
-		tx.finish();
 		return newRel;		
 	}
 
