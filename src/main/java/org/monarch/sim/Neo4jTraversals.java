@@ -87,21 +87,21 @@ public class Neo4jTraversals {
 		for (Node n : nodes)
 		{
 			// FIXME: Bad IC scores for testing purposes.
-//			n.setProperty("IC", 1.0);
-			if (n.getId() == 0)
-			{
-				continue;
-			}
-			
-//			System.out.println(n);
-			// FIXME: When we have real data, we should calculate this better.
-			// NOTE: Node properties have to be primitives, so we can't use a
-			// map to represent multiple IC scores or a list to store descendants.
-			int nodesBelow = getDescendants(n).size();
-			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
-			n.setProperty("IC", ic);
-//			System.out.println("Got IC");
-//			System.out.println();
+			n.setProperty("IC", 1.0);
+//			if (n.getId() == 0)
+//			{
+//				continue;
+//			}
+//			
+////			System.out.println(n);
+//			// FIXME: When we have real data, we should calculate this better.
+//			// NOTE: Node properties have to be primitives, so we can't use a
+//			// map to represent multiple IC scores or a list to store descendants.
+//			int nodesBelow = getDescendants(n).size();
+//			double ic = -Math.log((double) nodesBelow / totalNodes) / Math.log(2);
+//			n.setProperty("IC", ic);
+////			System.out.println("Got IC");
+////			System.out.println();
 		}
 		tx.success();
 		tx.finish();

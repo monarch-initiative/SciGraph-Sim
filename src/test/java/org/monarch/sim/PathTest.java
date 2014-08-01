@@ -36,7 +36,7 @@ public class PathTest {
 	
 	@Test
 	public void test() {
-		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO.tsv"))
+		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO_non_obvious.tsv"))
 		{
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println(pair.getA() + ", " + pair.getB());
