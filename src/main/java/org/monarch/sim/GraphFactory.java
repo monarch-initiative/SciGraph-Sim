@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -20,7 +21,7 @@ public class GraphFactory {
 
 	// Define the relationships we want to use.
 	enum RelTypes implements RelationshipType {
-		SUBCLASS,
+		SUBCLASS_OF,
 	}
 	
 	protected static Node addNode(GraphDatabaseService db) {
@@ -46,7 +47,7 @@ public class GraphFactory {
 	{
 		// Wrap a transaction around edge creation.
 		Transaction tx = db.beginTx();
-		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS);
+		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS_OF);
 		tx.success();
 		tx.finish();
 		return newRel;		
@@ -93,7 +94,7 @@ public class GraphFactory {
 	
 	public GraphDatabaseService buildOntologyDB(String url, String graphLocation, boolean forceRebuild) {
 		GraphFactory factory = new GraphFactory();
-		GraphDatabaseService db;
+		GraphDatabaseService db = null;
 		
 		String absolutePath = new File(graphLocation).getAbsolutePath();
 		String flagPath = absolutePath + "/buildCompletedFlag";
@@ -102,13 +103,17 @@ public class GraphFactory {
 		// the given url.
 		if (forceRebuild || !Files.exists(Paths.get(flagPath)))
 		{
-			OwlUtil.loadOntology(url, graphLocation);
-			db = loadOntologyDBHelper(graphLocation);
 			try {
+				// Make sure there's nothing there to get in the way.
+				FileUtils.deleteDirectory(new File(absolutePath));
+				
+				OwlUtil.loadOntology(url, graphLocation);
+				db = loadOntologyDBHelper(graphLocation);
+				
 				// Create the flag once the ontology is built.
 				new File(flagPath).createNewFile();
 			} catch (IOException e) {
-				// FIXME: This should probably be handled better.
+				// FIXME: This should be handled better.
 				System.out.println(e.getMessage());
 			}
 		}

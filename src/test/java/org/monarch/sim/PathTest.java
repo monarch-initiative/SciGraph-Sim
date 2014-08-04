@@ -4,11 +4,14 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 
 import com.tinkerpop.pipes.util.structures.Pair;
 
@@ -34,20 +37,55 @@ public class PathTest {
 		retinaPathFinder.close();
 	}
 	
+	private void printPath(PathFinder finder, List<String> path) {
+		// As always, Java makes it difficult to do a trivial task.
+		LinkedList<String> copy = new LinkedList<>(path);
+		Node prev = finder.getNodeByFragment(copy.removeFirst());
+		System.out.println("~~ " + finder.nodeToString(prev) + "~~");
+		
+		// Find all edges between each pair of successive nodes.
+		while (!copy.isEmpty())
+		{
+			Node next = finder.getNodeByFragment(copy.removeFirst());
+			for (Relationship edge : prev.getRelationships())
+			{
+				if (edge.getOtherNode(prev).equals(next))
+				{
+					Node start = edge.getStartNode();
+					Node end = edge.getEndNode();
+					String toPrint = "";
+					toPrint += finder.nodeToString(start);
+					toPrint += "--";
+					toPrint += edge.getType();
+					toPrint += "--> ";
+					toPrint += finder.nodeToString(end);
+					System.out.println(toPrint);
+				}
+			}
+			System.out.println("~~ " + finder.nodeToString(next) + "~~");
+			prev = next;
+		}
+	}
+	
 	@Test
 	public void test() {
 		for (Pair<String, String> pair : monarchPathFinder.getPairs("HPGO_non_obvious.tsv"))
 		{
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println(pair.getA() + ", " + pair.getB());
+			String firstFragment = pair.getA();
+			String secondFragment = pair.getB();
+			System.out.println(monarchPathFinder.nodeToString(monarchPathFinder.getNodeByFragment(firstFragment))
+					+ ", " + monarchPathFinder.nodeToString(monarchPathFinder.getNodeByFragment(secondFragment)));
 			Node lcs = monarchPathFinder.getLCS(pair);
 			if (lcs != null)
 			{
 				String lcsFragment = (String) lcs.getProperty("fragment");
 				System.out.println();
-				System.out.println(monarchPathFinder.nodeToString(lcs));
-				System.out.println(monarchPathFinder.getShortestPath(pair.getA(), lcsFragment));
-				System.out.println(monarchPathFinder.getShortestPath(pair.getB(), lcsFragment));
+				System.out.println("LCS: " + monarchPathFinder.nodeToString(lcs));
+				System.out.println();
+				printPath(monarchPathFinder, monarchPathFinder.getShortestPath(firstFragment, lcsFragment));
+				System.out.println();
+				printPath(monarchPathFinder, monarchPathFinder.getShortestPath(secondFragment, lcsFragment));
 			}
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println();

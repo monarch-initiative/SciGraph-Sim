@@ -76,7 +76,7 @@ public class PathFinder extends MappedDB {
 		List<String> fragmentPath = new LinkedList<>();
 		for (Node n : path)
 		{
-			fragmentPath.add(nodeToString(getNodeByFragment((String) n.getProperty("fragment"))));
+			fragmentPath.add((String) n.getProperty("fragment"));
 		}
 		return fragmentPath;
 	}
