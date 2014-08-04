@@ -20,13 +20,17 @@ public class Neo4jBenchmarks {
 	
 	static GraphDatabaseService testDB;
 	static Node root;
+	static SciGraphTraverser traverser;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-//		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
-		testDB = factory.buildCompleteDB(300);
-		root = getRoot(testDB);
+		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+//		testDB = factory.buildCompleteDB(1200);
+		traverser = new SciGraphTraverser(testDB);
+//		traverser.relationships("SUBCLASS_OF");
+		root = testDB.getNodeById(71805);
+//		root = getRoot(testDB);
 	}
 
 	@AfterClass
@@ -76,14 +80,32 @@ public class Neo4jBenchmarks {
 	}
 
 	@Test
-	public void test() {
-//		getAllByAll(testDB);
-		Neo4jTraversals.getDescendants(root);
+	public void naiveTest() {
+		System.out.println("Starting naive test");
+		int count = 0;
+		for (Node n : Neo4jTraversals.getDescendants(root))
+		{
+			count++;
+		}
+		System.out.println(count);
+		System.out.println("Found all descendants");
 	}
 	
 	@Test
-	public void setICTest() {
-		Neo4jTraversals.setAllIC(testDB);
+	public void traverserTest() {
+		System.out.println("Starting traverser test");
+		int count = 0;
+		for (Node n : traverser.getDescendants(root))
+		{
+			count++;
+		}
+		System.out.println(count);
+		System.out.println("Found all descendants");
 	}
+	
+//	@Test
+//	public void setICTest() {
+//		Neo4jTraversals.setAllIC(testDB);
+//	}
 
 }

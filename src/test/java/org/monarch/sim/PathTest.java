@@ -37,16 +37,15 @@ public class PathTest {
 		retinaPathFinder.close();
 	}
 	
-	private void printPath(PathFinder finder, List<String> path) {
-		// As always, Java makes it difficult to do a trivial task.
+	private void printPath(MappedDB map, List<String> path) {
 		LinkedList<String> copy = new LinkedList<>(path);
-		Node prev = finder.getNodeByFragment(copy.removeFirst());
-		System.out.println("~~ " + finder.nodeToString(prev) + "~~");
+		Node prev = map.getNodeByFragment(copy.removeFirst());
+		System.out.println("~~ " + map.nodeToString(prev) + "~~");
 		
 		// Find all edges between each pair of successive nodes.
 		while (!copy.isEmpty())
 		{
-			Node next = finder.getNodeByFragment(copy.removeFirst());
+			Node next = map.getNodeByFragment(copy.removeFirst());
 			for (Relationship edge : prev.getRelationships())
 			{
 				if (edge.getOtherNode(prev).equals(next))
@@ -54,15 +53,15 @@ public class PathTest {
 					Node start = edge.getStartNode();
 					Node end = edge.getEndNode();
 					String toPrint = "";
-					toPrint += finder.nodeToString(start);
+					toPrint += map.nodeToString(start);
 					toPrint += "--";
 					toPrint += edge.getType();
 					toPrint += "--> ";
-					toPrint += finder.nodeToString(end);
+					toPrint += map.nodeToString(end);
 					System.out.println(toPrint);
 				}
 			}
-			System.out.println("~~ " + finder.nodeToString(next) + "~~");
+			System.out.println("~~ " + map.nodeToString(next) + "~~");
 			prev = next;
 		}
 	}
