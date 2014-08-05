@@ -49,7 +49,7 @@ public class TestGraphFactory extends GraphFactory {
 		tx.success();
 		tx.finish();
 		
-		Neo4jTraversals.setAllIC(completeDB);
+//		Neo4jTraversals.setAllIC(completeDB);
 		
 		return completeDB;
 	}
@@ -70,7 +70,7 @@ public class TestGraphFactory extends GraphFactory {
 			}
 		}
 		
-		Neo4jTraversals.setAllIC(treeDB);
+//		Neo4jTraversals.setAllIC(treeDB);
 		
 		return treeDB;
 	}

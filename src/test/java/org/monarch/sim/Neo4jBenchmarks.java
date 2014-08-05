@@ -1,6 +1,7 @@
 package org.monarch.sim;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -18,6 +19,8 @@ public class Neo4jBenchmarks {
 	@Rule
 	public TestRule benchmarkRun = new BenchmarkRule();
 	
+	private static final Logger log = Logger.getLogger(GraphFactory.class.getName());;
+	
 	static GraphDatabaseService testDB;
 	static Node root;
 	static SciGraphTraverser traverser;
@@ -28,7 +31,7 @@ public class Neo4jBenchmarks {
 		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
 //		testDB = factory.buildCompleteDB(1200);
 		traverser = new SciGraphTraverser(testDB);
-//		traverser.relationships("SUBCLASS_OF");
+		traverser.relationships("SUBCLASS_OF");
 		root = testDB.getNodeById(71805);
 //		root = getRoot(testDB);
 	}
@@ -79,28 +82,49 @@ public class Neo4jBenchmarks {
 		}
 	}
 
-	@Test
-	public void naiveTest() {
-		System.out.println("Starting naive test");
-		int count = 0;
-		for (Node n : Neo4jTraversals.getDescendants(root))
-		{
-			count++;
-		}
-		System.out.println(count);
-		System.out.println("Found all descendants");
-	}
+//	@Test
+//	public void naiveTest() {
+//		System.out.println("Starting naive test");
+//		int count = 0;
+//		for (Node n : Neo4jTraversals.getDescendants(root))
+//		{
+//			count++;
+//		}
+//		System.out.println(count);
+//		System.out.println("Found all descendants");
+//	}
+//	
+//	@Test
+//	public void traverserTest() {
+//		System.out.println("Starting traverser test");
+//		int count = 0;
+//		for (Node n : traverser.getDescendants(root))
+//		{
+//			count++;
+//		}
+//		System.out.println(count);
+//		System.out.println("Found all descendants");
+//	}
 	
 	@Test
-	public void traverserTest() {
-		System.out.println("Starting traverser test");
+	public void traverserAncestorTest() {
+		log.info("Starting ancestor test");
 		int count = 0;
-		for (Node n : traverser.getDescendants(root))
+		int count2 = 0;
+		for (Node n : GlobalGraphOperations.at(testDB).getAllNodes())
 		{
-			count++;
+			for (Node ancestor : traverser.getAncestors(n))
+			{
+				count++;
+			}
+			count2++;
+			if (count2 % 1000 == 0)
+			{
+				log.info(count2 + " nodes done");
+			}
 		}
-		System.out.println(count);
-		System.out.println("Found all descendants");
+		count2 = count;
+		log.info("Found all ancestors");
 	}
 	
 //	@Test
