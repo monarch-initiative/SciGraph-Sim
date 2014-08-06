@@ -30,7 +30,7 @@ public class Neo4jBenchmarks {
 		TestGraphFactory factory = new TestGraphFactory();
 		testDB = factory.buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
 //		testDB = factory.buildCompleteDB(1200);
-		traverser = new SciGraphTraverser(testDB);
+		traverser = new SciGraphTraverser(testDB, "traverser");
 		traverser.relationships("SUBCLASS_OF");
 		root = testDB.getNodeById(71805);
 //		root = getRoot(testDB);

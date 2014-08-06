@@ -1,7 +1,7 @@
 package org.monarch.sim;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,14 +21,20 @@ import org.neo4j.kernel.Uniqueness;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class SciGraphTraverser {
+	
+	private static final int traversalCachedNodes = 10000;
 
+	private String PUSHED_KEY;
+	private String DESCENDANT_KEY;
+	private String IC_KEY;
+	
 	private GraphDatabaseService db;
 	private int nodeCount;
-	private Set<RelationshipType> edgeTypes = new HashSet<>();
+	private Set<RelationshipType> edgeTypes;
 	// FIXME: In Neo4j 2.x, the traversal should come from the DB.
 	private TraversalDescription basicTraversal = Traversal.traversal()
 			.breadthFirst()
-			.uniqueness(Uniqueness.NODE_GLOBAL)
+			.uniqueness(Uniqueness.NODE_RECENT, traversalCachedNodes)
 			;
 	private boolean edgeTypesDefined = false;
 	
@@ -36,17 +42,26 @@ public class SciGraphTraverser {
 	 * Constructs a traverser to walk through a Neo4j database.
 	 * By default, this traverses all types of edges.
 	 * 
+	 * The name allows multiple traversers to use the same graph without
+	 * naming conflicts for node properties.
+	 * 
 	 * @param db	The database to traverse
+	 * @param name	The name of the traverser
 	 */
-	public SciGraphTraverser(GraphDatabaseService db) {
+	public SciGraphTraverser(GraphDatabaseService db, String name) {
 		this.db = db;
 		
 		nodeCount = IteratorUtil.count(GlobalGraphOperations.at(db).getAllNodes()) - 1;
 		
+		edgeTypes = new HashSet<>();
 		for (RelationshipType edgeType : GlobalGraphOperations.at(db).getAllRelationshipTypes())
 		{
 			edgeTypes.add(edgeType);
 		}
+		
+		PUSHED_KEY = name + "_pushed";
+		DESCENDANT_KEY = name + "_descendnts";
+		IC_KEY = name + "_ic";
 	}
 	
 	/**
@@ -113,8 +128,8 @@ public class SciGraphTraverser {
 				.nodes()
 				;
 		
-		// Iterables are hard to work with, so convert.
-		Collection<Node> nodes = new ArrayList<>();
+		// Iterables are hard to work with, so convert to a Collection.
+		Collection<Node> nodes = new HashSet<>();
 		for (Node found : iter)
 		{
 			nodes.add(found);
@@ -160,10 +175,11 @@ public class SciGraphTraverser {
 	
 	private Iterable<Node> getUnpushedDescendants(Node n) {
 		// We want to ignore nodes that have already been pushed.
-		Evaluator evaluator = new Evaluator() {
+		Evaluator evaluator = new Evaluator()
+		{
 			@Override
 			public Evaluation evaluate(Path path) {
-				if (path.endNode().hasProperty("pushed"))
+				if (path.endNode().hasProperty(PUSHED_KEY))
 				{
 					return Evaluation.EXCLUDE_AND_PRUNE;
 				}
@@ -185,14 +201,13 @@ public class SciGraphTraverser {
 	private void addDescendant(Node n) {
 		Transaction tx = db.beginTx();
 		
-		String key = "descendants";
-		if (!n.hasProperty(key))
+		if (!n.hasProperty(DESCENDANT_KEY))
 		{
-			n.setProperty(key, 1);
+			n.setProperty(DESCENDANT_KEY, 1);
 		}
 		else
 		{
-			n.setProperty(key, (int) n.getProperty(key) + 1);
+			n.setProperty(DESCENDANT_KEY, (int) n.getProperty(DESCENDANT_KEY) + 1);
 		}
 		
 		tx.success();
@@ -200,17 +215,15 @@ public class SciGraphTraverser {
 	}
 	
 	private void pushUp(Node n) {
-		String key = "pushed";
-		
 		// If we've already pushed, do nothing.
-		if (n.hasProperty(key))
+		if (n.hasProperty(PUSHED_KEY))
 		{
 			return;
 		}
 		
 		// Mark the node as pushed.
 		Transaction tx = db.beginTx();
-		n.setProperty(key, true);
+		n.setProperty(PUSHED_KEY, true);
 		tx.success();
 		tx.finish();
 		
@@ -228,10 +241,9 @@ public class SciGraphTraverser {
 	 */
 	public double getIC(Node n) {
 		// Check if we've already done the work.
-		String key = "IC";
-		if (n.hasProperty(key))
+		if (n.hasProperty(IC_KEY))
 		{
-			return (double) n.getProperty(key);
+			return (double) n.getProperty(IC_KEY);
 		}
 		
 		// Make all the descendants push up.
@@ -242,15 +254,90 @@ public class SciGraphTraverser {
 		
 		// TODO: Everything related to IC will need to be recalculated to
 		// handle annotations.
-		int descendants = (int) n.getProperty("descendants");
+		int descendants = (int) n.getProperty(DESCENDANT_KEY);
 		double ic = (Math.log(nodeCount) - Math.log(descendants)) / Math.log(2);
 		
 		Transaction tx = db.beginTx();
-		n.setProperty(key, ic);
+		n.setProperty(IC_KEY, ic);
 		tx.success();
 		tx.finish();
 		
 		return ic;
+	}
+	
+	/**
+	 * Finds the least common subsumer of two nodes.
+	 * 
+	 * @param first		A node in the graph
+	 * @param second	Another node
+	 */
+	public Node getLCS(Node first, final Node second) {
+		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
+
+		// FIXME: We don't do this yet.
+//		// We traverse the ancestors of the second node in order of decreasing IC,
+//		// so the first time we run across an ancestor of the first, we have the
+//		// LCS.
+		
+		// Find the first ancestor of the first node along each path from the second.
+//		final boolean [] found = {false};
+		Evaluator evaluator = new Evaluator()
+		{
+			@Override
+			public Evaluation evaluate(Path path) {
+//				if (found[0])
+//				{
+//					return Evaluation.EXCLUDE_AND_PRUNE;
+//				}
+				/*else*/ if (firstAncestors.contains(path.endNode()))
+				{
+//					found[0] = true;
+					return Evaluation.INCLUDE_AND_PRUNE;
+				}
+				else
+				{
+					return Evaluation.EXCLUDE_AND_CONTINUE;
+				}
+			}
+		};
+		
+		// We want to order the traversal by IC score.
+		Comparator<Path> icComparator = new Comparator<Path>() {
+			@Override
+			public int compare(Path first, Path second) {
+				Node firstNode = first.endNode();
+				Node secondNode = second.endNode();
+				double firstIC = getIC(firstNode);
+				double secondIC = getIC(secondNode);
+				if (firstIC < secondIC)
+				{
+					return 1;
+				}
+				else if (firstIC > secondIC)
+				{
+					return -1;
+				}
+				else
+				{
+					return (int) (firstNode.getId() - secondNode.getId());
+				}
+			}
+		};
+		
+		Iterable<Node> lcsIter = basicTraversal
+				.evaluator(evaluator)
+				.sort(icComparator)
+				.traverse(second)
+				.nodes()
+				;
+		
+		for (Node lcs : lcsIter)
+		{
+			return lcs;
+		}
+		
+		// FIXME: We should probably throw an error here.
+		return null;
 	}
 	
 }
