@@ -6,7 +6,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-public abstract class MappedDB {
+public class MappedDB {
 	
 	protected GraphDatabaseService db;
 	protected HashMap<String, Node> fragmentMap;

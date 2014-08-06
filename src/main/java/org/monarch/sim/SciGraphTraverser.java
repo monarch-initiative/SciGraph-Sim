@@ -240,6 +240,12 @@ public class SciGraphTraverser {
 	 * @param n	The node whose IC we want.
 	 */
 	public double getIC(Node n) {
+		// TODO: This should probably be an error, but it's convenient.
+		if (n == null)
+		{
+			return -1;
+		}
+		
 		// Check if we've already done the work.
 		if (n.hasProperty(IC_KEY))
 		{
@@ -273,6 +279,7 @@ public class SciGraphTraverser {
 	 */
 	public Node getLCS(Node first, final Node second) {
 		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
+		System.out.println(firstAncestors);
 		
 		// FIXME: We don't do this yet.
 //		// We traverse the ancestors of the second node in order of decreasing IC,
@@ -280,18 +287,20 @@ public class SciGraphTraverser {
 //		// LCS.
 		
 		// Find the first ancestor of the first node along each path from the second.
-//		final boolean [] found = {false};
+		final Node [] lcs = {null};
 		Evaluator evaluator = new Evaluator()
 		{
 			@Override
 			public Evaluation evaluate(Path path) {
-//				if (found[0])
-//				{
-//					return Evaluation.EXCLUDE_AND_PRUNE;
-//				}
-				/*else*/ if (firstAncestors.contains(path.endNode()))
+				System.out.println(path);
+				Node endNode = path.endNode();
+				if (getIC(lcs[0]) >= getIC(endNode))
 				{
-//					found[0] = true;
+					return Evaluation.EXCLUDE_AND_PRUNE;
+				}
+				else if (firstAncestors.contains(endNode))
+				{
+					lcs[0] = endNode;
 					return Evaluation.INCLUDE_AND_PRUNE;
 				}
 				else
@@ -301,26 +310,19 @@ public class SciGraphTraverser {
 			}
 		};
 		
-		Iterable<Node> ancestors = basicDownwardTraversal
+		Iterable<Path> iter = basicDownwardTraversal
 				.reverse()
 				.evaluator(evaluator)
 				.traverse(second)
-				.nodes()
 				;
 		
-		Node lcs = null;
-		double lcsIC = -1;
-		for (Node ancestor : ancestors)
+		// The traversal is lazy, so we need to force evaluation.
+		for (@SuppressWarnings("unused") Path p : iter)
 		{
-			double ancestorIC = getIC(ancestor);
-			if (ancestorIC > lcsIC)
-			{
-				lcs = ancestor;
-				lcsIC = ancestorIC;
-			}
+			continue;
 		}
 		
-		return lcs;
+		return lcs[0];
 	}
 	
 }
