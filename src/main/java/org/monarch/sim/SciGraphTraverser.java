@@ -8,6 +8,7 @@ import java.util.Set;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.NotFoundException;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
@@ -66,7 +67,6 @@ public class SciGraphTraverser {
 	
 	/**
 	 * Adds a type of relationship to traverse along.
-	 * If the graph does not contain the given type of edge, does nothing.
 	 * 
 	 * @param typeName	The name of the type of relationship
 	 * @param dir		Which direction is 'up'
@@ -83,12 +83,11 @@ public class SciGraphTraverser {
 			}
 		}
 		
-		// FIXME: This should throw some sort of error.
+		throw new NotFoundException("Relationship type \"" + typeName + "\" not found");
 	}
 	
 	/**
 	 * Adds a type of relationship to traverse along.
-	 * If the graph does not contain the given type of edge, does nothing.
 	 * 
 	 * @param typeName	The name of the type of relationship
 	 * @param dir		Which direction is 'up'
@@ -285,6 +284,7 @@ public class SciGraphTraverser {
 		{
 			@Override
 			public Evaluation evaluate(Path path) {
+				System.out.println(path);
 //				if (found[0])
 //				{
 //					return Evaluation.EXCLUDE_AND_PRUNE;
@@ -292,6 +292,7 @@ public class SciGraphTraverser {
 				/*else*/ if (firstAncestors.contains(path.endNode()))
 				{
 //					found[0] = true;
+					System.out.println("Found");
 					return Evaluation.INCLUDE_AND_PRUNE;
 				}
 				else
