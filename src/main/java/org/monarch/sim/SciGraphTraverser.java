@@ -301,43 +301,25 @@ public class SciGraphTraverser {
 			}
 		};
 		
-		// We want to order the traversal by IC score.
-		Comparator<Path> icComparator = new Comparator<Path>() {
-			@Override
-			public int compare(Path first, Path second) {
-				Node firstNode = first.endNode();
-				Node secondNode = second.endNode();
-				double firstIC = getIC(firstNode);
-				double secondIC = getIC(secondNode);
-				if (firstIC < secondIC)
-				{
-					return 1;
-				}
-				else if (firstIC > secondIC)
-				{
-					return -1;
-				}
-				else
-				{
-					return (int) (firstNode.getId() - secondNode.getId());
-				}
-			}
-		};
-		
-		Iterable<Node> lcsIter = basicTraversal
+		Iterable<Node> ancestors = basicTraversal
 				.evaluator(evaluator)
-				.sort(icComparator)
 				.traverse(second)
 				.nodes()
 				;
 		
-		for (Node lcs : lcsIter)
+		Node lcs = null;
+		double lcsIC = -1;
+		for (Node ancestor : ancestors)
 		{
-			return lcs;
+			double ancestorIC = getIC(ancestor);
+			if (ancestorIC > lcsIC)
+			{
+				lcs = ancestor;
+				lcsIC = ancestorIC;
+			}
 		}
 		
-		// FIXME: We should probably throw an error here.
-		return null;
+		return lcs;
 	}
 	
 }
