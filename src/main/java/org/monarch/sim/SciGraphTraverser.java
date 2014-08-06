@@ -33,7 +33,8 @@ public class SciGraphTraverser {
 	private int nodeCount;
 	private Set<RelationshipType> edgeTypes;
 	// FIXME: In Neo4j 2.x, the traversal should come from the DB.
-	private TraversalDescription basicTraversal = Traversal.traversal()
+	private TraversalDescription basicDownwardTraversal = Traversal
+			.traversal()
 			.breadthFirst()
 			.uniqueness(Uniqueness.NODE_RECENT, traversalCachedNodes)
 			;
@@ -77,7 +78,7 @@ public class SciGraphTraverser {
 		{
 			if (edgeType.toString().equals(typeName))
 			{
-				basicTraversal = basicTraversal.relationships(edgeType, dir);
+				basicDownwardTraversal = basicDownwardTraversal.relationships(edgeType, dir);
 				edgeTypesDefined = true;
 				return;
 			}
@@ -97,7 +98,7 @@ public class SciGraphTraverser {
 	}
 	
 	private Collection<Node> traversalHelper(Node n, boolean up, boolean oneStep) {
-		TraversalDescription td = basicTraversal;
+		TraversalDescription td = basicDownwardTraversal;
 		
 		// If we haven't set any edge types, assume all edges point up.
 		if (!edgeTypesDefined)
@@ -109,7 +110,7 @@ public class SciGraphTraverser {
 		}
 		
 		// Handle the separate cases.
-		if (!up)
+		if (up)
 		{
 			td = td.reverse();
 		}		
@@ -142,7 +143,7 @@ public class SciGraphTraverser {
 	 * @param n	The node whose parents we want
 	 */
 	public Collection<Node> getParents(Node n) {
-		return traversalHelper(n, false, true);
+		return traversalHelper(n, true, true);
 	}
 	
 	/**
@@ -151,7 +152,7 @@ public class SciGraphTraverser {
 	 * @param n	The node whose children we want
 	 */
 	public Collection<Node> getChildren(Node n) {
-		return traversalHelper(n, true, true);
+		return traversalHelper(n, false, true);
 	}
 	
 	/**
@@ -160,7 +161,7 @@ public class SciGraphTraverser {
 	 * @param n	The node whose ancestors we want
 	 */
 	public Collection<Node> getAncestors(Node n) {
-		return traversalHelper(n, false, false);
+		return traversalHelper(n, true, false);
 	}
 	
 	/**
@@ -169,7 +170,7 @@ public class SciGraphTraverser {
 	 * @param n	The node whose descendants we want
 	 */
 	public Collection<Node> getDescendants(Node n) {
-		return traversalHelper(n, true, false);
+		return traversalHelper(n, false, false);
 	}
 	
 	private Iterable<Node> getUnpushedDescendants(Node n) {
@@ -190,7 +191,7 @@ public class SciGraphTraverser {
 		};
 		
 		// Traverse.
-		return basicTraversal
+		return basicDownwardTraversal
 				.evaluator(evaluator)
 				.traverse(n)
 				.nodes()
@@ -272,7 +273,7 @@ public class SciGraphTraverser {
 	 */
 	public Node getLCS(Node first, final Node second) {
 		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
-
+		
 		// FIXME: We don't do this yet.
 //		// We traverse the ancestors of the second node in order of decreasing IC,
 //		// so the first time we run across an ancestor of the first, we have the
@@ -284,7 +285,6 @@ public class SciGraphTraverser {
 		{
 			@Override
 			public Evaluation evaluate(Path path) {
-				System.out.println(path);
 //				if (found[0])
 //				{
 //					return Evaluation.EXCLUDE_AND_PRUNE;
@@ -292,7 +292,6 @@ public class SciGraphTraverser {
 				/*else*/ if (firstAncestors.contains(path.endNode()))
 				{
 //					found[0] = true;
-					System.out.println("Found");
 					return Evaluation.INCLUDE_AND_PRUNE;
 				}
 				else
@@ -302,7 +301,8 @@ public class SciGraphTraverser {
 			}
 		};
 		
-		Iterable<Node> ancestors = basicTraversal
+		Iterable<Node> ancestors = basicDownwardTraversal
+				.reverse()
 				.evaluator(evaluator)
 				.traverse(second)
 				.nodes()

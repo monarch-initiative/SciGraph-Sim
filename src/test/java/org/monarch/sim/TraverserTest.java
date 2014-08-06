@@ -13,7 +13,7 @@ public class TraverserTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		db = new TestGraphFactory().buildTreeDB(255);
+		db = new TestGraphFactory().buildCompleteDB(255);
 	}
 
 	@AfterClass
@@ -24,7 +24,7 @@ public class TraverserTest {
 	@Test
 	public void test() {
 		SciGraphTraverser traverser = new SciGraphTraverser(db, "test");
-		traverser.relationships("SUBCLASS_OF", Direction.OUTGOING);
+		traverser.relationships("SUBCLASS_OF", Direction.INCOMING);
 		Node first = db.getNodeById(42);
 		Node second = db.getNodeById(234);
 		System.out.println(traverser.getIC(first));
