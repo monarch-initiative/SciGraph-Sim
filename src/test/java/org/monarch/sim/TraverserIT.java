@@ -109,6 +109,16 @@ public class TraverserIT {
 			// FIXME: Add shortest path calculation to traverser.
 			List<Node> firstPath = Neo4jTraversals.getShortestPath(first, lcs);
 			List<Node> secondPath = Neo4jTraversals.getShortestPath(second, lcs);
+			System.out.println(""
+					+ mapped.nodeToString(first)
+					+ "--[" + (firstPath.size() - 1) + " edges]--> "
+					+ mapped.nodeToString(lcs)
+					+ "<--[" + (secondPath.size() - 1) + " edges]-- "
+					+ mapped.nodeToString(second)
+					);
+			System.out.println((firstPath.size() + secondPath.size() - 2) + " edges total");
+			
+			System.out.println();
 			printPath(firstPath);
 			System.out.println();
 			printPath(secondPath);
