@@ -3,8 +3,10 @@ package org.monarch.sim;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -66,9 +68,13 @@ public class TraverserIT {
 	@Test
 	public void test() throws IOException {
 		SciGraphTraverser traverser = new SciGraphTraverser(db, "test");
+		Set<String> excluded = new HashSet<String>();
+		excluded.add("SUPERCLASS_OF");
+		excluded.add("PROPERTY");
+		excluded.add("inSubset");
 		for (RelationshipType rt : GlobalGraphOperations.at(db).getAllRelationshipTypes())
 		{
-			if (!rt.name().equals("SUPERCLASS_OF"))
+			if (!excluded.contains(rt.name()))
 			{
 				traverser.relationships(rt.name(), Direction.INCOMING);
 			}
