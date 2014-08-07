@@ -251,24 +251,27 @@ public class SciGraphTraverser {
 		{
 			return (double) n.getProperty(IC_KEY);
 		}
+//		
+//		// Make all the descendants push up.
+//		for (Node descendant : getUnpushedDescendants(n))
+//		{
+//			pushUp(descendant);
+//		}
+//		
+//		// TODO: Everything related to IC will need to be recalculated to
+//		// handle annotations.
+//		int descendants = (int) n.getProperty(DESCENDANT_KEY);
+//		double ic = (Math.log(nodeCount) - Math.log(descendants)) / Math.log(2);
+//		
+//		Transaction tx = db.beginTx();
+//		n.setProperty(IC_KEY, ic);
+//		tx.success();
+//		tx.finish();
+//		
+//		return ic;
 		
-		// Make all the descendants push up.
-		for (Node descendant : getUnpushedDescendants(n))
-		{
-			pushUp(descendant);
-		}
-		
-		// TODO: Everything related to IC will need to be recalculated to
-		// handle annotations.
-		int descendants = (int) n.getProperty(DESCENDANT_KEY);
-		double ic = (Math.log(nodeCount) - Math.log(descendants)) / Math.log(2);
-		
-		Transaction tx = db.beginTx();
-		n.setProperty(IC_KEY, ic);
-		tx.success();
-		tx.finish();
-		
-		return ic;
+		// FIXME: Uncomment the above.
+		return 1.0;
 	}
 	
 	/**
@@ -279,12 +282,6 @@ public class SciGraphTraverser {
 	 */
 	public Node getLCS(Node first, final Node second) {
 		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
-		System.out.println(firstAncestors);
-		
-		// FIXME: We don't do this yet.
-//		// We traverse the ancestors of the second node in order of decreasing IC,
-//		// so the first time we run across an ancestor of the first, we have the
-//		// LCS.
 		
 		// Find the first ancestor of the first node along each path from the second.
 		final Node [] lcs = {null};
@@ -292,9 +289,8 @@ public class SciGraphTraverser {
 		{
 			@Override
 			public Evaluation evaluate(Path path) {
-				System.out.println(path);
 				Node endNode = path.endNode();
-				if (getIC(lcs[0]) >= getIC(endNode))
+				if (getIC(lcs[0]) > getIC(endNode))
 				{
 					return Evaluation.EXCLUDE_AND_PRUNE;
 				}

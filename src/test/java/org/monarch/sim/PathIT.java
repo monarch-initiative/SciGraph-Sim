@@ -15,7 +15,7 @@ import org.neo4j.graphdb.Relationship;
 
 import com.tinkerpop.pipes.util.structures.Pair;
 
-public class PathTest {
+public class PathIT {
 
 	static PathFinder monarchPathFinder;
 	static PathFinder retinaPathFinder;
