@@ -1,5 +1,8 @@
 package org.monarch.sim;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,7 +64,7 @@ public class TraverserIT {
 	}
 	
 	@Test
-	public void test() {
+	public void test() throws IOException {
 		SciGraphTraverser traverser = new SciGraphTraverser(db, "test");
 		for (RelationshipType rt : GlobalGraphOperations.at(db).getAllRelationshipTypes())
 		{
@@ -71,22 +74,41 @@ public class TraverserIT {
 			}
 		}
 		
-		Node first = mapped.getNodeByFragment("MP:0020184");
-		Node second = mapped.getNodeByFragment("GO:0009608");
-		Node lcs = traverser.getLCS(first, second);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(mapped.nodeToString(first));
-		System.out.println(mapped.nodeToString(second));
-		System.out.println("LCS: " + mapped.nodeToString(lcs));
-		System.out.println();
-		
-		// FIXME: Add shortest path calculation to traverser.
-		List<Node> firstPath = Neo4jTraversals.getShortestPath(first, lcs);
-		List<Node> secondPath = Neo4jTraversals.getShortestPath(second, lcs);
-		printPath(firstPath);
-		System.out.println();
-		printPath(secondPath);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		BufferedReader reader = new BufferedReader(new FileReader("HPGO_non_obvious.tsv"));
+		String line;
+		while ((line = reader.readLine()) != null)
+		{
+			String [] pieces = line.split("\t");
+			Node first = mapped.getNodeByFragment(pieces[0]);
+			Node second = mapped.getNodeByFragment(pieces[3]);
+			
+			if (first == null)
+			{
+				System.out.println("Node " + pieces[0] + " does not exist.");
+				continue;
+			}
+			if (second == null)
+			{
+				System.out.println("Node " + pieces[3] + " does not exist.");
+				continue;
+			}
+			
+			Node lcs = traverser.getDummyLCS(first, second);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println(mapped.nodeToString(first));
+			System.out.println(mapped.nodeToString(second));
+			System.out.println("LCS: " + mapped.nodeToString(lcs));
+			System.out.println();
+
+			// FIXME: Add shortest path calculation to traverser.
+			List<Node> firstPath = Neo4jTraversals.getShortestPath(first, lcs);
+			List<Node> secondPath = Neo4jTraversals.getShortestPath(second, lcs);
+			printPath(firstPath);
+			System.out.println();
+			printPath(secondPath);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		}
+		reader.close();
 	}
 
 }

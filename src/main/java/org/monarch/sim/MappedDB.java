@@ -46,12 +46,31 @@ public class MappedDB {
 		
 		// String together the appropriate properties.
 		String str = "";
-		str += (String) n.getProperty("fragment", "");
-		str += " ";
-		str += (String) n.getProperty("http://www.w3.org/2000/01/rdf-schema#label", "");
+		if (n.hasProperty("fragment"))
+		{
+			str += n.getProperty("fragment") + " ";
+		}
+		if (n.hasProperty("label"))
+		{
+			Object label = n.getProperty("label");
+			if (label instanceof String [])
+			{
+				label = ((String []) label)[0];
+			}
+			str += label + " ";
+		}
+		else if (n.hasProperty("http://www.w3.org/2000/01/rdf-schema#label"))
+		{
+			Object label = n.getProperty("http://www.w3.org/2000/01/rdf-schema#label");
+			if (label instanceof String [])
+			{
+				label = ((String []) label)[0];
+			}
+			str += label + " ";
+		}
 		
 		// If we didn't find the desired properties, just use Neo4j's default representation.
-		if (str.equals(" "))
+		if (str.equals(""))
 		{
 			str = n.toString();
 		}

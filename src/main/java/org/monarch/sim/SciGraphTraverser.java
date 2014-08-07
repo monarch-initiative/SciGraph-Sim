@@ -280,7 +280,7 @@ public class SciGraphTraverser {
 	 * @param first		A node in the graph
 	 * @param second	Another node
 	 */
-	public Node getLCS(Node first, final Node second) {
+	public Node getLCS(Node first, Node second) {
 		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
 		
 		// Find the first ancestor of the first node along each path from the second.
@@ -319,6 +319,50 @@ public class SciGraphTraverser {
 		}
 		
 		return lcs[0];
+	}
+	
+	// FIXME: Remove this.
+	public Node getDummyLCS(Node first, Node second) {
+		final Set<Node> firstAncestors = (Set<Node>) getAncestors(first);
+		
+		// Find the first ancestor of the first node along each path from the second.
+		Evaluator evaluator = new Evaluator()
+		{
+			@Override
+			public Evaluation evaluate(Path path) {
+				Node endNode = path.endNode();
+				if (firstAncestors.contains(endNode))
+				{
+					return Evaluation.INCLUDE_AND_PRUNE;
+				}
+				else
+				{
+					return Evaluation.EXCLUDE_AND_CONTINUE;
+				}
+			}
+		};
+		
+		Iterable<Node> iter = basicDownwardTraversal
+				.reverse()
+				.evaluator(evaluator)
+				.traverse(second)
+				.nodes()
+				;
+		
+		Node lcs = null;
+		int minDist = Integer.MAX_VALUE;
+		
+		for (Node n : iter)
+		{
+			int dist = Neo4jTraversals.getShortestPath(first, n).size() + Neo4jTraversals.getShortestPath(second, n).size();
+			if (dist < minDist)
+			{
+				lcs = n;
+				minDist = dist;
+			}
+		}
+		
+		return lcs;
 	}
 	
 }
