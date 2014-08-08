@@ -11,14 +11,13 @@ import org.neo4j.graphdb.GraphDatabaseService;
 public class PhevorTest {
 	
 	static Phevor phevor;
-	static Collection<GraphDatabaseService> dbs;
 	static GraphDatabaseService completeDB;
 	static GraphDatabaseService treeDB;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-		dbs = new ArrayList<>();
+		Collection<GraphDatabaseService> dbs = new ArrayList<>();
 		completeDB = factory.buildCompleteDB(15);
 		dbs.add(completeDB);
 		treeDB = factory.buildTreeDB(15);

@@ -23,8 +23,9 @@ public class Phevor {
 	/**
 	 * Sets up the Phevor algorithm with the given linked ontologies.
 	 * 
-	 * @param dbs	The ontologies to use
-	 * @param links	The pairs of linked nodes
+	 * @param dbs		The ontologies to use
+	 * @param links		The pairs of linked nodes
+	 * @param edgeTypes	The names of valid types of edges
 	 */
 	public Phevor(Collection<GraphDatabaseService> dbs, Collection<String []> links, Collection<String> edgeTypes)
 	{
@@ -59,6 +60,17 @@ public class Phevor {
 		}
 		
 		throw new NotFoundException("Node " + canonical + " not found in any ontology.");
+	}
+	
+	/**
+	 * Finds the node associated with a fragment.
+	 * 
+	 * @param fragment	The fragment associated with the node
+	 */
+	public Node getNodeByFragment(String fragment) {
+		String canonical = makeCanonicalFragment(fragment);
+		
+		return fragmentMap.get(canonical);
 	}
 	
 	/**
@@ -124,7 +136,7 @@ public class Phevor {
 		double maxScore = 0;
 		for (String fragment : fragments)
 		{
-			double score = scoreMap.get(fragment);
+			double score = scoreMap.get(makeCanonicalFragment(fragment));
 			if (score > maxScore)
 			{
 				maxScore = score;
