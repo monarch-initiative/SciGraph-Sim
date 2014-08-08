@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.NotFoundException;
 
 public class Phevor {
 	
@@ -17,6 +18,12 @@ public class Phevor {
 	private double totalScore = 0;
 	private HashMap<String, Double> scoreMap = new HashMap<>();
 	
+	/**
+	 * Sets up the Phevor algorithm with the given linked ontologies.
+	 * 
+	 * @param dbs	The ontologies to use
+	 * @param links	The pairs of linked nodes
+	 */
 	public Phevor(Collection<GraphDatabaseService> dbs, Collection<String []> links)
 	{
 		ontologies = new LinkedList<>();
@@ -32,20 +39,31 @@ public class Phevor {
 		this.links = links;
 	}
 	
+	private String makeCanonicalFragment(String fragment) {
+		return fragment.replaceAll("_", ":");
+	}
+	
 	private double getScore(String fragment) {
+		String canonical = makeCanonicalFragment(fragment);
+		
 		// Find the right ontology and get the score from it.
 		for (PhevorDB ontology : ontologies)
 		{
-			if (ontology.containsFragment(fragment))
+			
+			if (ontology.containsFragment(canonical))
 			{
-				return ontology.getScore(fragment);
+				return ontology.getScore(canonical);
 			}
 		}
 		
-		// FIXME: This should throw an error.
-		return -1;
+		throw new NotFoundException("Node " + canonical + " not found in any ontology.");
 	}
 	
+	/**
+	 * Sets the nodes to expand with the Phevor algorithm.
+	 * 
+	 * @param fragments	The fragments associated with the nodes.
+	 */
 	public void setBaseNodes(Collection<String> fragments) {
 		// Reset scores.
 		totalScore = 0;
@@ -57,9 +75,10 @@ public class Phevor {
 			LinkedList<Node> relevantNodes = new LinkedList<>();
 			for (String fragment : fragments)
 			{
-				if (ontology.containsFragment(fragment))
+				String canonical = makeCanonicalFragment(fragment);
+				if (ontology.containsFragment(canonical))
 				{
-					relevantNodes.add(fragmentMap.get(fragment));
+					relevantNodes.add(fragmentMap.get(canonical));
 				}
 			}
 			
@@ -83,15 +102,22 @@ public class Phevor {
 		// Fill the score map.
 		for (String fragment : fragmentMap.keySet())
 		{
-			if (!scoreMap.containsKey(fragment))
+			String canonical = makeCanonicalFragment(fragment);
+			if (!scoreMap.containsKey(canonical))
 			{
-				scoreMap.put(fragment, getScore(fragment));
+				scoreMap.put(canonical, getScore(canonical));
 			}
 			
-			scoreMap.put(fragment, scoreMap.get(fragment) / totalScore);
+			scoreMap.put(canonical, scoreMap.get(canonical) / totalScore);
 		}
 	}
 	
+	/**
+	 * Compares a set of nodes with the previously set base nodes.
+	 * This assumes base nodes have already been set.
+	 * 
+	 * @param fragments	The fragments associated with the nodes
+	 */
 	public double compareOtherNodes(Collection<String> fragments) {
 		double maxScore = 0;
 		for (String fragment : fragments)
@@ -105,6 +131,9 @@ public class Phevor {
 		return maxScore;
 	}
 	
+	/**
+	 * Closes all the open resources.
+	 */
 	public void close() {
 		for (PhevorDB ontology : ontologies)
 		{
