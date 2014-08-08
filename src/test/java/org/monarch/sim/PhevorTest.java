@@ -11,14 +11,13 @@ import org.neo4j.graphdb.GraphDatabaseService;
 public class PhevorTest {
 	
 	static Phevor phevor;
-	static Collection<GraphDatabaseService> dbs;
 	static GraphDatabaseService completeDB;
 	static GraphDatabaseService treeDB;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		TestGraphFactory factory = new TestGraphFactory();
-		dbs = new ArrayList<>();
+		Collection<GraphDatabaseService> dbs = new ArrayList<>();
 		completeDB = factory.buildCompleteDB(15);
 		dbs.add(completeDB);
 		treeDB = factory.buildTreeDB(15);
@@ -26,7 +25,9 @@ public class PhevorTest {
 		ArrayList<String []> links = new ArrayList<>();
 		String [] link = {"TREE:4", "COMPLETE:3"};
 		links.add(link);
-		phevor = new Phevor(dbs, links);
+		ArrayList<String> edgeTypes = new ArrayList<>();
+		edgeTypes.add("SUBCLASS_OF");
+		phevor = new Phevor(dbs, links, edgeTypes);
 	}
 
 	@AfterClass

@@ -91,7 +91,6 @@ public class SciGraphTraverser {
 	 * Adds a type of relationship to traverse along.
 	 * 
 	 * @param typeName	The name of the type of relationship
-	 * @param dir		Which direction is 'up'
 	 */
 	public void relationships(String typeName) {
 		relationships(typeName, Direction.BOTH);

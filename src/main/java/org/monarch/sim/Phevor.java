@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.NotFoundException;
+import org.neo4j.graphdb.RelationshipType;
 
 public class Phevor {
 	
@@ -17,13 +20,20 @@ public class Phevor {
 	private double totalScore = 0;
 	private HashMap<String, Double> scoreMap = new HashMap<>();
 	
-	public Phevor(Collection<GraphDatabaseService> dbs, Collection<String []> links)
+	/**
+	 * Sets up the Phevor algorithm with the given linked ontologies.
+	 * 
+	 * @param dbs		The ontologies to use
+	 * @param links		The pairs of linked nodes
+	 * @param edgeTypes	The names of valid types of edges
+	 */
+	public Phevor(Collection<GraphDatabaseService> dbs, Collection<String []> links, Collection<String> edgeTypes)
 	{
 		ontologies = new LinkedList<>();
 		fragmentMap = new HashMap<>();
 		for (GraphDatabaseService db : dbs)
 		{
-			PhevorDB ontology = new PhevorDB(db);
+			PhevorDB ontology = new PhevorDB(db, edgeTypes);
 			ontologies.add(ontology);
 			// FIXME: This doesn't work if any nodes have the same fragment.
 			fragmentMap.putAll(ontology.getFragmentMap());
@@ -32,20 +42,42 @@ public class Phevor {
 		this.links = links;
 	}
 	
+	private String makeCanonicalFragment(String fragment) {
+		return fragment.replaceAll("_", ":");
+	}
+	
 	private double getScore(String fragment) {
+		String canonical = makeCanonicalFragment(fragment);
+		
 		// Find the right ontology and get the score from it.
 		for (PhevorDB ontology : ontologies)
 		{
-			if (ontology.containsFragment(fragment))
+			
+			if (ontology.containsFragment(canonical))
 			{
-				return ontology.getScore(fragment);
+				return ontology.getScore(canonical);
 			}
 		}
 		
-		// FIXME: This should throw an error.
-		return -1;
+		throw new NotFoundException("Node " + canonical + " not found in any ontology.");
 	}
 	
+	/**
+	 * Finds the node associated with a fragment.
+	 * 
+	 * @param fragment	The fragment associated with the node
+	 */
+	public Node getNodeByFragment(String fragment) {
+		String canonical = makeCanonicalFragment(fragment);
+		
+		return fragmentMap.get(canonical);
+	}
+	
+	/**
+	 * Sets the nodes to expand with the Phevor algorithm.
+	 * 
+	 * @param fragments	The fragments associated with the nodes.
+	 */
 	public void setBaseNodes(Collection<String> fragments) {
 		// Reset scores.
 		totalScore = 0;
@@ -57,9 +89,10 @@ public class Phevor {
 			LinkedList<Node> relevantNodes = new LinkedList<>();
 			for (String fragment : fragments)
 			{
-				if (ontology.containsFragment(fragment))
+				String canonical = makeCanonicalFragment(fragment);
+				if (ontology.containsFragment(canonical))
 				{
-					relevantNodes.add(fragmentMap.get(fragment));
+					relevantNodes.add(fragmentMap.get(canonical));
 				}
 			}
 			
@@ -83,20 +116,27 @@ public class Phevor {
 		// Fill the score map.
 		for (String fragment : fragmentMap.keySet())
 		{
-			if (!scoreMap.containsKey(fragment))
+			String canonical = makeCanonicalFragment(fragment);
+			if (!scoreMap.containsKey(canonical))
 			{
-				scoreMap.put(fragment, getScore(fragment));
+				scoreMap.put(canonical, getScore(canonical));
 			}
 			
-			scoreMap.put(fragment, scoreMap.get(fragment) / totalScore);
+			scoreMap.put(canonical, scoreMap.get(canonical) / totalScore);
 		}
 	}
 	
+	/**
+	 * Finds how closely related a set of nodes is to the set of base nodes.
+	 * This assumes base nodes have already been set.
+	 * 
+	 * @param fragments	The fragments associated with the nodes
+	 */
 	public double compareOtherNodes(Collection<String> fragments) {
 		double maxScore = 0;
 		for (String fragment : fragments)
 		{
-			double score = scoreMap.get(fragment);
+			double score = scoreMap.get(makeCanonicalFragment(fragment));
 			if (score > maxScore)
 			{
 				maxScore = score;
@@ -105,6 +145,9 @@ public class Phevor {
 		return maxScore;
 	}
 	
+	/**
+	 * Closes all the open resources.
+	 */
 	public void close() {
 		for (PhevorDB ontology : ontologies)
 		{
@@ -115,14 +158,32 @@ public class Phevor {
 	private class PhevorDB extends MappedDB {
 
 		double totalScore = 0;
-		HashMap<Node, Double> scoreMap = new HashMap<>(); 
+		HashMap<Node, Double> scoreMap = new HashMap<>();
+		SciGraphTraverser traverser = new SciGraphTraverser(db, "phevor");
 
 		public PhevorDB(String url, String graphLocation, boolean forceLoad) {
 			super(url, graphLocation, forceLoad);
 		}
 
-		public PhevorDB(GraphDatabaseService oldDB) {
-			super(oldDB);
+		public PhevorDB(GraphDatabaseService db) {
+			super(db);
+		}
+		
+		public PhevorDB(GraphDatabaseService db, Collection<String> edgeTypes) {
+			super(db);
+			for (String edgeType : edgeTypes)
+			{
+				try
+				{
+					// FIXME: There should be a way to specify direction.
+					traverser.relationships(edgeType, Direction.INCOMING);
+				}
+				catch (NotFoundException e)
+				{
+					// Some edge types may be in only one ontology, so
+					// we shouldn't worry if an edge type isn't found.
+				}
+			}
 		}
 
 		private void updateHashMap(HashMap<Node, Double> map, Node n, double change) {
@@ -160,7 +221,7 @@ public class Phevor {
 				for (Node parent : parents.keySet())
 				{
 					double nextLevelScore = parents.get(parent) / 2;
-					Iterable<Node> grandparents = Neo4jTraversals.getParents(parent);
+					Iterable<Node> grandparents = traverser.getParents(parent);
 					for (Node grandparent : grandparents)
 					{
 						updateHashMap(newParents, grandparent, nextLevelScore);
@@ -170,7 +231,7 @@ public class Phevor {
 				for (Node child : children.keySet())
 				{
 					double nextLevelScore = children.get(child) / 2;
-					Iterable<Node> grandchildren = Neo4jTraversals.getChildren(child);
+					Iterable<Node> grandchildren = traverser.getChildren(child);
 					for (Node grandchild : grandchildren)
 					{
 						updateHashMap(newChildren, grandchild, nextLevelScore);

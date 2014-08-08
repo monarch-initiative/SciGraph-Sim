@@ -34,8 +34,8 @@ public class MappedDB {
 		}
 	}
 	
-	protected String makeCanonicalFragment(String data) {
-		return data.replaceAll("_", ":");
+	protected String makeCanonicalFragment(String fragment) {
+		return fragment.replaceAll("_", ":");
 	}
 	
 	public String nodeToString(Node n) {
@@ -48,7 +48,7 @@ public class MappedDB {
 		String str = "";
 		if (n.hasProperty("fragment"))
 		{
-			str += n.getProperty("fragment") + " ";
+			str += makeCanonicalFragment((String) n.getProperty("fragment")) + " ";
 		}
 		if (n.hasProperty("label"))
 		{
