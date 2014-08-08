@@ -26,7 +26,9 @@ public class PhevorTest {
 		ArrayList<String []> links = new ArrayList<>();
 		String [] link = {"TREE:4", "COMPLETE:3"};
 		links.add(link);
-		phevor = new Phevor(dbs, links);
+		ArrayList<String> edgeTypes = new ArrayList<>();
+		edgeTypes.add("SUBCLASS_OF");
+		phevor = new Phevor(dbs, links, edgeTypes);
 	}
 
 	@AfterClass
