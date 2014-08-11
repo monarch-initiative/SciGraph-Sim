@@ -26,8 +26,8 @@ public class PhevorIT {
 //				new File("src/test/resources/ontologies/retina-test.owl").getAbsolutePath(),
 //				"target/retina", true);
 		db = new GraphFactory().buildOntologyDB(
-			new File("src/test/resources/ontologies/mouse-go-plus-phenotype-importer.owl").getAbsolutePath(),
-			"target/mouse-go-plus-phenotype-importer", false);
+			new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath(),
+			"target/mouse-go-plus-phenotype-importer", true);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		Collection<GraphDatabaseService> dbs = new ArrayList<>();
 		dbs.add(db);
