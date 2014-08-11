@@ -1,0 +1,3 @@
+Ontology: <http://examples.org/mouse-go-plus-phenotype-importer.owl>
+  Import: <http://purl.obolibrary.org/obo/upheno/data/mouse-gene-phenotype.ttl>
+  Import: <http://purl.obolibrary.org/obo/go.owl
