@@ -18,22 +18,26 @@ import org.neo4j.tooling.GlobalGraphOperations;
 public class PhevorIT {
 	
 	static Phevor phevor;
-	static GraphDatabaseService retinaDB;
+	static GraphDatabaseService db;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		retinaDB = new GraphFactory().buildOntologyDB(
-				new File("src/test/resources/ontologies/retina-test.owl").getAbsolutePath(),
-				"target/retina", true);
+//		db = new GraphFactory().buildOntologyDB(
+//				new File("src/test/resources/ontologies/retina-test.owl").getAbsolutePath(),
+//				"target/retina", true);
+		db = new GraphFactory().buildOntologyDB(
+			new File("src/test/resources/ontologies/mouse-go-plus-phenotype-importer.owl").getAbsolutePath(),
+			"target/mouse-go-plus-phenotype-importer", false);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		Collection<GraphDatabaseService> dbs = new ArrayList<>();
-		dbs.add(retinaDB);
+		dbs.add(db);
 		Collection<String []> links = new ArrayList<>();
 		Collection<String> edgeTypes = new ArrayList<>();
 		Collection<String> excluded = new HashSet<>();
 		excluded.add("SUPERCLASS_OF");
 		excluded.add("PROPERTY");
 		excluded.add("inSubset");		
-		for (RelationshipType edgeType : GlobalGraphOperations.at(retinaDB).getAllRelationshipTypes())
+		for (RelationshipType edgeType : GlobalGraphOperations.at(db).getAllRelationshipTypes())
 		{
 			String typeName = edgeType.name();
 			if (!excluded.contains(typeName))
@@ -51,7 +55,7 @@ public class PhevorIT {
 	
 	private Collection<String> getSampleFragments(int count) {
 		ArrayList<String> fragments = new ArrayList<>();
-		for (Node n : GlobalGraphOperations.at(retinaDB).getAllNodes())
+		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
 		{
 			if (n.getId() != 0)
 			{
@@ -122,7 +126,7 @@ public class PhevorIT {
 	
 	private ArrayList<Pair> getSortedScores() {
 		ArrayList<Pair> scores = new ArrayList<>();
-		for (Node n : GlobalGraphOperations.at(retinaDB).getAllNodes())
+		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
 		{
 			if (n.getId() != 0)
 			scores.add(new Pair(n));

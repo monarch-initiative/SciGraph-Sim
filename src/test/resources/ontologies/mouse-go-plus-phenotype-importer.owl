@@ -1,3 +1,4 @@
 Ontology: <http://examples.org/mouse-go-plus-phenotype-importer.owl>
-  Import: <http://purl.obolibrary.org/obo/upheno/data/mouse-gene-phenotype.ttl>
+  Import: <http://purl.obolibrary.org/obo/upheno/data/mouse-gene-phenotype.owl>
+  Import: <http://purl.obolibrary.org/obo/upheno/data/mouse-gene-GO-map.owl>
   Import: <http://purl.obolibrary.org/obo/upheno/monarch.owl>
