@@ -31,9 +31,6 @@ public class PhevorIT {
 		db = new GraphFactory().buildOntologyDB(
 			new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath(),
 			"target/mouse-go-importer", false);
-		Collection<GraphDatabaseService> dbs = new ArrayList<>();
-		dbs.add(db);
-		Collection<String []> links = new ArrayList<>();
 		Collection<String> edgeTypes = new ArrayList<>();
 //		Collection<String> excluded = new HashSet<>();
 //		excluded.add("SUPERCLASS_OF");
@@ -48,7 +45,7 @@ public class PhevorIT {
 //			}
 //		}
 		edgeTypes.add("SUBCLASS_OF");
-		phevor = new Phevor(dbs, links, edgeTypes);
+		phevor = new Phevor(db, edgeTypes);
 	}
 
 	@AfterClass
@@ -86,6 +83,11 @@ public class PhevorIT {
 	}
 	
 	private String nodeToString(Node n) {
+		if (n == null)
+		{
+			return "null";
+		}
+		
 		String str = "";
 		if (n.hasProperty("fragment"))
 		{
@@ -171,9 +173,9 @@ public class PhevorIT {
 		
 		Collection<String> fragments = getSampleFragments(baseFragments);
 		System.out.println("~~ Base nodes ~~");
-		for (String f : fragments)
+		for (String fragment : fragments)
 		{
-			System.out.println(nodeToString(phevor.getNodeByFragment(f)));
+			System.out.println(nodeToString(phevor.getNodeByFragment(fragment)));
 		}
 		System.out.println("~~~~~~~~~~~~~~~~");
 		System.out.println();
