@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
@@ -69,6 +70,7 @@ public class GraphFactory {
 		tx.finish();
 	}
 	
+	// TODO: Some old test cases still assume this is used. They should be cleaned up.
 	private GraphDatabaseService setAllIC(GraphDatabaseService db)
 	{
 		logger.info("Starting setAllIC");
@@ -76,14 +78,8 @@ public class GraphFactory {
 		logger.info("Finished setAllIC");
 		return db;
 	}
-	
-	// TODO: Set IC scores as we need them.
-	public GraphDatabaseService loadOntologyDB(String graphLocation) {
-		GraphDatabaseService db = loadOntologyDBHelper(graphLocation);
-		return setAllIC(db);
-	}
 
-	private GraphDatabaseService loadOntologyDBHelper(String graphLocation) {
+	private GraphDatabaseService loadOntologyDB(String graphLocation) {
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
 		return db;
 	}
@@ -108,7 +104,7 @@ public class GraphFactory {
 				FileUtils.deleteDirectory(new File(absolutePath));
 				
 				OwlUtil.loadOntology(url, graphLocation);
-				db = loadOntologyDBHelper(graphLocation);
+				db = loadOntologyDB(graphLocation);
 				
 				// Create the flag once the ontology is built.
 				new File(flagPath).createNewFile();
@@ -120,10 +116,48 @@ public class GraphFactory {
 		// Otherwise, we've already got the graph stored, and we can use that.
 		else
 		{
-			db = factory.loadOntologyDBHelper(graphLocation);
+			db = factory.loadOntologyDB(graphLocation);
 		}
 		
-		return setAllIC(db);
+		return db;
+	}
+	
+	public GraphDatabaseService buildOntologyDB(Collection<String> urls, String graphLocation) {
+		return buildOntologyDB(urls, graphLocation, true);
+	}
+	
+	public GraphDatabaseService buildOntologyDB(Collection<String> urls, String graphLocation, boolean forceRebuild) {
+		GraphFactory factory = new GraphFactory();
+		GraphDatabaseService db = null;
+		
+		String absolutePath = new File(graphLocation).getAbsolutePath();
+		String flagPath = absolutePath + "/buildCompletedFlag";
+		
+		// If we were told to rebuild or the flag isn't set, build from
+		// the given url.
+		if (forceRebuild || !Files.exists(Paths.get(flagPath)))
+		{
+			try {
+				// Make sure there's nothing there to get in the way.
+				FileUtils.deleteDirectory(new File(absolutePath));
+				
+				OwlUtil.loadOntology(urls, graphLocation);
+				db = loadOntologyDB(graphLocation);
+				
+				// Create the flag once the ontology is built.
+				new File(flagPath).createNewFile();
+			} catch (IOException e) {
+				// FIXME: This should be handled better.
+				System.out.println(e.getMessage());
+			}
+		}
+		// Otherwise, we've already got the graph stored, and we can use that.
+		else
+		{
+			db = factory.loadOntologyDB(graphLocation);
+		}
+		
+		return db;
 	}
 	
 }

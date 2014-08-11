@@ -36,12 +36,7 @@ public class Phevor {
 	
 	private double getScore(String fragment) {
 		String canonical = makeCanonicalFragment(fragment);
-		if (ontology.containsFragment(canonical))
-		{
-			return ontology.getScore(canonical);
-		}
-		
-		throw new NotFoundException("Node " + canonical + " not found in the ontology.");
+		return ontology.getScore(canonical);
 	}
 	
 	/**
@@ -69,10 +64,7 @@ public class Phevor {
 		for (String fragment : fragments)
 		{
 			String canonical = makeCanonicalFragment(fragment);
-			if (ontology.containsFragment(canonical))
-			{
-				relevantNodes.add(fragmentMap.get(canonical));
-			}
+			relevantNodes.add(fragmentMap.get(canonical));
 		}
 
 		// Set the base nodes appropriately.

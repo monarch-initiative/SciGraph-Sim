@@ -25,12 +25,9 @@ public class PhevorIT {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-//		db = new GraphFactory().buildOntologyDB(
-//				new File("src/test/resources/ontologies/retina-test.owl").getAbsolutePath(),
-//				"target/retina", true);
-		db = new GraphFactory().buildOntologyDB(
-			new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath(),
-			"target/mouse-go-importer", false);
+		Collection<String> urls = new ArrayList<>();
+		urls.add(new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath());
+		db = new GraphFactory().buildOntologyDB(urls, "target/mouse-go-importer", false);
 		Collection<String> edgeTypes = new ArrayList<>();
 //		Collection<String> excluded = new HashSet<>();
 //		excluded.add("SUPERCLASS_OF");
