@@ -15,7 +15,7 @@ public class Phevor {
 	private HashMap<String, Node> fragmentMap;
 	private Collection<String []> links;
 	// FIXME: Remove this magic number.
-	private static final int RELEVANT_STEPS = 10;
+	private static final int RELEVANT_STEPS = 15;
 	private double totalScore = 0;
 	private HashMap<String, Double> scoreMap = new HashMap<>();
 	

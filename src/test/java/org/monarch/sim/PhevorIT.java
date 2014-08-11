@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.tooling.GlobalGraphOperations;
 
@@ -27,24 +30,24 @@ public class PhevorIT {
 //				"target/retina", true);
 		db = new GraphFactory().buildOntologyDB(
 			new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath(),
-			"target/mouse-go-plus-phenotype-importer", true);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			"target/mouse-go-importer", false);
 		Collection<GraphDatabaseService> dbs = new ArrayList<>();
 		dbs.add(db);
 		Collection<String []> links = new ArrayList<>();
 		Collection<String> edgeTypes = new ArrayList<>();
-		Collection<String> excluded = new HashSet<>();
-		excluded.add("SUPERCLASS_OF");
-		excluded.add("PROPERTY");
-		excluded.add("inSubset");		
-		for (RelationshipType edgeType : GlobalGraphOperations.at(db).getAllRelationshipTypes())
-		{
-			String typeName = edgeType.name();
-			if (!excluded.contains(typeName))
-			{
-				edgeTypes.add(typeName);
-			}
-		}
+//		Collection<String> excluded = new HashSet<>();
+//		excluded.add("SUPERCLASS_OF");
+//		excluded.add("PROPERTY");
+//		excluded.add("inSubset");		
+//		for (RelationshipType edgeType : GlobalGraphOperations.at(db).getAllRelationshipTypes())
+//		{
+//			String typeName = edgeType.name();
+//			if (!excluded.contains(typeName))
+//			{
+//				edgeTypes.add(typeName);
+//			}
+//		}
+		edgeTypes.add("SUBCLASS_OF");
 		phevor = new Phevor(dbs, links, edgeTypes);
 	}
 
@@ -72,8 +75,11 @@ public class PhevorIT {
 				break;
 			}
 			
-			first.add(fragment);
-			count--;
+			if (fragment.startsWith("MP_"))
+			{
+				first.add(fragment);
+				count--;
+			}
 		}
 		
 		return first;
@@ -149,7 +155,21 @@ public class PhevorIT {
 
 	@Test
 	public void test() {
-		Collection<String> fragments = getSampleFragments(5);
+		int baseFragments = 5;
+		int relevantNodes = 10;
+		
+		Map<String, RelationshipType> edgeTypes = new HashMap<>();
+		System.out.println("~~ Edge types ~~");
+		for (RelationshipType edgeType : GlobalGraphOperations.at(db).getAllRelationshipTypes())
+		{
+			String typeName = edgeType.toString();
+			System.out.println(typeName);
+			edgeTypes.put(typeName, edgeType);
+		}
+		System.out.println("~~~~~~~~~~~~~~~~");
+		System.out.println();
+		
+		Collection<String> fragments = getSampleFragments(baseFragments);
 		System.out.println("~~ Base nodes ~~");
 		for (String f : fragments)
 		{
@@ -160,18 +180,24 @@ public class PhevorIT {
 		
 		phevor.setBaseNodes(fragments);
 		
-		int relevant = 10;
+		System.out.println("~~ Related nodes ~~");
 		ArrayList<Pair> scores = getSortedScores();
 		for (Pair pair : scores)
 		{
-			if (relevant == 0)
+			if (relevantNodes == 0)
 			{
 				break;
 			}
-			relevant--;
+			relevantNodes--;
 			
-			System.out.println(nodeToString(pair.node) + " --  " + pair.score);
+			Node node = pair.node;
+			System.out.println(nodeToString(node) + " --  " + pair.score);
+			for (Relationship edge : node.getRelationships(Direction.INCOMING, edgeTypes.get("RO_0002200")))
+			{
+				System.out.println("\tGENE: " + nodeToString(edge.getStartNode()));
+			}
 		}
+		System.out.println("~~~~~~~~~~~~~~~~~~~");
 	}
 
 }
