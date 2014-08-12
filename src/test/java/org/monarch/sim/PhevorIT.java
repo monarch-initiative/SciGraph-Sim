@@ -31,7 +31,6 @@ public class PhevorIT {
 	public static void setUpBeforeClass() throws Exception {
 		Collection<String> urls = new ArrayList<>();
 		urls.add(new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath());
-		urls.add(new File("src/test/resources/ontologies/mouse-gene-GO.ttl").getAbsolutePath());
 		db = new GraphFactory().buildOntologyDB(urls, "target/mouse-go-importer", false);
 		preprocessDB();
 		Collection<String> edgeTypes = new ArrayList<>();
