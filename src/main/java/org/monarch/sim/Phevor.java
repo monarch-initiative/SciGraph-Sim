@@ -40,6 +40,15 @@ public class Phevor {
 	}
 	
 	/**
+	 * Gets a nice string representation of a node.
+	 * 
+	 * @param n	The node to represent
+	 */
+	public String nodeToString(Node n) {
+		return ontology.nodeToString(n);
+	}
+	
+	/**
 	 * Finds the node associated with a fragment.
 	 * 
 	 * @param fragment	The fragment associated with the node
