@@ -31,8 +31,12 @@ public class PhevorIT {
 	public static void setUpBeforeClass() throws Exception {
 		Collection<String> urls = new ArrayList<>();
 		urls.add(new File("src/test/resources/ontologies/mouse-go-importer.owl").getAbsolutePath());
-		db = new GraphFactory().buildOntologyDB(urls, "target/mouse-go-importer", false);
-		preprocessDB();
+		db = new GraphFactory().buildOntologyDB(urls, "target/slowGraph", false);
+//		System.out.println("Cleaning up extra edges");
+//		postprocessDB();
+//		System.out.println("Preprocessing");
+//		preprocessDB();
+//		System.out.println("Finished preprocessing.");
 		Collection<String> edgeTypes = new ArrayList<>();
 //		Collection<String> excluded = new HashSet<>();
 //		excluded.add("SUPERCLASS_OF");
@@ -54,10 +58,21 @@ public class PhevorIT {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		phevor.close();
-		postprocessDB();
+//		postprocessDB();
 	}
 	
 	private static void preprocessDB() {
+		// Get the type of edge we actually care about.
+		RelationshipType edgeType = null;
+		for (RelationshipType type : GlobalGraphOperations.at(db).getAllRelationshipTypes())
+		{
+			if (type.name().equals("RO_0002200"))
+			{
+				edgeType = type;
+				break;
+			}
+		}
+		
 		// Find all GO and MP nodes annotated with the same gene.
 		// TODO: Make this less horrifying.
 		for (Node go : GlobalGraphOperations.at(db).getAllNodes())
@@ -72,33 +87,29 @@ public class PhevorIT {
 				continue;
 			}
 			
-			for (Relationship goEdge : go.getRelationships(Direction.INCOMING))
+			for (Relationship goEdge : go.getRelationships(Direction.INCOMING, edgeType))
 			{
-				if (! ((String) goEdge.getType().toString()).equals("RO_0002200"))
-				{
-					continue;
-				}
 				
 				Node gene = goEdge.getStartNode();
 				
-				for (Relationship mpEdge : gene.getRelationships(Direction.OUTGOING))
+				for (Relationship mpEdge : gene.getRelationships(Direction.OUTGOING, edgeType))
 				{
-					if (! ((String) mpEdge.getType().toString()).equals("RO_0002200"))
+					Node mp = mpEdge.getEndNode();
+					
+					if (! ((String) mp.getProperty("fragment")).startsWith("MP"))
 					{
 						continue;
 					}
 					
-					Node mp = mpEdge.getEndNode();
-					
-					RelationshipType edgeType = new RelationshipType() {						
+					RelationshipType extraEdgeType = new RelationshipType() {						
 						@Override
 						public String name() {
 							return FAKE_EDGE;
 						}
 					};
 					Transaction tx = db.beginTx();
-					go.createRelationshipTo(mp, edgeType);
-					mp.createRelationshipTo(go, edgeType);
+					go.createRelationshipTo(mp, extraEdgeType);
+					mp.createRelationshipTo(go, extraEdgeType);
 					tx.success();
 					tx.finish();
 				}
@@ -111,7 +122,7 @@ public class PhevorIT {
 		Transaction tx;
 		for (Relationship edge : GlobalGraphOperations.at(db).getAllRelationships())
 		{
-			if (edge.getType().toString().equals(FAKE_EDGE))
+			if (edge.getType().name().equals(FAKE_EDGE))
 			{
 				tx = db.beginTx();
 				edge.delete();
@@ -143,7 +154,7 @@ public class PhevorIT {
 			}
 			
 			// FIXME: This should be more general.
-			if (fragment.startsWith("MP"))
+			if (fragment.startsWith("GO"))
 			{
 				first.add(fragment);
 				count--;
@@ -197,7 +208,8 @@ public class PhevorIT {
 	@Test
 	public void test() {
 		int baseFragments = 5;
-		int relevantNodes = 10;
+		int relevantNodes = 50;
+		int relevantGenes = 10;
 		
 		Map<String, RelationshipType> edgeTypes = new HashMap<>();
 		System.out.println("~~ Edge types ~~");
@@ -232,10 +244,17 @@ public class PhevorIT {
 			relevantNodes--;
 			
 			Node node = pair.node;
-			System.out.println(nodeToString(node) + " --  " + pair.score);
+			System.out.println(nodeToString(node) + " --  " + (pair.score * 1_000_000));
+			int geneCount = 0;
 			for (Relationship edge : node.getRelationships(Direction.INCOMING, edgeTypes.get("RO_0002200")))
 			{
+				if (geneCount == relevantGenes)
+				{
+					System.out.println("\t...");
+					break;
+				}
 				System.out.println("\tGENE: " + nodeToString(edge.getStartNode()));
+				geneCount++;
 			}
 		}
 		System.out.println("~~~~~~~~~~~~~~~~~~~");

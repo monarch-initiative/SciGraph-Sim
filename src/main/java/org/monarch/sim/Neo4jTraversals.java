@@ -191,11 +191,12 @@ public class Neo4jTraversals {
 				continue;
 			}
 			
-			// If we've gone too far up, don't expand.
-			if ((Double) lastNode.getProperty("IC") < (Double) second.getProperty("IC"))
-			{
-				continue;
-			}
+			// FIXME: Remove this.
+//			// If we've gone too far up, don't expand.
+//			if ((Double) lastNode.getProperty("IC") < (Double) second.getProperty("IC"))
+//			{
+//				continue;
+//			}
 			
 			// Extend the path to all parents.
 			for (Node parent : getParents(lastNode))

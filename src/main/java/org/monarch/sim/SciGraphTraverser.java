@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -22,6 +23,8 @@ import org.neo4j.kernel.Uniqueness;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class SciGraphTraverser {
+	
+	private static final Logger logger = Logger.getLogger(SciGraphTraverser.class.getName());
 	
 	private static final int traversalCachedNodes = 10000;
 
@@ -233,6 +236,21 @@ public class SciGraphTraverser {
 		}
 	}
 	
+	public void pushAllNodes() {
+		logger.info("Beginning pushAllNodes()");
+		int count = 0;
+		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
+		{
+			pushUp(n);
+			count++;
+			if (count % 100 == 0)
+			{
+				logger.info("Pushed " + count + " nodes");
+			}
+		}
+		logger.info("Finished pushAllNodes()");
+	}
+	
 	/**
 	 * Finds the IC score of a given node.
 	 * 
@@ -363,5 +381,7 @@ public class SciGraphTraverser {
 		
 		return lcs;
 	}
+	
+	// FIXME: There should be an optional cleanup method to remove all the extra properties.
 	
 }
