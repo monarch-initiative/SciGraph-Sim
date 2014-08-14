@@ -72,6 +72,14 @@ public class PhevorIT {
 				break;
 			}
 		}
+
+		// Create an edge type for linking MP and GO.
+		RelationshipType extraEdgeType = new RelationshipType() {						
+			@Override
+			public String name() {
+				return FAKE_EDGE;
+			}
+		};
 		
 		// Find all GO and MP nodes annotated with the same gene.
 		// TODO: Make this less horrifying.
@@ -100,13 +108,6 @@ public class PhevorIT {
 					{
 						continue;
 					}
-					
-					RelationshipType extraEdgeType = new RelationshipType() {						
-						@Override
-						public String name() {
-							return FAKE_EDGE;
-						}
-					};
 					Transaction tx = db.beginTx();
 					go.createRelationshipTo(mp, extraEdgeType);
 					mp.createRelationshipTo(go, extraEdgeType);

@@ -65,7 +65,7 @@ public class SciGraphTraverser {
 		}
 		
 		PUSHED_KEY = name + "_pushed";
-		DESCENDANT_KEY = name + "_descendnts";
+		DESCENDANT_KEY = name + "_descendants";
 		IC_KEY = name + "_ic";
 	}
 	
