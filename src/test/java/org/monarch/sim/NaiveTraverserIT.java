@@ -13,7 +13,7 @@ public class NaiveTraverserIT {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		db = new TestGraphFactory().buildCompleteDB(10000);
+		db = new GraphFactory().buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
 		mapped = new MappedDB(db);
 	}
 
@@ -25,7 +25,6 @@ public class NaiveTraverserIT {
 	@Test
 	public void test() {
 		long start, end;
-		Node base = mapped.getNodeByFragment("COMPLETE:4");
 		NaiveTraverser traverser = new NaiveTraverser(db, "test");
 		
 		System.out.println("STARTING");
@@ -33,7 +32,6 @@ public class NaiveTraverserIT {
 		traverser.pushAllNodes();
 		end = System.nanoTime();
 		System.out.println((end - start) / 1_000_000);
-		System.out.println(traverser.getIC(base));
 		System.out.println("FINISHED");
 //		
 //		System.out.println("CHILDREN:");

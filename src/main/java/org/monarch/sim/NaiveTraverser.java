@@ -253,7 +253,8 @@ public class NaiveTraverser {
 			// Take the union of all the children's descendants.
 			for (Node child : getChildren(next))
 			{
-				topSortMap.get(next).nodesBelow.addAll(topSortMap.get(child).nodesBelow);
+				PushNodesInfo childInfo = topSortMap.get(child);
+				topSortMap.get(next).nodesBelow.addAll(childInfo.nodesBelow);				
 			}
 			
 			// Save the number of descendants.
@@ -264,10 +265,6 @@ public class NaiveTraverser {
 	private class PushNodesInfo {
 		public Set<Node> nodesBelow = new HashSet<>();
 		public int unpushedChildrern = 0;
-		
-		// TODO: Cache and clean up for efficiency.
-//		double ic = -1;
-//		public int unpushedParents = 0;
 	}
 
 	/**
