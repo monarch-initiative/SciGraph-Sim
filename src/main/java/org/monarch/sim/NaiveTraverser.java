@@ -263,12 +263,13 @@ public class NaiveTraverser {
 				{
 					topSortMap.remove(child);
 				}
-				
 			}
 			
 			// Save the number of descendants.
 			nodesBelowMap.put(next, topSortMap.get(next).nodesBelow.size());
 		}
+		
+		System.out.println(topSortMap.size() + " nodes not handled");
 	}
 	
 	private class PushNodesInfo {
