@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -14,13 +15,12 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.tooling.GlobalGraphOperations;
 
 public class NaiveTraverser {
 	
 	private GraphDatabaseService db;
-	private int nodeCount;
+	private int totalNodes;
 
 	// This traverser should be able to handle arbitrary inclusion or exclusion
 	// of edge types.
@@ -28,6 +28,8 @@ public class NaiveTraverser {
 	private Map<String, RelationshipType> edgeTypeMap;
 	private Set<RelationshipType> relevantEdgeTypes;
 	private boolean includeEdges;
+	
+	private Map<Node, Integer> nodesBelowMap;
 	
 	/**
 	 * Constructs a traverser to walk through a Neo4j database.
@@ -41,7 +43,16 @@ public class NaiveTraverser {
 	 */
 	public NaiveTraverser(GraphDatabaseService db, String name) {
 		this.db = db;
-		nodeCount = IteratorUtil.count(GlobalGraphOperations.at(this.db).getAllNodes());
+		
+		Iterable<Node> nodes = GlobalGraphOperations.at(this.db).getAllNodes();
+		// Neo4j uses a dummy node. Ignore it.
+		totalNodes = -1;
+		nodesBelowMap = new HashMap<>();
+		for (Node n : nodes)
+		{
+			totalNodes++;
+			nodesBelowMap.put(n, 0);
+		}
 		
 		edgeTypeMap = new HashMap<>();
 		for (RelationshipType edgeType : GlobalGraphOperations.at(this.db).getAllRelationshipTypes())
@@ -201,5 +212,71 @@ public class NaiveTraverser {
 		
 		return lcs;
 	}
+	
+	public void pushAllNodes() {
+		// Sort the nodes topologically.
+		Map<Node, PushNodesInfo> topSortMap = new HashMap<>();
+		Queue<Node> toExpand = new ArrayDeque<>();
 
+		// Preprocess the nodes.
+		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
+		{
+			PushNodesInfo info = new PushNodesInfo();
+			int unpushedChildren = getChildren(n).size();
+			info.unpushedChildrern = unpushedChildren;
+			info.nodesBelow.add(n);
+			topSortMap.put(n, info);
+			
+			// The nodes without children are our base nodes.
+			if (unpushedChildren == 0)
+			{
+				toExpand.add(n);
+			}
+		}
+		
+		// Expand until we run out of nodes.
+		while (! toExpand.isEmpty())
+		{
+			Node next = toExpand.remove();
+			
+			// Check if any of the parents are now leaves.
+			for (Node parent : getParents(next))
+			{
+				PushNodesInfo parentInfo = topSortMap.get(parent);
+				parentInfo.unpushedChildrern--;
+				if (parentInfo.unpushedChildrern == 0)
+				{
+					toExpand.add(parent);
+				}
+			}
+			
+			// Take the union of all the children's descendants.
+			for (Node child : getChildren(next))
+			{
+				topSortMap.get(next).nodesBelow.addAll(topSortMap.get(child).nodesBelow);
+			}
+			
+			// Save the number of descendants.
+			nodesBelowMap.put(next, topSortMap.get(next).nodesBelow.size());
+		}
+	}
+	
+	private class PushNodesInfo {
+		public Set<Node> nodesBelow = new HashSet<>();
+		public int unpushedChildrern = 0;
+		
+		// TODO: Cache and clean up for efficiency.
+//		double ic = -1;
+//		public int unpushedParents = 0;
+	}
+
+	/**
+	 * Find the IC score for a given node.
+	 * 
+	 * @param n	The node whose IC score we want.
+	 */
+	public double getIC(Node n) {
+		return (Math.log(totalNodes) - Math.log(nodesBelowMap.get(n))) / Math.log(2);
+	}
+	
 }
