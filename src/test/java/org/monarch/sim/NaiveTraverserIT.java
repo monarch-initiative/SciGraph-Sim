@@ -13,7 +13,8 @@ public class NaiveTraverserIT {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		db = new GraphFactory().buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl", "target/monarch", false);
+		db = new GraphFactory().buildOntologyDB("src/test/resources/ontologies/mouse-go-importer.owl",
+				"target/slowGraph", false);
 		mapped = new MappedDB(db);
 	}
 

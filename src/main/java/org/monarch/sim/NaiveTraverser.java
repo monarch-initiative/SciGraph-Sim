@@ -224,6 +224,7 @@ public class NaiveTraverser {
 			PushNodesInfo info = new PushNodesInfo();
 			int unpushedChildren = getChildren(n).size();
 			info.unpushedChildrern = unpushedChildren;
+			info.unpushedParents = getParents(n).size();
 			info.nodesBelow.add(n);
 			topSortMap.put(n, info);
 			
@@ -254,7 +255,15 @@ public class NaiveTraverser {
 			for (Node child : getChildren(next))
 			{
 				PushNodesInfo childInfo = topSortMap.get(child);
-				topSortMap.get(next).nodesBelow.addAll(childInfo.nodesBelow);				
+				topSortMap.get(next).nodesBelow.addAll(childInfo.nodesBelow);
+				
+				// If we no longer need the node, clean up.
+				childInfo.unpushedParents--;
+				if (childInfo.unpushedParents == 0)
+				{
+					topSortMap.remove(child);
+				}
+				
 			}
 			
 			// Save the number of descendants.
@@ -265,6 +274,7 @@ public class NaiveTraverser {
 	private class PushNodesInfo {
 		public Set<Node> nodesBelow = new HashSet<>();
 		public int unpushedChildrern = 0;
+		public int unpushedParents = 0;
 	}
 
 	/**
