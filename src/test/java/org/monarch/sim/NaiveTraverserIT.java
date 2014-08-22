@@ -1,10 +1,14 @@
 package org.monarch.sim;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.tooling.GlobalGraphOperations;
 
 public class NaiveTraverserIT {
 
@@ -25,12 +29,34 @@ public class NaiveTraverserIT {
 
 	@Test
 	public void test() {
+		System.out.println("~~~ EDGE TYPES ~~~");
+		for (RelationshipType type : GlobalGraphOperations.at(db).getAllRelationshipTypes())
+		{
+			System.out.println(type.name());
+		}
+		System.out.println("~~~~~~~~~~~~~~~~~~");
+		
 		long start, end;
 		NaiveTraverser traverser = new NaiveTraverser(db, "test");
+		Set<String> excluded = new HashSet<>();
+		excluded.add("SUPERCLASS_OF");
+		excluded.add("DISJOINT_WITH");
+		excluded.add("PROPERTY");
+		excluded.add("PHEVOR_SUBCLASS_OF");
+		traverser.excludeEdgeTypes(excluded);
 		
 		System.out.println("STARTING");
 		start = System.nanoTime();
-		traverser.pushAllNodes();
+		Set<String> ignored = new HashSet<>();
+		ignored.add("EQUIVALENT_TO");
+		traverser.pushAllNodes(ignored);
+		end = System.nanoTime();
+		System.out.println((end - start) / 1_000_000);
+		System.out.println("FINISHED");
+		
+		System.out.println("STARTING");
+		start = System.nanoTime();
+		traverser.pushAllNodes(new HashSet<String>());
 		end = System.nanoTime();
 		System.out.println((end - start) / 1_000_000);
 		System.out.println("FINISHED");

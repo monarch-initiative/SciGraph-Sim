@@ -72,7 +72,10 @@ public class NaiveTraverser {
 		relevantEdgeTypes = new HashSet<>();
 		for (String edgeType : edgeTypes)
 		{
-			relevantEdgeTypes.add(edgeTypeMap.get(edgeType));
+			if (edgeTypeMap.containsKey(edgeType))
+			{
+				relevantEdgeTypes.add(edgeTypeMap.get(edgeType));
+			}
 		}
 	}
 	
@@ -93,7 +96,10 @@ public class NaiveTraverser {
 		relevantEdgeTypes = new HashSet<>();
 		for (String edgeType : edgeTypes)
 		{
-			relevantEdgeTypes.add(edgeTypeMap.get(edgeType));
+			if (edgeTypeMap.containsKey(edgeType))
+			{
+				relevantEdgeTypes.add(edgeTypeMap.get(edgeType));
+			}
 		}
 	}
 	
@@ -213,7 +219,32 @@ public class NaiveTraverser {
 		return lcs;
 	}
 	
-	public void pushAllNodes() {
+	public void pushAllNodes(Collection<String> ignoredEdgeTypes) {
+		// To temporarily change the valid edge types, we need to save the old values.
+		Set<RelationshipType> oldRelevantEdgeTypes = relevantEdgeTypes;
+		
+		// Set the edge types temporarily.
+		Set<RelationshipType> newRelevantEdgeTypes = new HashSet<>();
+		for (String typeName : ignoredEdgeTypes)
+		{
+			if (edgeTypeMap.containsKey(typeName))
+			{
+				newRelevantEdgeTypes.add(edgeTypeMap.get(typeName));
+			}
+		}
+		
+		relevantEdgeTypes = new HashSet<>();
+		if (includeEdges)
+		{
+			relevantEdgeTypes.addAll(oldRelevantEdgeTypes);
+			relevantEdgeTypes.removeAll(newRelevantEdgeTypes);
+		}
+		else
+		{
+			relevantEdgeTypes.addAll(oldRelevantEdgeTypes);
+			relevantEdgeTypes.addAll(newRelevantEdgeTypes);
+		}
+		
 		// Sort the nodes topologically.
 		Map<Node, PushNodesInfo> topSortMap = new HashMap<>();
 		Queue<Node> toExpand = new ArrayDeque<>();
@@ -221,10 +252,12 @@ public class NaiveTraverser {
 		// Preprocess the nodes.
 		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
 		{
+			Set<Node> children = getChildren(n);
+			Set<Node> parents = getParents(n);
 			PushNodesInfo info = new PushNodesInfo();
-			int unpushedChildren = getChildren(n).size();
+			int unpushedChildren = children.size();
 			info.unpushedChildrern = unpushedChildren;
-			info.unpushedParents = getParents(n).size();
+			info.unpushedParents = parents.size();
 			info.nodesBelow.add(n);
 			topSortMap.put(n, info);
 			
@@ -238,38 +271,47 @@ public class NaiveTraverser {
 		// Expand until we run out of nodes.
 		while (! toExpand.isEmpty())
 		{
-			Node next = toExpand.remove();
-			
-			// Check if any of the parents are now leaves.
-			for (Node parent : getParents(next))
+			Node next = toExpand.poll();
+
+			// If there's still something with no descendants, expand.
+			if (next != null)
 			{
-				PushNodesInfo parentInfo = topSortMap.get(parent);
-				parentInfo.unpushedChildrern--;
-				if (parentInfo.unpushedChildrern == 0)
+
+				for (Node parent : getParents(next))
 				{
-					toExpand.add(parent);
+					PushNodesInfo parentInfo = topSortMap.get(parent);
+					parentInfo.unpushedChildrern--;
+
+					// Check if any of the parents are now leaves.
+					if (parentInfo.unpushedChildrern == 0)
+					{
+						toExpand.add(parent);
+					}
 				}
-			}
-			
-			// Take the union of all the children's descendants.
-			for (Node child : getChildren(next))
-			{
-				PushNodesInfo childInfo = topSortMap.get(child);
-				topSortMap.get(next).nodesBelow.addAll(childInfo.nodesBelow);
-				
-				// If we no longer need the node, clean up.
-				childInfo.unpushedParents--;
-				if (childInfo.unpushedParents == 0)
+
+				// Take the union of all the children's descendants.
+				for (Node child : getChildren(next))
 				{
-					topSortMap.remove(child);
+					PushNodesInfo childInfo = topSortMap.get(child);
+					topSortMap.get(next).nodesBelow.addAll(childInfo.nodesBelow);
+
+					// If we no longer need the node, clean up.
+					childInfo.unpushedParents--;
+					if (childInfo.unpushedParents == 0)
+					{
+						topSortMap.remove(child);
+					}
 				}
+
+				// Save the number of descendants.
+				nodesBelowMap.put(next, topSortMap.get(next).nodesBelow.size());
 			}
-			
-			// Save the number of descendants.
-			nodesBelowMap.put(next, topSortMap.get(next).nodesBelow.size());
 		}
 		
 		System.out.println(topSortMap.size() + " nodes not handled");
+		
+		// Restore the old edge types.
+		relevantEdgeTypes = oldRelevantEdgeTypes;
 	}
 	
 	private class PushNodesInfo {
