@@ -3,10 +3,12 @@ package org.monarch.sim;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -29,7 +31,7 @@ public class NaiveTraverser {
 	private Set<RelationshipType> relevantEdgeTypes;
 	private boolean includeEdges;
 	
-	private Map<Node, Integer> nodesBelowMap;
+	private Map<Node, Double> icMap;
 	
 	/**
 	 * Constructs a traverser to walk through a Neo4j database.
@@ -47,11 +49,11 @@ public class NaiveTraverser {
 		Iterable<Node> nodes = GlobalGraphOperations.at(this.db).getAllNodes();
 		// Neo4j uses a dummy node. Ignore it.
 		totalNodes = -1;
-		nodesBelowMap = new HashMap<>();
+		icMap = new HashMap<>();
 		for (Node n : nodes)
 		{
 			totalNodes++;
-			nodesBelowMap.put(n, 0);
+			icMap.put(n, 0.0);
 		}
 		
 		edgeTypeMap = new HashMap<>();
@@ -174,51 +176,11 @@ public class NaiveTraverser {
 		return getDirectedDescendants(n, Direction.OUTGOING);
 	}
 	
-	// FIXME: Remove this.
-	public Node getDummyLCS(Node first, Node second) {
-		Set<Node> firstAncestors = getAncestors(first);		
-		Set<Node> commonAncestors = new HashSet<>();
-		
-		Set<Node> visited = new HashSet<>();
-		Queue<Node> toExpand = new ArrayDeque<>();
-		toExpand.add(second);
-		while (! toExpand.isEmpty())
-		{
-			Node next = toExpand.remove();
-			if (! visited.add(next))
-			{
-				continue;
-			}
-			
-			for (Node parent : getParents(next))
-			{
-				if (firstAncestors.contains(parent))
-				{
-					commonAncestors.add(parent);
-				}
-				else
-				{
-					toExpand.add(parent);
-				}
-			}
-		}
-		
-		Node lcs = null;
-		int minDist = Integer.MAX_VALUE;
-		for (Node ancestor : commonAncestors)
-		{
-			int dist = Neo4jTraversals.getShortestPath(first, ancestor).size() +
-					Neo4jTraversals.getShortestPath(second, ancestor).size();
-			if (dist < minDist)
-			{
-				lcs = ancestor;
-				minDist = dist;
-			}
-		}
-		
-		return lcs;
-	}
-	
+	/**
+	 * Counts the nodes anywhere below each node.
+	 * 
+	 * @param ignoredEdgeTypes	Any additional edge types we don't want to use
+	 */
 	public void pushAllNodes(Collection<String> ignoredEdgeTypes) {
 		// To temporarily change the valid edge types, we need to save the old values.
 		Set<RelationshipType> oldRelevantEdgeTypes = relevantEdgeTypes;
@@ -233,15 +195,13 @@ public class NaiveTraverser {
 			}
 		}
 		
-		relevantEdgeTypes = new HashSet<>();
+		relevantEdgeTypes = new HashSet<>(oldRelevantEdgeTypes);
 		if (includeEdges)
 		{
-			relevantEdgeTypes.addAll(oldRelevantEdgeTypes);
 			relevantEdgeTypes.removeAll(newRelevantEdgeTypes);
 		}
 		else
 		{
-			relevantEdgeTypes.addAll(oldRelevantEdgeTypes);
 			relevantEdgeTypes.addAll(newRelevantEdgeTypes);
 		}
 		
@@ -268,9 +228,15 @@ public class NaiveTraverser {
 			}
 		}
 		
+		// FIXME: Remove this.
+		int count = 0;
+		
 		// Expand until we run out of nodes.
 		while (! toExpand.isEmpty())
 		{
+			// FIXME: Remove this.
+			count++;
+			
 			Node next = toExpand.poll();
 
 			// If there's still something with no descendants, expand.
@@ -303,12 +269,14 @@ public class NaiveTraverser {
 					}
 				}
 
-				// Save the number of descendants.
-				nodesBelowMap.put(next, topSortMap.get(next).nodesBelow.size());
+				// Save the IC.
+				int nodesBelow = topSortMap.get(next).nodesBelow.size();
+				double ic = (Math.log(totalNodes) - Math.log(nodesBelow)) / Math.log(2); 
+				icMap.put(next, ic);
 			}
 		}
 		
-		System.out.println(topSortMap.size() + " nodes not handled");
+		System.out.println(totalNodes - count + " never enqueued");
 		
 		// Restore the old edge types.
 		relevantEdgeTypes = oldRelevantEdgeTypes;
@@ -326,7 +294,88 @@ public class NaiveTraverser {
 	 * @param n	The node whose IC score we want.
 	 */
 	public double getIC(Node n) {
-		return (Math.log(totalNodes) - Math.log(nodesBelowMap.get(n))) / Math.log(2);
+		return icMap.get(n);
 	}
+	
+	// FIXME: The version below should be faster, but can't handle linked nodes.
+	public Node getLCS(Node first, Node second) {
+		Set<Node> ancestors = getAncestors(first);
+		ancestors.retainAll(getAncestors(second));
+		
+		Node lcs = null;
+		double ic = 0;
+		for (Node ancestor : ancestors)
+		{
+			if (ancestor.hasProperty("fragment"))
+			{
+				String fragment = (String) ancestor.getProperty("fragment");
+				if (fragment.matches("-?\\d*"))
+				{
+					continue;
+				}
+			}
+			
+			double ancestorIC = getIC(ancestor);
+			if (ancestorIC > ic)
+			{
+				lcs = ancestor;
+				ic = ancestorIC;
+			}
+		}
+		
+		return lcs;
+	}
+	
+//	public Node getLCS(Node first, Node second) {
+//		// Start with the ancestors of the first node.
+//		Set<Node> firstAncestors = getAncestors(first);
+//		
+//		// We want to expand ancestors of the second node in order of
+//		// decreasing IC score. 
+//		Comparator<Node> icComparator = new Comparator<Node>() {
+//			public int compare(Node first, Node second) {
+//				double firstIC = getIC(first);
+//				double secondIC = getIC(second);
+//				if (firstIC < secondIC)
+//					return -1;
+//				else if (firstIC > secondIC)
+//					return 1;
+//				else
+//					return (int) (first.getId() - second.getId());
+//			}
+//		};
+//		
+//		// NOTE: The magic number 11 is the default heap capacity, but there
+//		// isn't a sensible constructor.
+//		PriorityQueue<Node> heap = new PriorityQueue<Node>(11, icComparator);
+//		heap.add(second);
+//		HashSet<Node> visited = new HashSet<>();
+//		
+//		// Expand outward from the second node.
+//		while (! heap.isEmpty())
+//		{
+//			Node toExpand = heap.remove();
+//			if (! visited.add(toExpand))
+//			{
+//				continue;
+//			}
+//			
+//			// If we hit an ancestor of the first node, it must be our LCS.
+//			if (firstAncestors.contains(toExpand))
+//			{
+//				return toExpand;
+//			}
+//			
+//			// Expand outward.
+//			for (Node parent : getParents(toExpand))
+//			{
+//				heap.add(parent);
+//			}
+//		}
+//		
+//		// FIXME: This should throw some sort of error.
+//		// Our graph is rooted, so this should never happen.
+//		return null;
+//	}
 	
 }
