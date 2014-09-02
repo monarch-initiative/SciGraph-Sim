@@ -25,7 +25,7 @@ public class GraphFactory {
 		SUBCLASS_OF,
 	}
 	
-	protected static Node addNode(GraphDatabaseService db) {
+	protected Node addNode(GraphDatabaseService db) {
 		// Wrap a transaction around node creation.
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
@@ -34,7 +34,7 @@ public class GraphFactory {
 		return newNode;
 	}
 	
-	protected static Node addNode(GraphDatabaseService db, String name) {
+	protected Node addNode(GraphDatabaseService db, String name) {
 		// Wrap a transaction around node creation.
 		Transaction tx = db.beginTx();
 		Node newNode = db.createNode();
@@ -44,14 +44,19 @@ public class GraphFactory {
 		return newNode;
 	}
 	
-	protected static Relationship addEdge(GraphDatabaseService db, Node first, Node second)
+	protected Relationship addEdge(GraphDatabaseService db, Node first, Node second, RelationshipType edgeType)
 	{
 		// Wrap a transaction around edge creation.
 		Transaction tx = db.beginTx();
-		Relationship newRel = first.createRelationshipTo(second, RelTypes.SUBCLASS_OF);
+		Relationship newRel = first.createRelationshipTo(second, edgeType);
 		tx.success();
 		tx.finish();
 		return newRel;		
+	}
+	
+	protected Relationship addEdge(GraphDatabaseService db, Node first, Node second)
+	{
+		return addEdge(db, first, second, RelTypes.SUBCLASS_OF);
 	}
 
 	protected void removeUnlabeledEdges(GraphDatabaseService db) {

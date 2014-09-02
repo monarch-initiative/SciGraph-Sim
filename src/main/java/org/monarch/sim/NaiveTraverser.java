@@ -3,12 +3,10 @@ package org.monarch.sim;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -276,7 +274,8 @@ public class NaiveTraverser {
 			}
 		}
 		
-		System.out.println(totalNodes - count + " never enqueued");
+		// FIXME: Remove this.
+		System.out.println(totalNodes - count + 1 + " never enqueued");
 		
 		// Restore the old edge types.
 		relevantEdgeTypes = oldRelevantEdgeTypes;
@@ -306,6 +305,7 @@ public class NaiveTraverser {
 		double ic = 0;
 		for (Node ancestor : ancestors)
 		{
+			// FIXME: Hack to ignore garbage nodes.
 			if (ancestor.hasProperty("fragment"))
 			{
 				String fragment = (String) ancestor.getProperty("fragment");
@@ -378,4 +378,51 @@ public class NaiveTraverser {
 //		return null;
 //	}
 	
+	/**
+	 * Find a shortest directed path from one node to another.
+	 * 
+	 * @param first		The start of the path
+	 * @param second	The end of the path
+	 */
+	public List<Node> getShortestPath(Node first, Node second) {
+		HashSet<Node> visited = new HashSet<>();
+		Queue<ArrayList<Node>> paths = new ArrayDeque<>();
+		
+		// Expand paths starting with our base node. 
+		ArrayList<Node> basePath = new ArrayList<>();
+		basePath.add(first);
+		paths.add(basePath);
+		
+		// Expand paths.
+		while (!paths.isEmpty())
+		{
+			ArrayList<Node> nextPath = paths.remove();
+			Node lastNode = nextPath.get(nextPath.size() - 1);
+			
+			// If we've reached the end node, stop.
+			if (lastNode.equals(second))
+			{
+				return nextPath;
+			}
+			
+			// If we've been here before, don't expand.
+			if (!visited.add(lastNode))
+			{
+				continue;
+			}
+			
+			// Extend the path to all parents.
+			for (Node parent : getParents(lastNode))
+			{
+				ArrayList<Node> toAdd = new ArrayList<>(nextPath);
+				toAdd.add(parent);
+				paths.add(toAdd);
+			}
+			
+		}
+		
+		// FIXME: This should probably return an Optional.
+		// If we haven't found anything, give up.
+		return null;
+	}
 }

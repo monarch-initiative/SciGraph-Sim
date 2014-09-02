@@ -28,6 +28,7 @@ public class NaiveTraverserIT {
 	public static void setUpBeforeClass() throws Exception {
 		db = new GraphFactory().buildOntologyDB("http://purl.obolibrary.org/obo/upheno/monarch.owl",
 				"target/monarch", false);
+//		db = new TestGraphFactory().buildEquivDB();
 		mapped = new MappedDB(db);
 	}
 
@@ -86,9 +87,8 @@ public class NaiveTraverserIT {
 		}
 		System.out.println();
 		
-		// FIXME: Add shortest path calculation to traverser.
-		List<Node> firstPath = Neo4jTraversals.getShortestPath(first, lcs);
-		List<Node> secondPath = Neo4jTraversals.getShortestPath(second, lcs);
+		List<Node> firstPath = traverser.getShortestPath(first, lcs);
+		List<Node> secondPath = traverser.getShortestPath(second, lcs);
 		System.out.println(""
 				+ mapped.nodeToString(first)
 				+ "--[" + (firstPath.size() - 1) + " edges]--> "
@@ -143,6 +143,30 @@ public class NaiveTraverserIT {
 	
 	@Test
 	public void test() throws IOException {
+		Set<String> toDelete = new HashSet<>();
+		toDelete.add("SUPERCLASS_OF");
+		toDelete.add("PHEVOR_SUBCLASS_OF");
+		GraphUtil.cleanEdges(db, toDelete);
+		
+//		GraphUtil.fixEquivalent(db);
+		
+//		for (Node n : GlobalGraphOperations.at(db).getAllNodes())
+//		{
+//			if (n.getId() == 0)
+//			{
+//				continue;
+//			}
+//			System.out.println(n.getProperty("fragment"));
+//		}
+//		System.out.println();
+//		for (Relationship e : GlobalGraphOperations.at(db).getAllRelationships())
+//		{
+//			System.out.println(e.getStartNode().getProperty("fragment")
+//					+ " --" + e.getType().name() + "--> "
+//					+ e.getEndNode().getProperty("fragment"));
+//		}
+//		System.out.println();
+		
 		System.out.println("~~~ EDGE TYPES ~~~");
 		for (RelationshipType type : GlobalGraphOperations.at(db).getAllRelationshipTypes())
 		{

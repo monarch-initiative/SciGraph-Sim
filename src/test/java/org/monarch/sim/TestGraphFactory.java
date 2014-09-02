@@ -8,6 +8,8 @@ import net.lingala.zip4j.core.ZipFile;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.test.TestGraphDatabaseFactory;
@@ -144,6 +146,62 @@ public class TestGraphFactory extends GraphFactory {
 	public GraphDatabaseService buildMPSubsetDB() {
 		GraphDatabaseService db = buildOntologyDB("./src/test/resources/ontologies/mp-subset.owl", "target/mp-subset");
 		removeUnlabeledEdges(db);
+		return db;
+	}
+	
+	public GraphDatabaseService buildEquivDB() {
+		// Build a graph to test removal of EQUIVALENT_TO edges.
+		GraphDatabaseService db = new TestGraphDatabaseFactory().newImpermanentDatabase();
+		Node a = addNode(db);
+		Node b = addNode(db);
+		Node c = addNode(db);
+		Node d = addNode(db);
+		Node e = addNode(db);
+		Node f = addNode(db);
+		
+		Transaction tx = db.beginTx();
+		a.setProperty("fragment", "PI:314159");
+		b.setProperty("fragment", "-2171828");
+		c.setProperty("fragment", "PI:265358");
+		d.setProperty("fragment", "PI:979323");
+		e.setProperty("fragment", "8675309");
+		f.setProperty("fragment", "FIB:112358");
+		tx.success();
+		tx.finish();
+		
+		RelationshipType equivType = new RelationshipType() {			
+			@Override
+			public String name() {
+				return "EQUIVALENT_TO";
+			}
+		};
+		RelationshipType relType = new RelationshipType() {			
+			@Override
+			public String name() {
+				return "REL";
+			}
+		};
+		RelationshipType subclassType = new RelationshipType() {			
+			@Override
+			public String name() {
+				return "SUBCLASS_OF";
+			}
+		};
+		RelationshipType otherType = new RelationshipType() {			
+			@Override
+			public String name() {
+				return "OTHER";
+			}
+		};
+		addEdge(db, b, a, equivType);
+		addEdge(db, a, b, equivType);
+//		addEdge(db, b, f, equivType);
+//		addEdge(db, f, b, equivType);
+//		addEdge(db, b, e, relType);
+		addEdge(db, b, c, subclassType);
+		addEdge(db, b, d, otherType);
+		
+		
 		return db;
 	}
 
