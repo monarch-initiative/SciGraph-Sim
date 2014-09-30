@@ -9,6 +9,16 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.NotFoundException;
 
+/**
+ * This class implements the Phevor algorithm for finding the importance of nodes.
+ * 
+ * Given a collection of base nodes, specified with setBaseNodes(), this assigns
+ * an importance score to each node.
+ * The importance for a collection of nodes is the maximum importance for any of
+ * the individual nodes.
+ * 
+ * @author spikeharris
+ */
 public class Phevor {
 	
 	private PhevorDB ontology;

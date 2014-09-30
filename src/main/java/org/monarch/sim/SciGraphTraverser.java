@@ -22,6 +22,7 @@ import org.neo4j.kernel.Traversal;
 import org.neo4j.kernel.Uniqueness;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+@Deprecated
 public class SciGraphTraverser {
 	
 	private static final Logger logger = Logger.getLogger(SciGraphTraverser.class.getName());

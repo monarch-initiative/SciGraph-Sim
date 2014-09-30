@@ -17,6 +17,17 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+/**
+ * This class allows traversals through a Neo4j database.
+ * In particular, it supports finding children, parents, descendants, ancestors,
+ * IC scores, LCS, and shortest paths.
+ * 
+ * NaiveTraversers may restrict the types of edges used.
+ * Changing the edge types invalidates the previously computed IC scores, and
+ * pushAllNodes() must be called to recompute them.
+ * 
+ * @author spikeharris
+ */
 public class NaiveTraverser {
 	
 	private GraphDatabaseService db;
@@ -35,13 +46,9 @@ public class NaiveTraverser {
 	 * Constructs a traverser to walk through a Neo4j database.
 	 * By default, this traverses all types of edges.
 	 * 
-	 * The name allows multiple traversers to use the same graph without
-	 * naming conflicts for node properties.
-	 * 
 	 * @param db	The database to traverse
-	 * @param name	The name of the traverser
 	 */
-	public NaiveTraverser(GraphDatabaseService db, String name) {
+	public NaiveTraverser(GraphDatabaseService db) {
 		this.db = db;
 		
 		Iterable<Node> nodes = GlobalGraphOperations.at(this.db).getAllNodes();
@@ -274,8 +281,8 @@ public class NaiveTraverser {
 			}
 		}
 		
-		// FIXME: Remove this.
-		System.out.println(totalNodes - count + 1 + " never enqueued");
+//		// FIXME: Remove this.
+//		System.out.println(totalNodes - count + 1 + " never enqueued");
 		
 		// Restore the old edge types.
 		relevantEdgeTypes = oldRelevantEdgeTypes;
@@ -289,6 +296,7 @@ public class NaiveTraverser {
 
 	/**
 	 * Find the IC score for a given node.
+	 * Note that pushAllNodes() must be called first.
 	 * 
 	 * @param n	The node whose IC score we want.
 	 */
@@ -302,14 +310,14 @@ public class NaiveTraverser {
 		ancestors.retainAll(getAncestors(second));
 		
 		Node lcs = null;
-		double ic = 0;
+		double ic = -1;
 		for (Node ancestor : ancestors)
 		{
 			// FIXME: Hack to ignore garbage nodes.
 			if (ancestor.hasProperty("fragment"))
 			{
 				String fragment = (String) ancestor.getProperty("fragment");
-				if (fragment.matches("-?\\d*"))
+				if (fragment.matches("-?\\d+"))
 				{
 					continue;
 				}

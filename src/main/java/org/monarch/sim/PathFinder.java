@@ -12,6 +12,7 @@ import org.neo4j.graphdb.Node;
 
 import com.tinkerpop.pipes.util.structures.Pair;
 
+@Deprecated
 public class PathFinder extends MappedDB {
 	
 	public PathFinder(String url, String graphLocation, boolean forceLoad) {

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.graphdb.Node;
 
+@Deprecated
 public class CypherTraversals {
 
 	// FIXME: This is horribly slow.

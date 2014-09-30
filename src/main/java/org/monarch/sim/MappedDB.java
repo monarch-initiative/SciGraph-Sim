@@ -6,6 +6,12 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+/**
+ * This class provides a way to look up ontology nodes by their fragments.
+ * It also provides some convenience methods for printing nodes.
+ * 
+ * @author spikeharris
+ */
 public class MappedDB {
 	
 	protected GraphDatabaseService db;

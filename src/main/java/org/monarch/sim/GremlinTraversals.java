@@ -12,6 +12,7 @@ import com.tinkerpop.gremlin.java.GremlinPipeline;
 import com.tinkerpop.pipes.PipeFunction;
 import com.tinkerpop.pipes.branch.LoopPipe.LoopBundle;
 
+@Deprecated
 public class GremlinTraversals {
 
 	public static Iterable<Vertex> getParents(Vertex v) {

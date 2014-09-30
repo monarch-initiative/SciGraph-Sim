@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -16,6 +19,11 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+/**
+ * This class provides methods for creating Neo4j graphs.
+ * 
+ * @author spikeharris
+ */
 public class GraphFactory {
 	
   private static final Logger logger = Logger.getLogger(GraphFactory.class.getName());
@@ -132,7 +140,6 @@ public class GraphFactory {
 	}
 	
 	public GraphDatabaseService buildOntologyDB(Collection<String> urls, String graphLocation, boolean forceRebuild) {
-		GraphFactory factory = new GraphFactory();
 		GraphDatabaseService db = null;
 		
 		String absolutePath = new File(graphLocation).getAbsolutePath();
@@ -159,10 +166,71 @@ public class GraphFactory {
 		// Otherwise, we've already got the graph stored, and we can use that.
 		else
 		{
-			db = factory.loadOntologyDB(graphLocation);
+			db = loadOntologyDB(graphLocation);
 		}
 		
 		return db;
+	}
+	
+	/**
+	 * Constructs a graph isomorphic to the induced subgraph of the given graph.
+	 * 
+	 * @param db			The original graph
+	 * @param nodes			The nodes whose induced subgraph we want
+	 * @param graphLocation	The directory where the resulting graph should be stored
+	 */
+	public GraphDatabaseService buildSubgraphDB(GraphDatabaseService db,
+			Collection<Node> nodes, String graphLocation) {
+		String absolutePath = new File(graphLocation).getAbsolutePath();
+		// Clean up the target location.
+		try {
+			FileUtils.deleteDirectory(new File(absolutePath));
+		} catch (IOException e) {
+			// FIXME: This should be handled better.
+			System.out.println(e.getMessage());
+		}
+		
+		// Create a separate Neo4j graph to hold the subgraph.
+		GraphDatabaseService subDB = new GraphDatabaseFactory().newEmbeddedDatabase(graphLocation);
+		
+		// Keep track of corresponding nodes.
+		Map<Node, Node> nodeMap = new HashMap<>();
+		
+		Transaction tx = subDB.beginTx();
+		
+		// Copy each node.
+		for (Node orig : nodes)
+		{
+			Node copy = addNode(subDB);
+			for (String key : orig.getPropertyKeys())
+			{
+				copy.setProperty(key, orig.getProperty(key));
+			}
+			
+			nodeMap.put(orig, copy);
+		}
+		
+		// Copy each edge.
+		for (Node orig : nodes)
+		{
+			for (Relationship edge : orig.getRelationships(Direction.OUTGOING))
+			{
+				Node other = edge.getEndNode();
+				if (nodes.contains(other))
+				{
+					Relationship newEdge = addEdge(subDB, nodeMap.get(orig), nodeMap.get(other), edge.getType());
+					for (String key : edge.getPropertyKeys())
+					{
+						newEdge.setProperty(key, edge.getProperty(key));
+					}
+				}
+			}
+		}
+		
+		tx.success();
+		tx.finish();
+		
+		return subDB;
 	}
 	
 }

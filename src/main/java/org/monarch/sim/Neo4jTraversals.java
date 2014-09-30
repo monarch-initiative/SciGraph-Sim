@@ -18,6 +18,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+@Deprecated
 public class Neo4jTraversals {
 	
 	private static Collection<Node> getDirectedNeighbors(Node node, Direction dir) {

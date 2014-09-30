@@ -174,8 +174,7 @@ public class NaiveTraverserIT {
 		}
 		System.out.println("~~~~~~~~~~~~~~~~~~");
 		
-//		long start, end;
-		NaiveTraverser traverser = new NaiveTraverser(db, "test");
+		NaiveTraverser traverser = new NaiveTraverser(db);
 		Set<String> excluded = new HashSet<>();
 		excluded.add("SUPERCLASS_OF");
 		excluded.add("DISJOINT_WITH");
@@ -196,39 +195,6 @@ public class NaiveTraverserIT {
 		{
 			printPairInfo(pair, traverser);
 		}
-		
-//		
-//		System.out.println("CHILDREN:");
-//		for (Node n : traverser.getChildren(base))
-//		{
-//			System.out.println(mapped.nodeToString(n));
-//		}
-//		System.out.println();
-//		
-//		System.out.println("PARENTS:");
-//		for (Node n : traverser.getParents(base))
-//		{
-//			System.out.println(mapped.nodeToString(n));
-//		}
-//		System.out.println();
-//		
-//		System.out.println("DESCENDANTS:");
-//		for (Node n : traverser.getDescendants(base))
-//		{
-//			System.out.println(mapped.nodeToString(n));
-//		}
-//		System.out.println();
-//		
-//		System.out.println("ANCESTORS:");
-//		for (Node n : traverser.getAncestors(base))
-//		{
-//			System.out.println(mapped.nodeToString(n));
-//		}
-//		System.out.println();
-//		
-//		Node other = mapped.getNodeByFragment("COMPLETE:10");
-//		System.out.println("LCS:");
-//		System.out.println(mapped.nodeToString(traverser.getDummyLCS(base, other)));
 	}
 
 }
